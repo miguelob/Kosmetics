@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import icai.dtc.isw.domain.Product;
-import icai.dtc.isw.domain.Review;
-import icai.dtc.isw.domain.User;
+import domain.Product;
+import domain.Review;
+import domain.User;
 
 public class ReviewDAO {
     public static void loadProductReview(final Product product) {

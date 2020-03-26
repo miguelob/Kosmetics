@@ -14,8 +14,8 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import icai.dtc.isw.domain.Product;
-import icai.dtc.isw.domain.User;
+import domain.Product;
+import domain.User;
 
 public class UserDAO {
     public static User getUser(int i) {

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-import icai.dtc.isw.domain.Product;
+import domain.Product;
 
 
 public class ProductDAO {

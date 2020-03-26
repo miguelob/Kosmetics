@@ -1,4 +1,4 @@
-package icai.dtc.isw.domain;
+package domain;
 
 import java.io.Serializable;
 

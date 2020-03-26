@@ -9,9 +9,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import icai.dtc.isw.domain.Product;
-import icai.dtc.isw.domain.Question;
-import icai.dtc.isw.domain.Survey;
+import domain.Product;
+import domain.Question;
+import domain.Survey;
 
 public class SurveyDAO {
     public static Survey getSurvey(int id) {
