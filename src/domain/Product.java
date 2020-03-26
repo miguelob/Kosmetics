@@ -1,52 +1,162 @@
 package domain;
 
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.io.Serializable;
+import javax.swing.ImageIcon;
 
-public class Product {
+public class Product implements Serializable{
+    private static final long serialVersionUID = 1L;
+    public final int idProduct;
     private String name;
+    private double price;
+    private String brand;
     private String description;
-    private String category;
-    private ImageIcon image;
-    private float price;
-    private int offer;
+    private Survey survey;
+    private ArrayList<String> features = new ArrayList<String>();
+    private ArrayList<Review> reviews = new ArrayList<Review>();
+    private String productCategory;
+    private ArrayList<ImageIcon> productImage;
+    private ArrayList<String> colors;
+    private int score;
 
-    public Product(String name, String description, String category, byte[] image, float price, int offer){
-        this.name = name;
-        this.description = description;
-        this.category = category;
-        this.convertImage(image);
-        this.calculatePrice(price,offer);
+    //Constructor with all the information-> No tiene sentido, cuando el usuario requiera ás info del producto se carga sobre el ya existente.
+   /* public Product(int idProduct, String name, String productCategory, double price,
+        String brand, String description, String imageDirectory ,Survey survey, ArrayList<String> features,
+         ArrayList<Review> reviews){
 
+        this.idProduct = idProduct;
+        this.setName(name);
+        this.setPrice(price);
+        this.setBrand(brand);
+        this.setDescription(description);
+        this.setProductCategory(productCategory);
+        this.survey = survey;
+        this.features = features;
+        this.reviews = reviews;
+        this.imageDirectory = imageDirectory;
+        this.setImage();
+    }*/
+
+    //Constructor with the basic information to show on the main screen
+    public Product(int idProduct, String productCategory, String name,  String brand, double price,
+                   String description, byte[] imageBytes){
+
+        this.idProduct = idProduct;
+        this.setName(name);
+        this.setPrice(price);
+        this.setBrand(brand);
+        this.setDescription(description);
+        this.setProductCategory(productCategory);
+        this.setImage(imageBytes);
+    }
+    //===================================ESTE BORRAR===========================================================0
+    //TEMPORAL CONSTRUCTOR TO CHECK PROGRESS
+    public Product(int idProduct, String productCategory, String name,  String brand, double price, String description){
+
+        this.idProduct = idProduct;
+        this.setName(name);
+        this.setPrice(price);
+        this.setBrand(brand);
+        this.setDescription(description);
+        this.setProductCategory(productCategory);
     }
 
+
+    public void setSurvey(Survey survey){
+        this.survey=survey;
+    }
+
+    //Tanto reviews como features se rellenan una a una
+    public void addReview(Review review){
+        reviews.add(review);
+    }
+
+    public void addFeature(String feature){
+        features.add(feature);
+    }
+
+    //setters
+    private void setName(String name) {
+        if(name != null)
+            this.name = name;
+        else
+            this.name = "EMPTY_FIELD"; // to display that the name is empty
+    }
+    private void setPrice(double price) {
+        if(price > 0)
+            this.price = price;
+        else
+            this.price = 101; // to display that the price was bad registered we display 101 = LOL
+    }
+    private void setBrand(String brand) {
+        if(brand != null)
+            this.brand = brand;
+        else
+            this.brand = "EMPTY_FIELD"; // to display that the brand is empty
+    }
+    private void setDescription(String description) {
+        if(description != null)
+            this.description = description;
+        else
+            this.description = "EMPTY_FIELD"; // to display that the description is empty
+    }
+    private void setProductCategory(String productCategory) {
+        if(productCategory != null)
+            this.productCategory = productCategory;
+        else
+            this.productCategory = "EMPTY_FIELD"; // to display that the category is empty
+    }
+    private void setImage(byte[] imageBytes) {
+        if(imageBytes != null)
+            productImage = new ImageIcon(imageBytes);
+        else
+            productImage = new ImageIcon("media/images/NF.jpg");
+    }
+    public void setScore(float fullscore) {
+        score = Math.round(fullscore);
+    }
+
+    //GETTERS
     public String getName(){
         return name;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public String getBrand(){
+        return brand;
     }
     public String getDescription(){
         return description;
     }
     public String getCategory(){
-        return category;
+        return productCategory;
     }
-    public ImageIcon getImage(){
-        return image;
+    public ArrayList<String> getFeatures(){
+        return features;
     }
-    public float getPrice(){
-        return price;
+    public int getId() {
+        return idProduct;
+    }
+    /*public String getPhotoDirectory() {
+    	return imageDirectory;
+    }*/
+    public ImageIcon getProductImage() {
+        return productImage;
+    }
+    public ArrayList<Review> getReviews(){
+        return reviews;
+    }
+    public int getScore() {
+        return score;
+    }
+    public Survey getSurvey() {
+        return survey;
+    }
+    @Override
+    public String toString() {
+        return "He leido el id: "+this.getId()+" con nombre: "+this.getName()+" con precio: "+this.getPrice()+" con marca: "+this.getBrand()+" con Descripcion: "+this.getDescription();
     }
 
-    private void convertImage(byte[] image){
-        if(image != null)
-            this.image = new ImageIcon(image);
-        else
-            this.image = new ImageIcon("media/images/NF.jpg");
-    }
-    private void calculatePrice(float price, int offer){
-        if(offer >= 0 && offer <= 100){
-            this.price = price*(1-(offer/100));
-        }else{
-            this.price = price;
-        }
-    }
 }

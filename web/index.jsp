@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/StylesMiguel.css">
     <link rel="shortcut icon" href="media/LogoBueno.svg">
 
-    <title>Kosmeetics</title>
+    <title>Kosmetics</title>
 </head>
 <body id = "body">
     <%@include file="cabecera.jsp"%>
