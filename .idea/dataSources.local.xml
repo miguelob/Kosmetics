@@ -11,7 +11,7 @@
       <user-name>Admin</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="KDB_BETA" />
+          <node kind="schema" qname="pat_7" />
         </introspection-scope>
       </schema-mapping>
     </data-source>

@@ -16,7 +16,7 @@ public class Product implements Serializable{
     private ArrayList<String> features = new ArrayList<String>();
     private ArrayList<Review> reviews = new ArrayList<Review>();
     private String productCategory;
-    private ArrayList<ImageIcon> productImage;
+    private ArrayList<ImageIcon> productImages;
     private ArrayList<String> colors;
     private int score;
 
@@ -109,9 +109,9 @@ public class Product implements Serializable{
     }
     private void setImage(byte[] imageBytes) {
         if(imageBytes != null)
-            productImage = new ImageIcon(imageBytes);
+            productImages.add(new ImageIcon(imageBytes));
         else
-            productImage = new ImageIcon("media/images/NF.jpg");
+            productImages.add(new ImageIcon("media/images/NF.jpg"));
     }
     public void setScore(float fullscore) {
         score = Math.round(fullscore);
@@ -143,7 +143,7 @@ public class Product implements Serializable{
     	return imageDirectory;
     }*/
     public ImageIcon getProductImage() {
-        return productImage;
+        return productImages.get(0);
     }
     public ArrayList<Review> getReviews(){
         return reviews;

@@ -14,22 +14,28 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import com.sun.source.tree.CaseTree;
 import domain.Product;
 import domain.User;
 
 public class UserDAO {
     public static User getUser(int i) {
         User user = null;
-        Connection con=ConnectionDAO.getInstance().getConnection();
+        Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
-        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE \"ID_User\" = " + i);
-             ResultSet rs = pst.executeQuery()) {
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE \"ID_User\" = " + i);
+             ResultSet rs = pst.executeQuery();
             if(rs.next()) {
                 user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getDate(5), rs.getString(6), rs.getString(7),null);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException sqle) {
 
-            System.out.println(ex.getMessage());
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
         return user;
     }
@@ -51,25 +57,31 @@ public class UserDAO {
     }*/
     public static User login(String name, String password) {
         User user = null;
-        Connection con=ConnectionDAO.getInstance().getConnection();
+        Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
-        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE (\"E-mail\" = '"+name+"' OR \"Name\" = '"+name+"') AND \"Password\" = '"+password+"'");
-             ResultSet rs = pst.executeQuery()){
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE (\"E-mail\" = '"+name+"' OR \"Name\" = '"+name+"') AND \"Password\" = '"+password+"'");
+             ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
                 user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getDate(5), rs.getString(6), rs.getString(7),null);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException sqle) {
 
-            System.out.println(ex.getMessage());
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
 
         return user;
     }
     public static boolean uploadUser(User user) {
         boolean status = false;
-        Connection con=ConnectionDAO.getInstance().getConnection();
+        Connection con = null;
         try{
+            con = ConnectionDAO.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement("INSERT INTO \"Users\"(\"E-mail\", \"Password\", \"Name\", \"Birth_Date\", \"Skin_Color\", \"Skin_Condition\", \"Image\") VALUES(?,?,?,?,?,?,?)");
 
             pst.setString(1,user.getEmail());
@@ -83,45 +95,56 @@ public class UserDAO {
             pst.executeUpdate();
             status = true;
 
-        } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException sqle) {
+            System.err.format("SQL State: %s\n%s", sqle.getSQLState(), sqle.getMessage());
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
         }
         return status;
     }
     public static int getUserID(User user) {
         int id = -1;
-        Connection con=ConnectionDAO.getInstance().getConnection();
-        try (PreparedStatement pst = con.prepareStatement("SELECT \"ID_User\" FROM  \"Users\" WHERE \"Name\" = '" + user.getName()+"'");
-             ResultSet rs = pst.executeQuery()) {
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT \"ID_User\" FROM  \"Users\" WHERE \"Name\" = '" + user.getName()+"'");
+             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt(1);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException sqle) {
 
-            System.out.println(ex.getMessage());
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
 
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
         return id;
     }
     public static boolean setFavorite(Product product, User user, boolean value) {
         boolean status = false;
-        final Connection con=ConnectionDAO.getInstance().getConnection();
+        Connection con = null;
         try {
+            con = ConnectionDAO.getInstance().getConnection();
             final PreparedStatement pst = con.prepareStatement("UPDATE \"Favorites\" SET \"Value\" = '"+value+"' WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
             pst.executeUpdate();
             status = true;
-        }catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        }catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
         return status;
     }
     public static boolean getFavoriteStatus(Product product, User user) {
         boolean status = false;
-        final Connection con=ConnectionDAO.getInstance().getConnection();
-        try (PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
-             ResultSet rs = pst.executeQuery()) {
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
+             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 status = rs.getBoolean(1);
             }
@@ -140,13 +163,17 @@ public class UserDAO {
             }
             System.out.println(ex.getMessage());
 
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
         return status;
     }
     public static void getFavorites(User user, ArrayList<Product> list) {
-        final Connection con=ConnectionDAO.getInstance().getConnection();
-        try (PreparedStatement pst = con.prepareStatement("SELECT \"ID_Product\" FROM  \"Favorites\" WHERE \"ID_User\" = '" +UserDAO.getUserID(user)+"' AND \"Value\" = '"+true+"'");
-             ResultSet rs2 = pst.executeQuery()) {
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Product\" FROM  \"Favorites\" WHERE \"ID_User\" = '" +UserDAO.getUserID(user)+"' AND \"Value\" = '"+true+"'");
+             ResultSet rs2 = pst.executeQuery();
             while (rs2.next()) {
                 try (PreparedStatement pst2 = con.prepareStatement("SELECT * FROM \"Products\" WHERE \"ID_Product\" = '"+rs2.getInt(1)+"'");
                      ResultSet rs = pst2.executeQuery()) {
@@ -156,9 +183,9 @@ public class UserDAO {
                         list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6),rs.getBytes(8)));
                     }
 
-                } catch (SQLException ex) {
+                } catch (SQLException sqle) {
 
-                    System.out.println(ex.getMessage());
+                    System.out.println(sqle.getMessage());
                 }
             }
             for(int i = 0 ; i<list.size();i++) {
@@ -184,10 +211,12 @@ public class UserDAO {
                     System.out.println(ex.getMessage());
                 }
             }
-        } catch (SQLException ex) {
+        } catch (SQLException sqle) {
 
-            System.out.println(ex.getMessage());
-
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
         }
     }
     private static byte[] getImageBytes(ImageIcon image) {

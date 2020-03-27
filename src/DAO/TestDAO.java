@@ -48,8 +48,9 @@ public class TestDAO {
 	}*/
 
     public static void getTests() {
-        Connection con=ConnectionDAO.getInstance().getConnection();
+        Connection con = null;
         try{
+            con = ConnectionDAO.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement("INSERT INTO \"Users\"(\"E-mail\", \"Password\", \"Name\", \"Birth_Date\", \"Skin_Color\", \"Skin_Condition\", \"Image\") VALUES(?,?,?,?,?,?,?)");
 
             pst.setString(1,"oleoblancomiguel@gmail.com");
