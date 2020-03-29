@@ -18,7 +18,7 @@ public class ProductDAO {
         Connection con = null;
         try{
             con=ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Products\"");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Products");
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {

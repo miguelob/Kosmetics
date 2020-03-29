@@ -25,7 +25,7 @@ public class UserDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE \"ID_User\" = " + i);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Users WHERE idUser = " + i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
                 user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getDate(5), rs.getString(6), rs.getString(7),null);
@@ -55,13 +55,16 @@ public class UserDAO {
         }
         return permision;
     }*/
-    public static User login(String name, String password) {
+    public static User login(String userName, String passw) {
         User user = null;
         Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Users\" WHERE (\"E-mail\" = '"+name+"' OR \"Name\" = '"+name+"') AND \"Password\" = '"+password+"'");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Users WHERE (email = ? OR name = ?) AND password = ?");
+            pst.setString(1,userName);
+            pst.setString(2,userName);
+            pst.setString(3,passw);
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
@@ -82,7 +85,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO \"Users\"(\"E-mail\", \"Password\", \"Name\", \"Birth_Date\", \"Skin_Color\", \"Skin_Condition\", \"Image\") VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO Users(email, password, name, birthDate, skinColor, skinCondition, userImg) VALUES(?,?,?,?,?,?,?)");
 
             pst.setString(1,user.getEmail());
             pst.setString(2,user.getPassword());
@@ -107,7 +110,8 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"ID_User\" FROM  \"Users\" WHERE \"Name\" = '" + user.getName()+"'");
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  Users WHERE name = ?");
+            pst.setString(1,user.getName());
              ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt(1);

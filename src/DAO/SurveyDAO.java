@@ -41,7 +41,8 @@ public class SurveyDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Questions\" WHERE \"ID_Question\" = " + id);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Questions WHERE idQuestion = ?");
+            pst.setInt(1,id);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
                 question = new Question(rs.getInt(1), rs.getString(2));
