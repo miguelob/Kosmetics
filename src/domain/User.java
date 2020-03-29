@@ -22,7 +22,7 @@ public class User implements Serializable{
     private ImageIcon userImage;
 
     public User(String name,String email,String userPasword,
-                Date birthDate,String skinColor,String skinCondition, byte[] imageBytes){
+                Date birthDate,String skinColor,String skinCondition, ImageIcon image){
 
         //this.idUser=idUser;
         this.name=name;
@@ -31,7 +31,7 @@ public class User implements Serializable{
         this.birthDate=birthDate;
         this.skinColor=skinColor;
         this.skinCondition=skinCondition;
-        this.setImage(imageBytes);
+        this.userImage = image;
     }
     /*public User(String name,String email,String userPasword,
             Date birthDate,String skinColor,String skinCondition, byte[] imageBytes){
