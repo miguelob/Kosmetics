@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @WebServlet(name = "Registro", urlPatterns = "/Registro")
@@ -27,7 +29,7 @@ public class Registro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        byte[] password = encriptar(request.getParameter("password"));
         Date brithDate = (Date) ((Object) request.getParameter("birthDate"));
         String skinColor = request.getParameter("skinColor");
         String skinCondition = request.getParameter("skinCondition");
@@ -57,5 +59,15 @@ public class Registro extends HttpServlet {
 
         }
         request.getRequestDispatcher("/XXXXXX.jsp").forward(request,response);//FALTA POR ESPECIFICAR EL ARCHIVO
+    }
+    private static byte[] encriptar(String passw){
+        byte[] textoEncriptado = null;
+        try{
+            MessageDigest msd = MessageDigest.getInstance("MD5");
+            textoEncriptado = msd.digest(passw.getBytes());
+        } catch (NoSuchAlgorithmException nsae){
+            javax.swing.JOptionPane.showMessageDialog(null, "Error cargando el algoritmo", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        return textoEncriptado;
     }
 }

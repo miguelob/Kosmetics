@@ -15,13 +15,13 @@ public class User implements Serializable{
     //public final int idUser;
     private String name;
     private String email;
-    private String userPassword;
+    byte[] userPassword;
     private Date birthDate;
     private String skinColor;
     private String skinCondition;
     private ImageIcon userImage;
 
-    public User(String name,String email,String userPasword,
+    public User(String name,String email,byte[] userPasword,
                 Date birthDate,String skinColor,String skinCondition, ImageIcon image){
 
         //this.idUser=idUser;
@@ -46,10 +46,10 @@ public class User implements Serializable{
 			this.setImage(imageBytes);
 	}*/
 
-    public User(String name, String email, char[] userPassword){
+    public User(String name, String email, byte[] userPassword){
         this.name=name;
         this.email=email;
-        this.userPassword=String.valueOf(userPassword);
+        this.userPassword = userPassword;
     }
     private void setImage(byte[] imageBytes) {
         if(imageBytes != null)
@@ -63,7 +63,7 @@ public class User implements Serializable{
     public String getEmail() {
         return email;
     }
-    public String getPassword() {
+    public byte[] getPassword() {
         return userPassword;
     }
     public Date getBirthDate() {
