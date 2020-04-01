@@ -93,10 +93,10 @@ public class UserDAO {
             pst.setString(1,user.getEmail());
             pst.setString(2,user.getPassword());
             pst.setString(3,user.getName());
-            pst.setDate(4, (java.sql.Date) user.getBirthDate());
+            pst.setDate(4, UserDAO.convertUtilToSql(user.getBirthDate()));
             pst.setString(5,user.getSkinColor());
             pst.setString(6,user.getSkinCondition());
-            pst.setBytes(7,null);//UserDAO.getImageBytes(user.getProfileImage()));
+            pst.setBytes(7,getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
 
             pst.executeUpdate();
             status = true;
@@ -238,5 +238,9 @@ public class UserDAO {
             e1.printStackTrace();
         }
         return imgBytes;
+    }
+    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        return sDate;
     }
 }
