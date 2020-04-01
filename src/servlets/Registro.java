@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 @WebServlet(name = "Registro", urlPatterns = "/Registro")
@@ -28,7 +29,7 @@ public class Registro extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Date brithDate = (Date) ((Object) request.getParameter("birthDate"));
+        String brithDate =  request.getParameter("birthDate");
         String skinColor = request.getParameter("skinColor");
         String skinCondition = request.getParameter("skinCondition");
         ImageIcon userImg = (ImageIcon) ((Object) request.getParameter("userImg"));
@@ -38,10 +39,13 @@ public class Registro extends HttpServlet {
         //1 --> algun campo esta vacion
         //2 --> el usuario ya existe
         //3 --> error al gardar en base de datos
+        try{
+            user = new User(name,email,password,brithDate,skinColor,skinCondition,null);
+        }catch (ParseException ex){
+            ex.printStackTrace();
+        }
 
-        user = new User(name,email,password,brithDate,skinColor,skinCondition,userImg);
-
-        if(name.equals("") || email.equals("") || password.equals("") || brithDate == null || skinColor.equals("") || skinCondition.equals("") || userImg == null){
+        if(name.equals("") || email.equals("") || password.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
             request.setAttribute("error",1);
         }else if(UserDAO.getUserID(user) == -1){
             request.setAttribute("error",2);

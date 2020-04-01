@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,16 +26,16 @@ public class UserDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM Users WHERE idUser = " + i);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser = " + i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getDate(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
             }
         } catch (SQLException sqle) {
 
             System.out.println(sqle.getMessage());
             sqle.printStackTrace();
-        } catch (ClassNotFoundException cnfe){
+        } catch (ClassNotFoundException | ParseException cnfe){
             cnfe.printStackTrace();
         }
         return user;
@@ -61,14 +62,14 @@ public class UserDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM Users WHERE (email = ? OR name = ?) AND password = ?");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
             pst.setString(1,userName);
             pst.setString(2,userName);
             pst.setString(3,passw);
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getDate(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
             }
         } catch (SQLException sqle) {
 
@@ -76,6 +77,8 @@ public class UserDAO {
             sqle.printStackTrace();
         } catch (ClassNotFoundException cnfe){
             cnfe.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         return user;
@@ -85,12 +88,12 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO Users(email, password, name, birthDate, skinColor, skinCondition, userImg) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO users(email, password, name, birthDate, skinColor, skinCondition, userImg) VALUES(?,?,?,?,?,?,?)");
 
             pst.setString(1,user.getEmail());
             pst.setString(2,user.getPassword());
             pst.setString(3,user.getName());
-            pst.setDate(4, new java.sql.Date(user.getBirthDate().getTime()));
+            pst.setDate(4, (java.sql.Date) user.getBirthDate());
             pst.setString(5,user.getSkinColor());
             pst.setString(6,user.getSkinCondition());
             pst.setBytes(7,null);//UserDAO.getImageBytes(user.getProfileImage()));
@@ -110,7 +113,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  Users WHERE name = ?");
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE name = ?");
             pst.setString(1,user.getName());
              ResultSet rs = pst.executeQuery();
             if (rs.next()) {
