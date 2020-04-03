@@ -1,0 +1,27 @@
+#body{
+    background-image: url("../media/MP.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#Letrero{
+    color: white;
+    font-size: 100px;
+}
+#Letrero_2 {
+    color: white;
+    margin-bottom: 5%;
+}
+
+#registro-inicio_img{
+    /*height: 100%;*/
+}
+
+/*Pinta un circulo del color especificado en el bakgraund. Probar con span y div. No se a usado de momento*/
+.circulo-colored{
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #5cb85c;
+}
