@@ -8,14 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/StylesMiguel.css">
+    <link rel="shortcut icon" href="media/LogoBueno.svg">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
+        <img src="media/LogoBueno.svg" height="32" width="32" class="navbar-brand mr-0 align-top" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
         </form>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,16 +30,9 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item active mx-2">
-                    <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="InicioSesion_Usuarios.html">Iniciar sesión<span class="sr-only">(current)</span></a>
                 </li>
-
-                <form action="registro_usuario.jsp">
-                    <button class="btn btn-info btn-sm my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
-                </form>
-
-                <form action="incluir_producto.jsp">
-                    <button class="btn btn-ttc btn-sm my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
-                </form>
+                <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit">Registrarse</button>
             </ul>
         </div>
     </nav>
@@ -42,7 +40,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse text-nowrap justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav justify-content-center">
                 <li class="nav-item mx-2 d-none d-xl-block">
                     <a class="nav-link" href="#">BASES</a>
@@ -78,6 +76,8 @@
             </ul>
         </div>
     </nav>
-   <%@include file="jsSources.jsp"%>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

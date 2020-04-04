@@ -1,0 +1,183 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: alexr
+  Date: 03/04/2020
+  Time: 19:45
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <%@include file="head.jsp"%>
+    <title>Añadir producto · Kosmetics</title>
+</head>
+<body>
+    <%@include file="cabecera.jsp"%>
+        <form class="needs-validation justify-content-center" novalidate>
+            <div class="col-8 m-auto">
+                <div id="titelIncluirProducto" class="panel-body py-auto mt-3 rounded">
+                    <h1 class="text-center py-3 mt-5 "><strong>Añada un nuevo producto!!</strong></h1>
+                </div>
+                <h3 class="text-left text-muted pt-5 pb-1 px-3">Información general</h3>
+                <div class="form-row py-2">
+                    <label for="productName">Nombre</label>
+                    <input type="text" class="form-control" id="productName" placeholder="Hello Happy Foundation" value="nombre" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="form-row py-2">
+                    <label for="productDecripcion">Descripción</label>
+                    <!--<input type="text" class="form-control" id="productDecripcion" placeholder="Base de maqullaje fluida con cobertura media /n SPF 15 PA++" value="descripcion" required>-->
+                    <textarea class="form-control" id="productDecripcion" placeholder="Base de maqullaje fluida con cobertura media. SPF 15 PA++" rows="3" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="form-row py-2">
+
+                    <label for="productCategoria">Categoría</label>
+                    <select id="productCategoria" class="custom-select" required>
+                        <option selected></option>
+                        <option value="1" >bases</option>
+                        <option value="2" >máscaras de pestañas</option>
+                        <option value="3" >pintalabios</option>
+                        <option value="4" >sombras de ojos</option>
+                        <option value="5" >pestañas postizas</option>
+                        <option value="6" >contouring</option>
+                        <option value="7" >colorete</option>
+                        <option value="8" >cejas</option>
+                        <option value="9" >correctores</option>
+                        <option value="10" >eyeliner</option>
+
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe asignar el producto a alguna categoría.
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="productColores">Colores disponibles</label>
+                    <input type="text" class="form-control" id="productColores" placeholder="fdeec7;fde457;ab11c7;11d5c7;" required>
+                    <div class="invalid-feedback">
+                        Porfavor introduzca los colores en código hexadecimal separado por ';'.
+                    </div>
+                </div>
+
+                <h3 class="text-left text-muted pt-5 pb-1 px-3">Información de venta</h3>
+                <div class="form-row py-2">
+                    <label for="productMarca">Marca</label>
+                    <select id="productMarca" class="custom-select" required>
+                        <option selected></option>
+                        <option value="1" ></option>
+
+
+
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe asignar el producto a alguna categoría.
+                    </div>
+                </div>
+                <div class="form-row pb-2 pt-0">
+                    <label for="prodictPrecio">Precio</label>
+                    <input type="text" class="form-control" id="prodictPrecio" placeholder="4,6" required>
+                    <div class="invalid-feedback">
+                        Valor numérico invalido.
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <h6 class="text-left pt-1 pb-0">Ofertas</h6>
+                    <div class="form-row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta4" value="option4" >
+                            <label class="form-check-label" for="productOferta4">
+                                sin oferta
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta1" value="option1" checked>
+                            <label class="form-check-label" for="productOferta1">
+                                envio gratis
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta2" value="option2" >
+                            <label class="form-check-label" for="productOferta2">
+                                promoción gratuita
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta3" value="option3" >
+                            <label class="form-check-label" for="productOferta3">
+                                descuento
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h3 class="text-left text-muted mt-5 pb-1 px-3">Personalice las opciones de feedback</h3>
+                <div class="form-row py-2">
+                    <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
+                    <select id="productCaracteristicas" class="custom-select" required>
+                        <option selected></option>
+                        <option value="1" ></option>
+
+
+
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe asignar el producto a alguna categoría.
+                    </div>
+                </div>
+
+                <div class="form-row py-2">
+                    <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
+                    <select id="productPreguntas" class="custom-select" required>
+                        <option value="1">pregunta</option>
+                        <option value="2">pregunta</option>
+                        <option value="3">pregunta</option>
+                        <option value="3">pregunta</option>
+                        <option value="3">pregunta</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe seleccionar tres preguntas.
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <button class="btn btn-dark btn-block px-3 my-4 mx-auto" type="submit">Submit form</button>
+                </div>
+            </div>
+        </form>
+
+        <script>
+
+             // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+        <%@include file="jsSources.jsp"%>
+</body>
+</html>

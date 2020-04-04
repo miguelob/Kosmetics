@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="60ca424d-5bfd-454c-b8b9-711757ac6ace" name="servidor" url="http://kosmeticsserver.ddns.net">
+        <fileTransfer host="kosmeticsserver.ddns.net" port="2020">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="2020" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
