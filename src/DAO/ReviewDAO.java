@@ -16,7 +16,7 @@ public class ReviewDAO {
         //QUERY for loading reviews. we also need the query user
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Reviews\" WHERE \"ID_Product\" = " + product.getId());
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM reviews WHERE  = Users_idUser " + product.getId());
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -36,7 +36,7 @@ public class ReviewDAO {
         final Connection con = null;
         try{
             ConnectionDAO.getInstance().getConnection();
-            final PreparedStatement pst = con.prepareStatement("INSERT INTO \"Reviews\"(\"ID_Product\", \"ID_User\", \"Title_Comment\", \"Comment\", \"Score_Product\", \"Score_Review\", \"Score_Review_Participants\") VALUES(?,?,?,?,?,?,?)");
+            final PreparedStatement pst = con.prepareStatement("INSERT INTO reviews (Products_idProducts, Users_idUser, title, text, scoreProduct, scoreReview, scoreReviewParticipants) VALUES(?,?,?,?,?,?,?)");
 
             pst.setInt(1,ProductDAO.getProductID(product));
             pst.setInt(2,UserDAO.getUserID(review.getUser()));
@@ -69,7 +69,7 @@ public class ReviewDAO {
         //QUERY for loading reviews. we also need the query user
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"Reviews\" WHERE \"ID_User\" = " + UserDAO.getUserID(tempUser));
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM reviews WHERE = Users_idUser = " + UserDAO.getUserID(tempUser));
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
