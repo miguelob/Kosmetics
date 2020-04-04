@@ -29,7 +29,7 @@ public class UserDAO {
             PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser = " + i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(8));
             }
         } catch (SQLException sqle) {
 
@@ -68,7 +68,8 @@ public class UserDAO {
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(9));
+                System.out.println(rs.getInt(8));
             }
         } catch (SQLException sqle) {
 
@@ -87,7 +88,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO users(email, password, name, birthDate, skinColor, skinCondition, userImg) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO users(email, password, name, birthDate, skinColor, skinCondition, userImg, admin) VALUES(?,?,?,?,?,?,?,?)");
 
             pst.setString(1,user.getEmail());
             pst.setString(2,user.getPassword());
@@ -96,6 +97,7 @@ public class UserDAO {
             pst.setString(5,user.getSkinColor());
             pst.setString(6,user.getSkinCondition());
             pst.setBytes(7,null);//getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
+            pst.setInt(8,user.getAdmin());
 
             pst.executeUpdate();
             status = true;

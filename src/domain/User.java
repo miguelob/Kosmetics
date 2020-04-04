@@ -20,9 +20,10 @@ public class User implements Serializable{
     private String skinColor;
     private String skinCondition;
     private ImageIcon userImage;
+    private int admin;
 
     public User(String name,String email,String userPasword,
-                String birthDate,String skinColor,String skinCondition, byte[] image) throws ParseException {
+                String birthDate,String skinColor,String skinCondition, byte[] image,int admin) throws ParseException {
 
         //this.idUser=idUser;
         this.name=name;
@@ -32,7 +33,9 @@ public class User implements Serializable{
         this.skinColor=skinColor;
         this.skinCondition=skinCondition;
         this.setImage(image);
+        this.admin = admin;
     }
+
     /*public User(String name,String email,String userPasword,
             Date birthDate,String skinColor,String skinCondition, byte[] imageBytes){
 
@@ -83,6 +86,9 @@ public class User implements Serializable{
     }
     public void setSkinCondition(String skinCondition) {
         this.skinCondition = skinCondition;
+    }
+    public int getAdmin(){
+        return admin;
     }
    public void setBirthDate(String date) throws ParseException {
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

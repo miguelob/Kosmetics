@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
             if(user != null){
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
-                System.out.println("Todo OK");
+                //System.out.println("Todo OK");
             }else{
                 System.out.println("Error en contraseña o email");
             }
