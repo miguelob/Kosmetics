@@ -59,7 +59,7 @@ public class addProduct extends HttpServlet {
                 break;
             case 8:
                 retorno = "cejas";
-                break;;
+                break;
             case 9:
                 retorno = "correctores";
                 break;
