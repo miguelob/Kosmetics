@@ -31,17 +31,17 @@ public class Registro extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String name = request.getParameter("name");
-        System.out.println(request.getParameter("name"));
+        //System.out.println(request.getParameter("name"));
         String email = request.getParameter("email");
-        System.out.println(request.getParameter("email"));
+        //System.out.println(request.getParameter("email"));
         String password = request.getParameter("password");
-        System.out.println(request.getParameter("password"));
+        //System.out.println(request.getParameter("password"));
         String brithDate =  request.getParameter("birthDate");
-        System.out.println(request.getParameter("birthDate"));
+        //System.out.println(request.getParameter("birthDate"));
         String skinColor =this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
-        System.out.println(skinColor);
+        //System.out.println(skinColor);
         String skinCondition = this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
-        System.out.println(skinCondition);
+        //System.out.println(skinCondition);
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
         byte[] userImg = null;
 
@@ -61,16 +61,16 @@ public class Registro extends HttpServlet {
 
             if(name.equals("") || email.equals("") || password.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
                 request.setAttribute("error",1);
-                System.out.println("nulos");
+                //System.out.println("nulos");
             }else if(UserDAO.getUserID(user) != -1){
                 request.setAttribute("error",2);
-                System.out.println("ya existe");
+                //System.out.println("ya existe");
             }else{
                 if(!UserDAO.uploadUser(user)){
-                    System.out.println("error al subir");
+                    //System.out.println("error al subir");
                     request.setAttribute("error",3);
                 }else{
-                    System.out.println("todo ok");
+                    //System.out.println("todo ok");
                     request.setAttribute("error",0);
                     request.setAttribute("user",user);
                     HttpSession session = request.getSession();
@@ -78,7 +78,7 @@ public class Registro extends HttpServlet {
                 }
 
             }
-            request.getRequestDispatcher("/index.jsp").forward(request,response);//FALTA POR ESPECIFICAR EL ARCHIVO
+            request.getRequestDispatcher("/index.jsp").forward(request,response);
         }catch (ParseException ex){
             ex.printStackTrace();
         }

@@ -56,16 +56,15 @@ public class UserDAO {
         }
         return permision;
     }*/
-    public static User login(String userName, String passw) {
+    public static User login(String email, String passw) {
         User user = null;
         Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
-            pst.setString(1,userName);
-            pst.setString(2,userName);
-            pst.setString(3,passw);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");//"SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
+            pst.setString(1,email);
+            pst.setString(2,passw);
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
