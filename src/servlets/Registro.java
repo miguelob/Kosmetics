@@ -27,15 +27,21 @@ public class Registro extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //processRequest(request,response); HABRA QUE PONERLO EN CUANDO EL FORWARD FUNCIONE
+        processRequest(request,response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String name = request.getParameter("name");
+        System.out.println(request.getParameter("name"));
         String email = request.getParameter("email");
+        System.out.println(request.getParameter("email"));
         String password = request.getParameter("password");
+        System.out.println(request.getParameter("password"));
         String brithDate =  request.getParameter("birthDate");
-        String skinColor = request.getParameter("skinColor");
-        String skinCondition = request.getParameter("skinCondition");
+        System.out.println(request.getParameter("birthDate"));
+        String skinColor =this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
+        System.out.println(skinColor);
+        String skinCondition = this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
+        System.out.println(skinCondition);
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
         byte[] userImg = null;
 
@@ -44,20 +50,27 @@ public class Registro extends HttpServlet {
         //1 --> algun campo esta vacion
         //2 --> el usuario ya existe
         //3 --> error al gardar en base de datos
+
         //if(userImg == null){
            // userImg = defaultImage();
         //}
+
         try{
             user = new User(name,email,password,brithDate,skinColor,skinCondition,userImg);
+            System.out.println("user");
 
             if(name.equals("") || email.equals("") || password.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
                 request.setAttribute("error",1);
-            }else if(UserDAO.getUserID(user) == -1){
+                System.out.println("nulos");
+            }else if(UserDAO.getUserID(user) != -1){
                 request.setAttribute("error",2);
+                System.out.println("ya existe");
             }else{
                 if(!UserDAO.uploadUser(user)){
+                    System.out.println("error al subir");
                     request.setAttribute("error",3);
                 }else{
+                    System.out.println("todo ok");
                     request.setAttribute("error",0);
                     request.setAttribute("user",user);
                     HttpSession session = request.getSession();
@@ -65,7 +78,7 @@ public class Registro extends HttpServlet {
                 }
 
             }
-            request.getRequestDispatcher("/XXXXXX.jsp").forward(request,response);//FALTA POR ESPECIFICAR EL ARCHIVO
+            request.getRequestDispatcher("/index.jsp").forward(request,response);//FALTA POR ESPECIFICAR EL ARCHIVO
         }catch (ParseException ex){
             ex.printStackTrace();
         }
@@ -78,4 +91,41 @@ public class Registro extends HttpServlet {
         byte [] data = bos.toByteArray();
         return data;
     }*/
+    private String num2SkinColor(int i){
+        String retorno = "";
+        switch (i){
+            case 1:
+                retorno = "marfil";
+                break;
+            case 2:
+                retorno = "palida";
+                break;
+            case 3:
+                retorno = "beige";
+                break;
+            case 4:
+                retorno = "moreno claro";
+                break;
+            case 5:
+                retorno = "moreno oscuro";
+                break;
+        }
+        return retorno;
+    }
+    private String num2SkinCondition(int i){
+        String retorno = "";
+        switch (i){
+            case 1:
+                retorno = "mixta";
+                break;
+            case 2:
+                retorno = "grasa";
+                break;
+            case 3:
+                retorno = "seca";
+                break;
+        }
+        return retorno;
+    }
 }
+

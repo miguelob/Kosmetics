@@ -96,7 +96,7 @@ public class UserDAO {
             pst.setDate(4, UserDAO.convertUtilToSql(user.getBirthDate()));
             pst.setString(5,user.getSkinColor());
             pst.setString(6,user.getSkinCondition());
-            pst.setBytes(7,getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
+            pst.setBytes(7,null);//getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
 
             pst.executeUpdate();
             status = true;
@@ -113,8 +113,8 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE name = ?");
-            pst.setString(1,user.getName());
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE email = ?");
+            pst.setString(1,user.getEmail());
              ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt(1);
