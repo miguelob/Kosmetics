@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,11 +29,11 @@
                 </li>
 
                 <form action="registro_usuario.jsp">
-                    <button class="btn btn-info btn-sm my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
+                    <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
                 </form>
 
                 <form action="incluir_producto.jsp">
-                    <button class="btn btn-ttc btn-sm my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
+                    <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                 </form>
             </ul>
         </div>
