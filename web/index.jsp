@@ -18,7 +18,7 @@
     <title>Kosmetics</title>
 </head>
 <body id = "body">
-    <%@include file="cabecera.jsp"%>
+    <jsp:include page="cabecera.jsp"/>
     <div class = "container">
         <div class = "row">
             <div class="col-sm">

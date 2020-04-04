@@ -20,7 +20,7 @@
         <img src="media/LogoBueno.svg" height="32" width="32" class="navbar-brand mr-0 align-top" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
         </form>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse justify-content-center text-nowrap" id="navbarNavDropdown">
             <ul class="navbar-nav justify-content-center">
                 <li class="nav-item mx-2 d-none d-xl-block">
                     <a class="nav-link" href="#">BASES</a>
