@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <jsp:include page="head.jsp"/>
@@ -23,18 +24,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <c:choose>
+                    <c:when test="${empty sessionScope.user}">
+                        <li class="nav-item active mx-2">
+                            <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
+                        </li>
 
-                <li class="nav-item active mx-2">
-                    <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
-                </li>
-
-                <form action="registro_usuario.jsp">
-                    <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
-                </form>
-
-                <form action="incluir_producto.jsp">
-                    <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
-                </form>
+                        <form action="registro_usuario.jsp">
+                            <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <c:if test="${sessionScope.user.admin > 0}">
+                            <form action="incluir_producto.jsp">
+                                <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
+                            </form>
+                        </c:if>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </nav>
