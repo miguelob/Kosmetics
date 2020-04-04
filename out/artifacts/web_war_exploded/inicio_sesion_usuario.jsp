@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es-es">
 <head>
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
    <title>Iniciar sesión · Kosmetics</title>
 </head>
 <body>
@@ -13,14 +13,14 @@
                 <div class = "col-lg-8">
                     <h1 class="text-center pt-5">Login</h1>
                     <h4 class="text-center text-muted py-3">¡Descubre las novedades más asombrosa!</h4>
-                    <form>
+                    <form method = "POST" action = "Login">
                         <div class="form-group">
-                            <label for="userInputEmail">nombre de usuario / correo electrónico</label>
-                            <input type="email" class="form-control" id="userInputEmail" aria-describedby="emailHelp">
+                            <label for="userInputEmail">correo electrónico</label>
+                            <input type="email" class="form-control" id="userInputEmail" aria-describedby="emailHelp" name = "email">
                         </div>
                         <div class="form-group">
                             <label for="userInputPassword">Contraseña</label>
-                            <input type="password" class="form-control" id="userInputPassword">
+                            <input type="password" class="form-control" id="userInputPassword" name = "password">
                         </div>
 
                         <button type="submit" class="btn btn-dark btn-block mt-5">Iniciar sesión</button>
@@ -35,6 +35,6 @@
 
     </div>
 
-<%@include file="jsSources.jsp"%>
+<jsp:include page="jsSources.jsp"/>
 </body>
 </html>

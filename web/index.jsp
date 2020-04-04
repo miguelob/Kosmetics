@@ -9,7 +9,7 @@
 <html>
 <head>
 
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
     <title>Kosmetics</title>
 </head>
 <body id = "body">
@@ -34,6 +34,6 @@
         </div>
     </div>
 
-    <%@include file="jsSources.jsp"%>
+    <jsp:include page="jsSources.jsp"/>
 </body>
 </html>
