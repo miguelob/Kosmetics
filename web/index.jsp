@@ -23,8 +23,8 @@
                 <div class="mt-5 d-flex justify-content-center">
                     <div class="mr-lg-3 ml-xl-auto mt-lg-5 pr-xl-5">
                         <p class="h1" id="Letrero"><strong>Kosmetics.</strong></p>
-                        <small class="h4 text-nowrap" id="Letrero_2" >Diseñado por consumidores para consumidores</small>
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search high-quality products" aria-label="Search">
+                        <small class="h4 text-nowrap " id="Letrero_2" >Diseñado por consumidores para consumidores</small>
+                        <input class="form-control mr-sm-2 mt-3" type="search" placeholder="Search high-quality products" aria-label="Search">
                     </div>
                 </div>
             </div>

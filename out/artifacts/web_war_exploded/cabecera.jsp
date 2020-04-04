@@ -12,10 +12,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="media/LogoBueno.svg" height="32" width="32" class="navbar-brand mr-0 align-top" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
+        <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
         </form>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,10 +27,13 @@
                 <li class="nav-item active mx-2">
                     <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
                 </li>
+
                 <form action="registro_usuario.jsp">
+                    <button class="btn btn-info btn-sm my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
+                </form>
 
-                    <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
-
+                <form action="incluir_producto.jsp">
+                    <button class="btn btn-ttc btn-sm my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                 </form>
             </ul>
         </div>
@@ -39,7 +42,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse text-nowrap justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav justify-content-center">
                 <li class="nav-item mx-2 d-none d-xl-block">
                     <a class="nav-link" href="#">BASES</a>
