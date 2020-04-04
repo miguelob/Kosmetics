@@ -88,7 +88,7 @@ public class User implements Serializable{
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
        //birthDate = format.parse(date);
         birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-        System.out.println(birthDate);
+        //System.out.println(birthDate);
         //this.birthDate = date;
     }
 

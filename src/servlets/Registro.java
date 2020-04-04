@@ -3,17 +3,21 @@ package servlets;
 import DAO.UserDAO;
 import domain.User;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "Registro", urlPatterns = "/Registro")
 public class Registro extends HttpServlet {
@@ -33,15 +37,16 @@ public class Registro extends HttpServlet {
         String skinColor = request.getParameter("skinColor");
         String skinCondition = request.getParameter("skinCondition");
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
-
-        System.out.println(request.getParameter("userImg")); byte[] userImg = null;
+        byte[] userImg = null;
 
         //ERROR CODES
         //0 --> TODO OK
         //1 --> algun campo esta vacion
         //2 --> el usuario ya existe
         //3 --> error al gardar en base de datos
-
+        //if(userImg == null){
+           // userImg = defaultImage();
+        //}
         try{
             user = new User(name,email,password,brithDate,skinColor,skinCondition,userImg);
 
@@ -66,4 +71,11 @@ public class Registro extends HttpServlet {
         }
 
     }
+    /*private byte[] defaultImage() throws IOException {
+        BufferedImage bImage = ImageIO.read(new File("fp.jpg"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos );
+        byte [] data = bos.toByteArray();
+        return data;
+    }*/
 }
