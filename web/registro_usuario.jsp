@@ -41,11 +41,11 @@
                                 <label for="tono_piel">tipo de piel</label>
                                 <select id="tono_piel" class="custom-select" name = "skinColor">
                                     <option selected>sin definir</option>
-                                    <option value="1" style="background: #fdeec7">marfil</option>
-                                    <option value="2" style="background: #fee1b9">palida</option>
-                                    <option value="3" style="background: #fcbd84">beige</option>
-                                    <option value="4" style="background: #a87256; color:white">moreno claro</option>
-                                    <option value="5" style="background: #633c1d; color:white">moreno oscuro</option>
+                                    <option value="marfil" style="background: #fdeec7">marfil</option>
+                                    <option value="palida" style="background: #fee1b9">palida</option>
+                                    <option value="beige" style="background: #fcbd84">beige</option>
+                                    <option value="moreno claro" style="background: #a87256; color:white">moreno claro</option>
+                                    <option value="moreno oscuro" style="background: #633c1d; color:white">moreno oscuro</option>
 
                                 </select>
                             </div>
@@ -53,10 +53,10 @@
                             <div class="form-group col-md-4">
                                 <label for="tipo_piel">tipo de piel</label>
                                 <select id="tipo_piel" class="custom-select" name = "skinCondition">
-                                    <option selected>sin definir</option>
-                                    <option value="1" >mixta</option>
-                                    <option value="2" >grasa</option>
-                                    <option value="3" >seca</option>
+                                    <option selected  value = "sin definir">sin definir</option>
+                                    <option value="mixta">mixta</option>
+                                    <option value="grasa">grasa</option>
+                                    <option value="seca">seca</option>
 
                                 </select>
                             </div>

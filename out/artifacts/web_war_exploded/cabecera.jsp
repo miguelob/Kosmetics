@@ -36,7 +36,7 @@
                     </c:when>
                     <c:otherwise>
                         <c:if test="${sessionScope.user.admin > 0}">
-                            <form action="incluir_producto.jsp">
+                            <form method="POST" action="CargarDatosMarcas">
                                 <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                             </form>
                         </c:if>

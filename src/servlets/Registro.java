@@ -38,9 +38,9 @@ public class Registro extends HttpServlet {
         //System.out.println(request.getParameter("password"));
         String brithDate =  request.getParameter("birthDate");
         //System.out.println(request.getParameter("birthDate"));
-        String skinColor =this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
+        String skinColor = request.getParameter("skinColor"); //this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
         //System.out.println(skinColor);
-        String skinCondition = this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
+        String skinCondition = request.getParameter("skinCondition"); //this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
         //System.out.println(skinCondition);
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
         byte[] userImg = null;
@@ -48,8 +48,9 @@ public class Registro extends HttpServlet {
         //ERROR CODES
         //0 --> TODO OK
         //1 --> algun campo esta vacion
-        //2 --> el usuario ya existe
-        //3 --> error al gardar en base de datos
+        //2 --> el email ya esta registrado
+        //3 --> el username ya esta registrado
+        //4 --> error al gardar en base de datos
 
         //if(userImg == null){
            // userImg = defaultImage();
@@ -62,13 +63,16 @@ public class Registro extends HttpServlet {
             if(name.equals("") || email.equals("") || password.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
                 request.setAttribute("error",1);
                 //System.out.println("nulos");
-            }else if(UserDAO.getUserID(user) != -1){
-                request.setAttribute("error",2);
+            }else if(UserDAO.getUserID(user) != -1 || UserDAO.checkUsername(user) !=-1){
+                if(UserDAO.getUserID(user) != -1)
+                    request.setAttribute("error",2);
+                else
+                    request.setAttribute("error",3);
                 //System.out.println("ya existe");
             }else{
                 if(!UserDAO.uploadUser(user)){
                     //System.out.println("error al subir");
-                    request.setAttribute("error",3);
+                    request.setAttribute("error",4);
                 }else{
                     //System.out.println("todo ok");
                     request.setAttribute("error",0);
@@ -90,7 +94,7 @@ public class Registro extends HttpServlet {
         ImageIO.write(bImage, "jpg", bos );
         byte [] data = bos.toByteArray();
         return data;
-    }*/
+    }
     private String num2SkinColor(int i){
         String retorno = "";
         switch (i){
@@ -126,6 +130,6 @@ public class Registro extends HttpServlet {
                 break;
         }
         return retorno;
-    }
+    }*/
 }
 

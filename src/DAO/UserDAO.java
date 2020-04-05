@@ -26,7 +26,8 @@ public class UserDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser = " + i);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser =  ?");
+            pst.setInt(1,i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
                 user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(8));
@@ -56,20 +57,21 @@ public class UserDAO {
         }
         return permision;
     }*/
-    public static User login(String email, String passw) {
+    public static User login(String userOrEmail, String passw) {
         User user = null;
         Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");//"SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
-            pst.setString(1,email);
-            pst.setString(2,passw);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
+            pst.setString(1,userOrEmail);
+            pst.setString(2,userOrEmail);
+            pst.setString(3,passw);
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
                 user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(9));
-                System.out.println(rs.getInt(8));
+                //System.out.println(rs.getInt(8));
             }
         } catch (SQLException sqle) {
 
@@ -117,6 +119,27 @@ public class UserDAO {
             PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE email = ?");
             pst.setString(1,user.getEmail());
              ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
+    public static int checkUsername(User user) {
+        int id = -1;
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE name = ?");
+            pst.setString(1,user.getName());
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt(1);
             }

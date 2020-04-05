@@ -15,8 +15,8 @@
                     <h4 class="text-center text-muted py-3">¡Descubre las novedades más asombrosa!</h4>
                     <form method = "POST" action = "Login">
                         <div class="form-group">
-                            <label for="userInputEmail">correo electrónico</label>
-                            <input type="email" class="form-control" id="userInputEmail" aria-describedby="emailHelp" name = "email">
+                            <label for="userInputName">correo electrónico / nombre de usuario</label>
+                            <input type="text" class="form-control" id="userInputName" aria-describedby="emailHelp" name = "userOrEmail">
                         </div>
                         <div class="form-group">
                             <label for="userInputPassword">Contraseña</label>

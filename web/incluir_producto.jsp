@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <jsp:include page="head.jsp"/>
@@ -38,17 +39,16 @@
 
                     <label for="productCategoria">Categoría</label>
                     <select id="productCategoria" class="custom-select" required name = "categoria">
-                        <option selected></option>
-                        <option value="1" >bases</option>
-                        <option value="2" >máscaras de pestañas</option>
-                        <option value="3" >pintalabios</option>
-                        <option value="4" >sombras de ojos</option>
-                        <option value="5" >pestañas postizas</option>
-                        <option value="6" >contouring</option>
-                        <option value="7" >colorete</option>
-                        <option value="8" >cejas</option>
-                        <option value="9" >correctores</option>
-                        <option value="10" >eyeliner</option>
+                        <option value="bases" >bases</option>
+                        <option value="máscaras de pestañas" >máscaras de pestañas</option>
+                        <option value="pintalabios" >pintalabios</option>
+                        <option value="sombras de ojos" >sombras de ojos</option>
+                        <option value="pestañas postizas" >pestañas postizas</option>
+                        <option value="contouring" >contouring</option>
+                        <option value="colorete" >colorete</option>
+                        <option value="cejas" >cejas</option>
+                        <option value="correctores" >correctores</option>
+                        <option value="eyeliner" >eyeliner</option>
 
                     </select>
                     <div class="invalid-feedback">
@@ -67,11 +67,9 @@
                 <div class="form-row py-2">
                     <label for="productMarca">Marca</label>
                     <select id="productMarca" class="custom-select" required name = "marca">
-                        <option selected></option>
-                        <option value="1" ></option>
-
-
-
+                        <c:forEach var="brand" items="${sessionScope.brands}">
+                            <option value=${brand} >${brand} </option>
+                        </c:forEach>
                     </select>
                     <div class="invalid-feedback">
                         Debe asignar el producto a alguna categoría.
@@ -126,9 +124,9 @@
                 <div class="form-row py-2">
                     <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
                     <select id="productCaracteristicas" class="custom-select" required name = "resaltar">
-                        <option selected></option>
-                        <option value="1" ></option>
-
+                        <c:forEach var="feature" items="${sessionScope.features}">
+                            <option value=${feature} >${feature} </option>
+                        </c:forEach>
 
 
                     </select>
@@ -140,11 +138,9 @@
                 <div class="form-row py-2">
                     <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
                     <select id="productPreguntas" class="custom-select" required name = "pregunta">
-                        <option value="1">pregunta</option>
-                        <option value="2">pregunta</option>
-                        <option value="3">pregunta</option>
-                        <option value="3">pregunta</option>
-                        <option value="3">pregunta</option>
+                        <c:forEach var="question" items="${sessionScope.questions}">
+                            <option value=${question} >${question} </option>
+                        </c:forEach>
                     </select>
                     <div class="invalid-feedback">
                         Debe seleccionar tres preguntas.
