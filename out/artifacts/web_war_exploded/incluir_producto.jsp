@@ -44,16 +44,16 @@
 
                     <label for="productCategoria">Categoría</label>
                     <select id="productCategoria" class="custom-select" required name = "categoria">
-                        <option value="bases" >bases</option>
-                        <option value="máscaras de pestañas" >máscaras de pestañas</option>
-                        <option value="pintalabios" >pintalabios</option>
-                        <option value="sombras de ojos" >sombras de ojos</option>
-                        <option value="pestañas postizas" >pestañas postizas</option>
-                        <option value="contouring" >contouring</option>
-                        <option value="colorete" >colorete</option>
-                        <option value="cejas" >cejas</option>
-                        <option value="correctores" >correctores</option>
-                        <option value="eyeliner" >eyeliner</option>
+                        <option value="1" >bases</option>
+                        <option value="2" >máscaras de pestañas</option>
+                        <option value="3" >pintalabios</option>
+                        <option value="4" >sombras de ojos</option>
+                        <option value="5" >pestañas postizas</option>
+                        <option value="6" >contouring</option>
+                        <option value="7" >colorete</option>
+                        <option value="8" >cejas</option>
+                        <option value="9" >correctores</option>
+                        <option value="10" >eyeliner</option>
 
                     </select>
                     <div class="invalid-feedback">
@@ -73,7 +73,7 @@
                     <label for="productMarca">Marca</label>
                     <select id="productMarca" class="custom-select" required name = "marca">
                         <c:forEach var="brand" items="${sessionScope.brands}">
-                            <option value=${brand} >${brand} </option>
+                            <option value=${brand.key} >${brand.value} </option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">
@@ -130,7 +130,7 @@
                     <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
                     <select id="productCaracteristicas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="5" multiple data-selected-text-format="count" name="features">
                         <c:forEach var="feature" items="${sessionScope.features}">
-                            <option value=${feature} >${feature} </option>
+                            <option value=${feature.key} >${feature.value} </option>
                         </c:forEach>
 
 
@@ -144,7 +144,7 @@
                     <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
                     <select id="productPreguntas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="3" multiple data-selected-text-format="count" name="questions">
                         <c:forEach var="question" items="${sessionScope.questions}">
-                            <option value=${question} >${question} </option>
+                            <option value=${question.key} >${question.value} </option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">

@@ -20,6 +20,15 @@ public class Product implements Serializable{
     private ArrayList<String> colors;
     private int score;
 
+    //NUEVO CONTRUSCOTOR PARA AÑADIR NUEVO PRODUCTO
+
+    /*public Product(String name, double price, String brand, String description, Survey survey, ArrayList<String> features
+                        , String productCategory){
+        this.name = name;
+        this.
+    }  */
+
+
     //Constructor with all the information-> No tiene sentido, cuando el usuario requiera ás info del producto se carga sobre el ya existente.
    /* public Product(int idProduct, String name, String productCategory, double price,
         String brand, String description, String imageDirectory ,Survey survey, ArrayList<String> features,

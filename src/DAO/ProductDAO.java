@@ -12,7 +12,25 @@ import domain.Product;
 
 public class ProductDAO {
 
-
+    public static void uploadProduct(Product product) {
+        Connection con=null;
+        ReviewDAO.loadProductReview(product);
+        //FALTA RELLENAR LAS IMAGENES QUE FALTAN
+        //QUERY PARA SACAR EL ID DE ENCUESTA ASOCIADA AL PRODUCTO
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Survey\" FROM  \"Products\" WHERE \"ID_Product\" = " + product.getId());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                product.setSurvey(SurveyDAO.getSurvey(rs.getInt(1)));
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+    }
 
     public static void getProductBasicInfo(ArrayList<Product> lista) {
         Connection con = null;
