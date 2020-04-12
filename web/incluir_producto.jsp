@@ -11,6 +11,11 @@
 <head>
     <jsp:include page="head.jsp"/>
     <title>Añadir producto · Kosmetics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
     <jsp:include page="cabecera.jsp"/>
@@ -77,7 +82,7 @@
                 </div>
                 <div class="form-row pb-2 pt-0">
                     <label for="prodictPrecio">Precio</label>
-                    <input type="text" class="form-control" id="prodictPrecio" placeholder="4,6" required name = "precio">
+                    <input type="text" class="form-control" id="prodictPrecio" placeholder="4.6" required name = "precio">
                     <div class="invalid-feedback">
                         Valor numérico invalido.
                     </div>
@@ -87,7 +92,7 @@
                     <h6 class="text-left pt-1 pb-0">Ofertas</h6>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta4" value="Sin oferta" name = "oferta" >
+                            <input class="form-check-input" type="radio" id="productOferta4" value="Sin oferta" name = "oferta" checked>
                             <label class="form-check-label" for="productOferta4">
                                 sin oferta
                             </label>
@@ -95,7 +100,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta1" value="Envio gratis" name = "oferta" checked>
+                            <input class="form-check-input" type="radio" id="productOferta1" value="Envio gratis" name = "oferta">
                             <label class="form-check-label" for="productOferta1">
                                 envio gratis
                             </label>
@@ -103,7 +108,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta2" value="promocion gratuita" name = "oferta" >
+                            <input class="form-check-input" type="radio" id="productOferta2" value="promocion gratuita" name = "oferta" >
                             <label class="form-check-label" for="productOferta2">
                                 promoción gratuita
                             </label>
@@ -111,7 +116,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta3" value="descuento" name = "oferta">
+                            <input class="form-check-input" type="radio" id="productOferta3" value="descuento" name = "oferta">
                             <label class="form-check-label" for="productOferta3">
                                 descuento
                             </label>
@@ -123,7 +128,7 @@
                 <h3 class="text-left text-muted mt-5 pb-1 px-3">Personalice las opciones de feedback</h3>
                 <div class="form-row py-2">
                     <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
-                    <select id="productCaracteristicas" class="custom-select" required name = "resaltar">
+                    <select id="productCaracteristicas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="5" multiple data-selected-text-format="count" name="features">
                         <c:forEach var="feature" items="${sessionScope.features}">
                             <option value=${feature} >${feature} </option>
                         </c:forEach>
@@ -137,7 +142,7 @@
 
                 <div class="form-row py-2">
                     <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
-                    <select id="productPreguntas" class="custom-select" required name = "pregunta">
+                    <select id="productPreguntas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="3" multiple data-selected-text-format="count" name="questions">
                         <c:forEach var="question" items="${sessionScope.questions}">
                             <option value=${question} >${question} </option>
                         </c:forEach>

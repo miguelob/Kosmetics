@@ -21,14 +21,23 @@ public class addProduct extends HttpServlet {
         System.out.println(name);
         String descripcion = request.getParameter("descripcion");
         System.out.println(descripcion);
-        String categoria = this.num2Cat(Integer.parseInt(request.getParameter("categoria")));
+        String categoria = request.getParameter("categoria");
         System.out.println(categoria);
         String colores = request.getParameter("colores");
         System.out.println(colores);
-        String marca = "vacio";
+        String marca = request.getParameter("marca");
+        System.out.println(marca);
         float precio = Float.parseFloat(request.getParameter("precio"));
         String oferta = request.getParameter("oferta");
         System.out.println(oferta);
+        String[] features = request.getParameterValues("features");
+        for (String feature: features) {
+            System.out.println(feature);
+        }
+        String[] questions = request.getParameterValues("questions");
+        for (String question: questions) {
+            System.out.println(question);
+        }
 
 
 
