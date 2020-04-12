@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.HashMap;
 
 @WebServlet(name = "CargarDatosMarcas", urlPatterns = "/CargarDatosMarcas")
 public class CargarDatosMarcas extends HttpServlet {
@@ -23,9 +23,9 @@ public class CargarDatosMarcas extends HttpServlet {
         processRequest(request,response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Collection<String> brands = BrandsDAO.getAllBrands();
-        Collection<String> features = FeaturesDAO.getAllFeatures();
-        Collection<String> questions = QuestionsDAO.getAllFeatures();
+        HashMap<Integer,String> brands = BrandsDAO.getAllBrands();
+        HashMap<Integer,String> features = FeaturesDAO.getAllFeatures();
+        HashMap<Integer,String> questions = QuestionsDAO.getAllQuestions();
 
         HttpSession session = request.getSession();
         session.setAttribute("brands",brands);

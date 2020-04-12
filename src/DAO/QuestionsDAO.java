@@ -6,17 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class QuestionsDAO {
-    public static Collection<String> getAllFeatures() {
-        ArrayList<String> questions = new ArrayList<String>();
+    public static HashMap<Integer,String> getAllQuestions() {
+        HashMap<Integer,String> questions = new HashMap<Integer,String>();
         Connection con = null;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT questionText FROM questions");
+            PreparedStatement pst = con.prepareStatement("SELECT idQuestion, questionText FROM questions");
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
-                questions.add(rs.getString(1));
+                questions.put(rs.getInt(1),rs.getString(2));
                 //System.out.println(rs.getString(2));
             }
         } catch (SQLException sqle) {
