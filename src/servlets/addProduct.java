@@ -1,5 +1,7 @@
 package servlets;
 
+import DAO.ProductDAO;
+import domain.Product;
 import domain.Question;
 import domain.Survey;
 
@@ -25,18 +27,19 @@ public class addProduct extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response){
         String name = request.getParameter("name");
-        System.out.println(name);
+        System.out.println("Nombre: "+name);
         String descripcion = request.getParameter("descripcion");
-        System.out.println(descripcion);
+        System.out.println("Descrip: "+descripcion);
         String categoria = num2Cat(Integer.parseInt(request.getParameter("categoria")));
-        System.out.println(categoria);
+        System.out.println("Categoria: "+categoria);
         String colores = request.getParameter("colores");
-        System.out.println(colores);
-        String marca = request.getParameter("marca");
-        System.out.println(marca);
+        System.out.println("Colores: "+colores);
+        int marca = Integer.parseInt(request.getParameter("marca"));
+        System.out.println("Marca: "+marca);
         float precio = Float.parseFloat(request.getParameter("precio"));
-        String oferta = request.getParameter("oferta");
-        System.out.println(oferta);
+        System.out.println("Precio: "+precio);
+        int oferta = Integer.parseInt(request.getParameter("oferta"));
+        System.out.println("Oferta:" +oferta);
 
         String[] idFeatures = request.getParameterValues("features");
         ArrayList<String> features = new ArrayList<String>();
@@ -48,17 +51,22 @@ public class addProduct extends HttpServlet {
 
         for (String feature: idFeatures) {
             features.add(featuresHM.get(Integer.parseInt(feature)));
-            System.out.println(feature);
+            System.out.println("feature: "+feature);
         }
         Survey survey = new Survey();
         String[] idQuestions = request.getParameterValues("questions");
         for (String question: idQuestions) {
             int id = Integer.parseInt(question);
             survey.put(new Question(id,questionsHM.get(id)),0,0,0);
-            System.out.println(question);
+            System.out.println("Questions: "+question);
         }
 
-
+        ProductDAO.uploadProduct(name,descripcion,categoria,null,precio,oferta,marca);
+        int productId = ProductDAO.getProductID(name);
+        if(productId != -1){
+            ProductDAO.setQuestions(productId,idQuestions);
+            ProductDAO.setFeatures(productId,idFeatures);
+        }
 
     }
     private String num2Cat(int i){

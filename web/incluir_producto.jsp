@@ -92,7 +92,7 @@
                     <h6 class="text-left pt-1 pb-0">Ofertas</h6>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta4" value="Sin oferta" name = "oferta" checked>
+                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked>
                             <label class="form-check-label" for="productOferta4">
                                 sin oferta
                             </label>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta1" value="Envio gratis" name = "oferta">
+                            <input class="form-check-input" type="radio" id="productOferta1" value="2" name = "oferta">
                             <label class="form-check-label" for="productOferta1">
                                 envio gratis
                             </label>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta2" value="promocion gratuita" name = "oferta" >
+                            <input class="form-check-input" type="radio" id="productOferta2" value="3" name = "oferta" >
                             <label class="form-check-label" for="productOferta2">
                                 promoción gratuita
                             </label>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta3" value="descuento" name = "oferta">
+                            <input class="form-check-input" type="radio" id="productOferta3" value="4" name = "oferta">
                             <label class="form-check-label" for="productOferta3">
                                 descuento
                             </label>

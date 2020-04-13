@@ -38,7 +38,7 @@ public class ReviewDAO {
             ConnectionDAO.getInstance().getConnection();
             final PreparedStatement pst = con.prepareStatement("INSERT INTO reviews (Products_idProducts, Users_idUser, title, text, scoreProduct, scoreReview, scoreReviewParticipants) VALUES(?,?,?,?,?,?,?)");
 
-            pst.setInt(1,ProductDAO.getProductID(product));
+            pst.setInt(1,ProductDAO.getProductID(product.getName()));
             pst.setInt(2,UserDAO.getUserID(review.getUser()));
             pst.setString(3,review.getCommentTitle());
             pst.setString(4, review.getComment());

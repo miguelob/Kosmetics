@@ -158,7 +158,7 @@ public class UserDAO {
         Connection con = null;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            final PreparedStatement pst = con.prepareStatement("UPDATE \"Favorites\" SET \"Value\" = '"+value+"' WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
+            final PreparedStatement pst = con.prepareStatement("UPDATE \"Favorites\" SET \"Value\" = '"+value+"' WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product.getName())+"'");
             pst.executeUpdate();
             status = true;
         }catch (SQLException sqle) {
@@ -174,7 +174,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
+            PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product.getName())+"'");
              ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 status = rs.getBoolean(1);
@@ -183,7 +183,7 @@ public class UserDAO {
             try{
                 PreparedStatement pst = con.prepareStatement("INSERT INTO \"Favorites\"(\"ID_Product\", \"ID_User\", \"Value\") VALUES(?,?,?)");
 
-                pst.setInt(1,ProductDAO.getProductID(product));
+                pst.setInt(1,ProductDAO.getProductID(product.getName()));
                 pst.setInt(2,UserDAO.getUserID(user));
                 pst.setBoolean(3,false);
 
@@ -220,7 +220,7 @@ public class UserDAO {
                 }
             }
             for(int i = 0 ; i<list.size();i++) {
-                try (PreparedStatement pst3 = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(list.get(i)));
+                try (PreparedStatement pst3 = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(list.get(i).getName()));
                      ResultSet rs3 = pst.executeQuery()) {
                     if(rs3.next()) {
                         list.get(i).setScore(rs3.getFloat(1));
