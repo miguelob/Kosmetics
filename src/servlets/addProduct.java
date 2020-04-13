@@ -25,7 +25,7 @@ public class addProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request,response);
     }
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         System.out.println("Nombre: "+name);
         String descripcion = request.getParameter("descripcion");
@@ -67,6 +67,7 @@ public class addProduct extends HttpServlet {
             ProductDAO.setQuestions(productId,idQuestions);
             ProductDAO.setFeatures(productId,idFeatures);
         }
+        request.getRequestDispatcher("/subirimg.jsp").forward(request,response);
 
     }
     private String num2Cat(int i){

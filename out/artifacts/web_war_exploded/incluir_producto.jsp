@@ -19,7 +19,7 @@
 </head>
 <body>
     <jsp:include page="cabecera.jsp"/>
-        <form class="needs-validation justify-content-center" novalidate method="POST" action="addProduct">
+        <form class="needs-validation justify-content-center" novalidate method="POST" action="addProduct" enctype="multipart/form-data">
             <div class="col-8 m-auto">
                 <div id="titelIncluirProducto" class="panel-body py-auto mt-3 rounded">
                     <h1 class="text-center py-3 mt-5 "><strong>Añada un nuevo producto!!</strong></h1>
@@ -156,7 +156,6 @@
                     <button class="btn btn-dark btn-block px-3 my-4 mx-auto" type="submit">Submit form</button>
                 </div>
             </div>
-        </form>
 
         <script>
 
