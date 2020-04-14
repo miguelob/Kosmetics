@@ -30,6 +30,7 @@ public class addProduct extends HttpServlet {
         System.out.println("Nombre: "+name);
         String descripcion = request.getParameter("descripcion");
         System.out.println("Descrip: "+descripcion);
+        System.out.println("Categoria String: "+request.getParameter("categoria"));
         String categoria = num2Cat(Integer.parseInt(request.getParameter("categoria")));
         System.out.println("Categoria: "+categoria);
         String colores = request.getParameter("colores");
@@ -40,6 +41,11 @@ public class addProduct extends HttpServlet {
         System.out.println("Precio: "+precio);
         int oferta = Integer.parseInt(request.getParameter("oferta"));
         System.out.println("Oferta:" +oferta);
+        int descuento = 0;
+        if (oferta == 4){
+            descuento = Integer.parseInt(request.getParameter("descuento"));
+            System.out.println("Descuento:" +descuento);
+        }
 
         String[] idFeatures = request.getParameterValues("features");
         ArrayList<String> features = new ArrayList<String>();
@@ -61,13 +67,13 @@ public class addProduct extends HttpServlet {
             System.out.println("Questions: "+question);
         }
 
-        ProductDAO.uploadProduct(name,descripcion,categoria,null,precio,oferta,marca);
+        ProductDAO.uploadProduct(name,descripcion,categoria,null,precio,oferta,descuento,marca);
         int productId = ProductDAO.getProductID(name);
         if(productId != -1){
             ProductDAO.setQuestions(productId,idQuestions);
             ProductDAO.setFeatures(productId,idFeatures);
         }
-        request.getRequestDispatcher("/subirimg.jsp").forward(request,response);
+        //request.getRequestDispatcher("/subirimg.jsp").forward(request,response);
 
     }
     private String num2Cat(int i){

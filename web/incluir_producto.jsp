@@ -19,7 +19,7 @@
 </head>
 <body>
     <jsp:include page="cabecera.jsp"/>
-        <form class="needs-validation justify-content-center" novalidate method="POST" action="addProduct" enctype="multipart/form-data">
+        <form class="needs-validation justify-content-center" novalidate method="POST" action="addProduct">
             <div class="col-8 m-auto">
                 <div id="titelIncluirProducto" class="panel-body py-auto mt-3 rounded">
                     <h1 class="text-center py-3 mt-5 "><strong>Añada un nuevo producto!!</strong></h1>
@@ -92,7 +92,7 @@
                     <h6 class="text-left pt-1 pb-0">Ofertas</h6>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked>
+                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta4">
                                 sin oferta
                             </label>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta1" value="2" name = "oferta">
+                            <input class="form-check-input" type="radio" id="productOferta1" value="2" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta1">
                                 envio gratis
                             </label>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta2" value="3" name = "oferta" >
+                            <input class="form-check-input" type="radio" id="productOferta2" value="3" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta2">
                                 promoción gratuita
                             </label>
@@ -116,12 +116,15 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta3" value="4" name = "oferta">
+                            <input id = "descuento" class="form-check-input" type="radio" id="productOferta3" value="4" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta3">
                                 descuento
                             </label>
                         </div>
                     </div>
+
+                </div>
+                <div class="form-row pb-2 pt-0" id = "oferta">
 
                 </div>
 

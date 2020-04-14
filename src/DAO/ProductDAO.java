@@ -12,18 +12,32 @@ import domain.Product;
 
 public class ProductDAO {
 
-    public static void uploadProduct(String name, String description, String cat, byte[] img, float price, int offer, int idBrand) {
+    public static void uploadProduct(String name, String description, String cat, byte[] img, float price, int offer,int descuento, int idBrand) {
         Connection con=null;
+        int oferta = 0;
+        int freeD = 0;
+        switch (offer){
+            case 2 :
+                freeD = 1;
+                break;
+            case 3:
+                oferta = 100;
+                break;
+            case 4:
+                oferta = descuento;
+                break;
+        }
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO products (name,description,productCategory,productImg,price,offer,Brands_idBrands) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO products (name,description,productCategory,productImg,price,offer,freeDeliver,Brands_idBrands) VALUES(?,?,?,?,?,?,?,?)");
             pst.setString(1,name);
             pst.setString(2,description);
             pst.setString(3,cat);
             pst.setBytes(4,null);
             pst.setFloat(5,price);
-            pst.setInt(6,offer);
-            pst.setInt(7,idBrand);
+            pst.setInt(6,oferta);
+            pst.setInt(7,freeD);
+            pst.setInt(8,idBrand);
 
             pst.executeUpdate();
 
