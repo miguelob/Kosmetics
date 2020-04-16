@@ -34,7 +34,9 @@ public class Registro extends HttpServlet {
         //System.out.println(request.getParameter("name"));
         String email = request.getParameter("email");
         //System.out.println(request.getParameter("email"));
-        String password = request.getParameter("password");
+        String password1 = request.getParameter("password1");
+        String password2 = request.getParameter("password2");
+        //System.out.println("1: "+password1+" 2: "+password2);
         //System.out.println(request.getParameter("password"));
         String brithDate =  request.getParameter("birthDate");
         //System.out.println(request.getParameter("birthDate"));
@@ -44,6 +46,7 @@ public class Registro extends HttpServlet {
         //System.out.println(skinCondition);
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
         byte[] userImg = null;
+        HttpSession session = request.getSession();
 
         //ERROR CODES
         //0 --> TODO OK
@@ -56,35 +59,41 @@ public class Registro extends HttpServlet {
            // userImg = defaultImage();
         //}
 
-        try{
-            user = new User(name,email,password,brithDate,skinColor,skinCondition,userImg,0);
-            System.out.println("user");
+        if(password1.equals(password2)){
+            try{
+                user = new User(name,email,password1,brithDate,skinColor,skinCondition,userImg,0);
+                //System.out.println("user");
 
-            if(name.equals("") || email.equals("") || password.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
-                request.setAttribute("error",1);
-                //System.out.println("nulos");
-            }else if(UserDAO.getUserID(user) != -1 || UserDAO.checkUsername(user) !=-1){
-                if(UserDAO.getUserID(user) != -1)
-                    request.setAttribute("error",2);
-                else
-                    request.setAttribute("error",3);
-                //System.out.println("ya existe");
-            }else{
-                if(!UserDAO.uploadUser(user)){
-                    //System.out.println("error al subir");
-                    request.setAttribute("error",4);
+                if(name.equals("") || email.equals("") || password1.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
+                    request.setAttribute("error","Rellene todos los campos.");
+                    request.getRequestDispatcher("/registro_usuario.jsp").forward(request,response);
+                    System.out.println("nulos");
+                }else if(UserDAO.getUserID(user) != -1 || UserDAO.checkUsername(user) !=-1 || UserDAO.checkEmail(user) != 1){
+                    if (UserDAO.checkUsername(user) != -1)
+                        request.setAttribute("error","Ese nombre de usuario ya está registrado.");
+                    else
+                        request.setAttribute("error","Ese email ya está registrado.");
+                    //System.out.println("ya existe");
+                    request.getRequestDispatcher("/registro_usuario.jsp").forward(request,response);
                 }else{
-                    //System.out.println("todo ok");
-                    request.setAttribute("error",0);
-                    request.setAttribute("user",user);
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user",user);
-                }
+                    if(!UserDAO.uploadUser(user)){
+                        //System.out.println("error al subir");
+                        request.setAttribute("error","Error al subir el usuario.");
+                        request.getRequestDispatcher("/registro_usuario.jsp").forward(request,response);
+                    }else{
+                        //System.out.println("todo ok");
+                        session.setAttribute("user",user);
+                        request.getRequestDispatcher("/index.jsp").forward(request,response);
+                    }
 
+                }
+            }catch (ParseException ex){
+                ex.printStackTrace();
             }
-            request.getRequestDispatcher("/index.jsp").forward(request,response);
-        }catch (ParseException ex){
-            ex.printStackTrace();
+        }else{
+            //System.out.println("Contraseñas no coinciden");
+            request.setAttribute("eror","Las contraseñas no coinciden.");
+            request.getRequestDispatcher("/registro_usuario.jsp").forward(request,response);
         }
 
     }

@@ -153,6 +153,27 @@ public class UserDAO {
         }
         return id;
     }
+    public static int checkEmail(User user) {
+        int id = -1;
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE email = ?");
+            pst.setString(1,user.getEmail());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
     public static boolean setFavorite(Product product, User user, boolean value) {
         boolean status = false;
         Connection con = null;
