@@ -34,3 +34,16 @@ function validarDescuento(){
     }
     //console.log("hola");
 }
+function validarLogin(){
+    var user = document.getElementById("userInputName").value;
+    var pass = document.getElementById("userInputPassword").value;
+    var error = document.getElementById("error");
+    var retorno = true;
+
+    if(user === "" || pass === ""){
+        retorno = false;
+        error.innerHTML = "Debe rellenar todos los campos";
+    }
+
+    return retorno;
+}

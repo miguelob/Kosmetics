@@ -30,11 +30,15 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
                 //System.out.println("Todo OK");
+                request.getRequestDispatcher("/index.jsp").forward(request,response);
             }else{
-                System.out.println("Error en contraseña o email");
+                request.setAttribute("error","Contraseña o email incorrectos");
+                request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
             }
-            request.getRequestDispatcher("/index.jsp").forward(request,response);
 
+        }else{
+            request.setAttribute("error","Debe rellenar todos los campos");
+            request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
         }
     }
 }

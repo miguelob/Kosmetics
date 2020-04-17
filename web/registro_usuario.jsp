@@ -71,7 +71,7 @@
                             </div>
 
                         </div>
-                        <div id = "error">${requestScope.error}</div><br>
+                        <div id = "error">${requestScope.error}</div>
                         <button type="submit" class="btn btn-dark btn-block mt-5">Registrarse</button>
 
                     </form>
