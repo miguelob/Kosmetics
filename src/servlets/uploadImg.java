@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
         maxFileSize=1024 * 1024 * 5,
         maxRequestSize=1024 * 1024 * 5 * 5
 )
-public class Servlet extends HttpServlet {
+public class uploadImg extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Collection<Part> files = request.getParts();
 
