@@ -12,7 +12,103 @@ import domain.Product;
 
 public class ProductDAO {
 
+    public static void uploadProduct(String name, String description, String cat, byte[] img, float price, int offer,int descuento, int idBrand) {
+        Connection con=null;
+        int oferta = 0;
+        int freeD = 0;
+        switch (offer){
+            case 2 :
+                freeD = 1;
+                break;
+            case 3:
+                oferta = 100;
+                break;
+            case 4:
+                oferta = descuento;
+                break;
+        }
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO products (name,description,productCategory,productImg,price,offer,freeDeliver,Brands_idBrands) VALUES(?,?,?,?,?,?,?,?)");
+            pst.setString(1,name);
+            pst.setString(2,description);
+            pst.setString(3,cat);
+            pst.setBytes(4,null);
+            pst.setFloat(5,price);
+            pst.setInt(6,oferta);
+            pst.setInt(7,freeD);
+            pst.setInt(8,idBrand);
 
+            pst.executeUpdate();
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+    }
+    public static void setQuestions(int productId, String[] idQuestions){
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            for (String question: idQuestions) {
+
+                int questionId = Integer.parseInt(question);
+                PreparedStatement pst = con.prepareStatement("INSERT INTO products_questions (Products_idProducts,Questions_idQuestion) VALUES(?,?)");
+                pst.setInt(1,productId);
+                pst.setInt(2,questionId);
+
+                pst.executeUpdate();
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+    }
+    public static void setFeatures(int productId, String[] idFeatures){
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            for (String feature: idFeatures) {
+
+                int featureId = Integer.parseInt(feature);
+                PreparedStatement pst = con.prepareStatement("INSERT INTO products_features (Products_idProducts,Features_idFeatures) VALUES(?,?)");
+                pst.setInt(1,productId);
+                pst.setInt(2,featureId);
+
+                pst.executeUpdate();
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+    }
+    public static int getProductID(String name) {
+        int id = -1;
+        Connection con=null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idProducts FROM  products WHERE name = ?");
+            pst.setString(1,name);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
 
     public static void getProductBasicInfo(ArrayList<Product> lista) {
         Connection con = null;
@@ -77,24 +173,6 @@ public class ProductDAO {
             cnfe.printStackTrace();
         }
     }
-    public static int getProductID(Product product) {
-        int id = -1;
-        Connection con=null;
-        try {
-            con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Product\" FROM  \"Products\" WHERE \"Name\" = '" + product.getName()+"'");
-             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            sqle.printStackTrace();
-        } catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
-        }
-        return id;
-    }
     public static int getSurveyID(Product product) {
         int id = -1;
         Connection con = null;
@@ -118,7 +196,7 @@ public class ProductDAO {
         Connection con = null;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(product));
+            PreparedStatement pst = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(product.getName()));
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
                 valor = (int) rs.getFloat(1);

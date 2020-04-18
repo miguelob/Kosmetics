@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
     <title>Registrarse · Kosmetics</title>
 </head>
 <body>
@@ -19,18 +19,18 @@
                 <div class = "col-lg-8">
                     <h1 class="text-center pt-5">Crea tu perfil</h1>
                     <h4 class="text-center text-muted py-3">¡Descubre las novedades más asombrosa!</h4>
-                    <form>
+                    <form method = "POST" action = "Registro">
                         <div class="form-group">
                             <label for="userInputName">nombre de usuario</label>
-                            <input placeholder="p.ej. Milo Tatch" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp">
+                            <input placeholder="p.ej. Milo Tatch" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp" name = "name">
                         </div>
                         <div class="form-group">
                             <label for="userInputEmail">correo electrónico</label>
-                            <input placeholder="p.ej. mtatch@gmail.com" type="email" class="form-control" id="userInputEmail">
+                            <input placeholder="p.ej. mtatch@gmail.com" type="email" class="form-control" id="userInputEmail" name = "email">
                         </div>
                         <div class="form-group">
                             <label for="userInputPassword">contraseña</label>
-                            <input  type="password" class="form-control" id="userInputPassword">
+                            <input  type="password" class="form-control" id="userInputPassword" name = "password">
                         </div>
                         <div class="form-group">
                             <label for="userInputPasswordRepit">repetir la contraseña</label>
@@ -39,31 +39,31 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="tono_piel">tipo de piel</label>
-                                <select id="tono_piel" class="custom-select" >
+                                <select id="tono_piel" class="custom-select" name = "skinColor">
                                     <option selected>sin definir</option>
-                                    <option value="1" style="background: #fdeec7">marfil</option>
-                                    <option value="2" style="background: #fee1b9">palida</option>
-                                    <option value="3" style="background: #fcbd84">beige</option>
-                                    <option value="4" style="background: #a87256; color:white">moreno claro</option>
-                                    <option value="5" style="background: #633c1d; color:white">moreno oscuro</option>
+                                    <option value="marfil" style="background: #fdeec7">marfil</option>
+                                    <option value="palida" style="background: #fee1b9">palida</option>
+                                    <option value="beige" style="background: #fcbd84">beige</option>
+                                    <option value="moreno claro" style="background: #a87256; color:white">moreno claro</option>
+                                    <option value="moreno oscuro" style="background: #633c1d; color:white">moreno oscuro</option>
 
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="tipo_piel">tipo de piel</label>
-                                <select id="tipo_piel" class="custom-select">
-                                    <option selected>sin definir</option>
-                                    <option value="1" >mixta</option>
-                                    <option value="2" >grasa</option>
-                                    <option value="3" >seca</option>
+                                <select id="tipo_piel" class="custom-select" name = "skinCondition">
+                                    <option selected  value = "sin definir">sin definir</option>
+                                    <option value="mixta">mixta</option>
+                                    <option value="grasa">grasa</option>
+                                    <option value="seca">seca</option>
 
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="fecha_nacimiento">fecha de nacimiento </label>
-                                <input type="date" name="fecha_nacimiento" class="form-control"id="fecha_nacimiento"
+                                <input type="date" name = "birthDate" class="form-control"id="fecha_nacimiento"
                                            value="2020-04-2"
                                            min="1920-01-01" max="2020-12-31">
                             </div>
@@ -80,6 +80,6 @@
 
     </div>
 
-<%@include file="jsSources.jsp"%>
+<jsp:include page="jsSources.jsp"/>
 </body>
 </html>

@@ -6,14 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
     <title>Añadir producto · Kosmetics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
-    <%@include file="cabecera.jsp"%>
-        <form class="needs-validation justify-content-center" novalidate>
+    <jsp:include page="cabecera.jsp"/>
+        <form class="needs-validation justify-content-center" novalidate method="POST" action="addProduct">
             <div class="col-8 m-auto">
                 <div id="titelIncluirProducto" class="panel-body py-auto mt-3 rounded">
                     <h1 class="text-center py-3 mt-5 "><strong>Añada un nuevo producto!!</strong></h1>
@@ -21,7 +27,7 @@
                 <h3 class="text-left text-muted pt-5 pb-1 px-3">Información general</h3>
                 <div class="form-row py-2">
                     <label for="productName">Nombre</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Hello Happy Foundation" value="nombre" required>
+                    <input type="text" class="form-control" id="productName" placeholder="Hello Happy Foundation" value="nombre" required name="name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -29,7 +35,7 @@
                 <div class="form-row py-2">
                     <label for="productDecripcion">Descripción</label>
                     <!--<input type="text" class="form-control" id="productDecripcion" placeholder="Base de maqullaje fluida con cobertura media /n SPF 15 PA++" value="descripcion" required>-->
-                    <textarea class="form-control" id="productDecripcion" placeholder="Base de maqullaje fluida con cobertura media. SPF 15 PA++" rows="3" required></textarea>
+                    <textarea class="form-control" id="productDecripcion" placeholder="Base de maqullaje fluida con cobertura media. SPF 15 PA++" rows="3" required name = "descripcion"></textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -37,8 +43,7 @@
                 <div class="form-row py-2">
 
                     <label for="productCategoria">Categoría</label>
-                    <select id="productCategoria" class="custom-select" required>
-                        <option selected></option>
+                    <select id="productCategoria" class="custom-select" required name = "categoria">
                         <option value="1" >bases</option>
                         <option value="2" >máscaras de pestañas</option>
                         <option value="3" >pintalabios</option>
@@ -57,7 +62,7 @@
                 </div>
                 <div class="form-row">
                     <label for="productColores">Colores disponibles</label>
-                    <input type="text" class="form-control" id="productColores" placeholder="fdeec7;fde457;ab11c7;11d5c7;" required>
+                    <input type="text" class="form-control" id="productColores" placeholder="fdeec7;fde457;ab11c7;11d5c7;" required name = "colores">
                     <div class="invalid-feedback">
                         Porfavor introduzca los colores en código hexadecimal separado por ';'.
                     </div>
@@ -66,12 +71,10 @@
                 <h3 class="text-left text-muted pt-5 pb-1 px-3">Información de venta</h3>
                 <div class="form-row py-2">
                     <label for="productMarca">Marca</label>
-                    <select id="productMarca" class="custom-select" required>
-                        <option selected></option>
-                        <option value="1" ></option>
-
-
-
+                    <select id="productMarca" class="custom-select" required name = "marca">
+                        <c:forEach var="brand" items="${sessionScope.brands}">
+                            <option value=${brand.key} >${brand.value} </option>
+                        </c:forEach>
                     </select>
                     <div class="invalid-feedback">
                         Debe asignar el producto a alguna categoría.
@@ -79,7 +82,7 @@
                 </div>
                 <div class="form-row pb-2 pt-0">
                     <label for="prodictPrecio">Precio</label>
-                    <input type="text" class="form-control" id="prodictPrecio" placeholder="4,6" required>
+                    <input type="text" class="form-control" id="prodictPrecio" placeholder="4.6" required name = "precio">
                     <div class="invalid-feedback">
                         Valor numérico invalido.
                     </div>
@@ -89,7 +92,7 @@
                     <h6 class="text-left pt-1 pb-0">Ofertas</h6>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta4" value="option4" >
+                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta4">
                                 sin oferta
                             </label>
@@ -97,7 +100,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta1" value="option1" checked>
+                            <input class="form-check-input" type="radio" id="productOferta1" value="2" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta1">
                                 envio gratis
                             </label>
@@ -105,7 +108,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta2" value="option2" >
+                            <input class="form-check-input" type="radio" id="productOferta2" value="3" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta2">
                                 promoción gratuita
                             </label>
@@ -113,7 +116,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="productOferta3" value="option3" >
+                            <input id = "descuento" class="form-check-input" type="radio" id="productOferta3" value="4" name = "oferta" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta3">
                                 descuento
                             </label>
@@ -121,14 +124,17 @@
                     </div>
 
                 </div>
+                <div class="form-row pb-2 pt-0" id = "oferta">
+
+                </div>
 
                 <h3 class="text-left text-muted mt-5 pb-1 px-3">Personalice las opciones de feedback</h3>
                 <div class="form-row py-2">
                     <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
-                    <select id="productCaracteristicas" class="custom-select" required>
-                        <option selected></option>
-                        <option value="1" ></option>
-
+                    <select id="productCaracteristicas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="5" multiple data-selected-text-format="count" name="features">
+                        <c:forEach var="feature" items="${sessionScope.features}">
+                            <option value=${feature.key} >${feature.value} </option>
+                        </c:forEach>
 
 
                     </select>
@@ -139,12 +145,10 @@
 
                 <div class="form-row py-2">
                     <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
-                    <select id="productPreguntas" class="custom-select" required>
-                        <option value="1">pregunta</option>
-                        <option value="2">pregunta</option>
-                        <option value="3">pregunta</option>
-                        <option value="3">pregunta</option>
-                        <option value="3">pregunta</option>
+                    <select id="productPreguntas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="3" multiple data-selected-text-format="count" name="questions">
+                        <c:forEach var="question" items="${sessionScope.questions}">
+                            <option value=${question.key} >${question.value} </option>
+                        </c:forEach>
                     </select>
                     <div class="invalid-feedback">
                         Debe seleccionar tres preguntas.
@@ -155,7 +159,6 @@
                     <button class="btn btn-dark btn-block px-3 my-4 mx-auto" type="submit">Submit form</button>
                 </div>
             </div>
-        </form>
 
         <script>
 
@@ -178,6 +181,6 @@
                 }, false);
             })();
         </script>
-        <%@include file="jsSources.jsp"%>
+        <jsp:include page="jsSources.jsp"/>
 </body>
 </html>

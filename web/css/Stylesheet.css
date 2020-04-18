@@ -84,4 +84,8 @@
     border-radius: 50%;
     background: #5cb85c;
 }
+#error{
+    color: red;
+    align-content: center;
+}
 
