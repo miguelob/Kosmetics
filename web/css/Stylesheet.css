@@ -33,7 +33,7 @@
 }
 
 /*imagen por defecto de usuario*/
-.icono{
+.userImg{
     width: 250px;
     height: 250px;
     background:#fcbd84;
@@ -48,6 +48,33 @@
     font-weight: bold;
 }
 
+/*imagen por defecto de producto*/
+.productoImg{
+    width: 270px;
+    height: 270px;
+    background:#17A2B8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+}
+
+/*CSS para las estrellas de valoración*/
+.fa-star {
+    color: grey;
+}
+.checked {
+    color: orange;
+}
+/*
+.product_container{
+    height: 200px;
+}*/
 /*Pinta un circulo del color especificado en el bakgraund. Probar con span y div. No se a usado de momento*/
 .circulo-colored{
     width: 100px;
