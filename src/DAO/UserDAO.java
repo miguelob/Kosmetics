@@ -26,10 +26,11 @@ public class UserDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser = " + i);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE idUser =  ?");
+            pst.setInt(1,i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(8));
             }
         } catch (SQLException sqle) {
 
@@ -56,20 +57,21 @@ public class UserDAO {
         }
         return permision;
     }*/
-    public static User login(String userName, String passw) {
+    public static User login(String userOrEmail, String passw) {
         User user = null;
         Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try {
             con = ConnectionDAO.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement("SELECT * FROM users WHERE (email = ? OR name = ?) AND password = ?");
-            pst.setString(1,userName);
-            pst.setString(2,userName);
+            pst.setString(1,userOrEmail);
+            pst.setString(2,userOrEmail);
             pst.setString(3,passw);
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null);
+                user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getInt(9));
+                //System.out.println(rs.getInt(8));
             }
         } catch (SQLException sqle) {
 
@@ -88,7 +90,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("INSERT INTO users(email, password, name, birthDate, skinColor, skinCondition, userImg) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO users(email, password, name, birthDate, skinColor, skinCondition, userImg, admin) VALUES(?,?,?,?,?,?,?,?)");
 
             pst.setString(1,user.getEmail());
             pst.setString(2,user.getPassword());
@@ -96,7 +98,8 @@ public class UserDAO {
             pst.setDate(4, UserDAO.convertUtilToSql(user.getBirthDate()));
             pst.setString(5,user.getSkinColor());
             pst.setString(6,user.getSkinCondition());
-            pst.setBytes(7,getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
+            pst.setBytes(7,null);//getImageBytes(user.getProfileImage()));//UserDAO.getImageBytes(user.getProfileImage()));
+            pst.setInt(8,user.getAdmin());
 
             pst.executeUpdate();
             status = true;
@@ -113,9 +116,51 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE email = ?");
+            pst.setString(1,user.getEmail());
+             ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
+    public static int checkUsername(User user) {
+        int id = -1;
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE name = ?");
             pst.setString(1,user.getName());
-             ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
+    public static int checkEmail(User user) {
+        int id = -1;
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE email = ?");
+            pst.setString(1,user.getEmail());
+            ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 id = rs.getInt(1);
             }
@@ -134,7 +179,7 @@ public class UserDAO {
         Connection con = null;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            final PreparedStatement pst = con.prepareStatement("UPDATE \"Favorites\" SET \"Value\" = '"+value+"' WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
+            final PreparedStatement pst = con.prepareStatement("UPDATE \"Favorites\" SET \"Value\" = '"+value+"' WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product.getName())+"'");
             pst.executeUpdate();
             status = true;
         }catch (SQLException sqle) {
@@ -150,7 +195,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product)+"'");
+            PreparedStatement pst = con.prepareStatement("SELECT \"Value\" FROM  \"Favorites\" WHERE \"ID_User\" = '"+UserDAO.getUserID(user)+"' AND \"ID_Product\" = '"+ProductDAO.getProductID(product.getName())+"'");
              ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 status = rs.getBoolean(1);
@@ -159,7 +204,7 @@ public class UserDAO {
             try{
                 PreparedStatement pst = con.prepareStatement("INSERT INTO \"Favorites\"(\"ID_Product\", \"ID_User\", \"Value\") VALUES(?,?,?)");
 
-                pst.setInt(1,ProductDAO.getProductID(product));
+                pst.setInt(1,ProductDAO.getProductID(product.getName()));
                 pst.setInt(2,UserDAO.getUserID(user));
                 pst.setBoolean(3,false);
 
@@ -196,7 +241,7 @@ public class UserDAO {
                 }
             }
             for(int i = 0 ; i<list.size();i++) {
-                try (PreparedStatement pst3 = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(list.get(i)));
+                try (PreparedStatement pst3 = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(list.get(i).getName()));
                      ResultSet rs3 = pst.executeQuery()) {
                     if(rs3.next()) {
                         list.get(i).setScore(rs3.getFloat(1));
