@@ -30,7 +30,7 @@
                             <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
                         </li>
 
-                        <form action="registro_usuario.jsp">
+                        <form action="registro_usuario.jsp" method="post">
                             <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
                         </form>
                     </c:when>

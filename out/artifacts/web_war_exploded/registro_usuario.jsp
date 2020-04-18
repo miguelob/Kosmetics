@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <jsp:include page="head.jsp"/>
@@ -19,7 +21,7 @@
                 <div class = "col-lg-8">
                     <h1 class="text-center pt-5">Crea tu perfil</h1>
                     <h4 class="text-center text-muted py-3">¡Descubre las novedades más asombrosa!</h4>
-                    <form method = "POST" action = "Registro">
+                    <form method = "POST" action = "Registro" onsubmit="return validarRegistro();">
                         <div class="form-group">
                             <label for="userInputName">nombre de usuario</label>
                             <input placeholder="p.ej. Milo Tatch" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp" name = "name">
@@ -30,11 +32,11 @@
                         </div>
                         <div class="form-group">
                             <label for="userInputPassword">contraseña</label>
-                            <input  type="password" class="form-control" id="userInputPassword" name = "password">
+                            <input  type="password" class="form-control" id="userInputPassword" name = "password1">
                         </div>
                         <div class="form-group">
                             <label for="userInputPasswordRepit">repetir la contraseña</label>
-                            <input  type="password" class="form-control" id="userInputPasswordRepit">
+                            <input  type="password" class="form-control" id="userInputPasswordRepit" name = "password2">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -69,6 +71,7 @@
                             </div>
 
                         </div>
+                        <div id = "error">${requestScope.error}</div>
                         <button type="submit" class="btn btn-dark btn-block mt-5">Registrarse</button>
 
                     </form>

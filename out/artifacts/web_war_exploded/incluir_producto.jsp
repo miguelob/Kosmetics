@@ -92,7 +92,7 @@
                     <h6 class="text-left pt-1 pb-0">Ofertas</h6>
                     <div class="form-row">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked onclick="validarDescuento();">
+                            <input class="form-check-input" type="radio" id="productOferta4" value="1" name = "oferta" checked onload="validarDescuento();" onclick="validarDescuento();">
                             <label class="form-check-label" for="productOferta4">
                                 sin oferta
                             </label>
