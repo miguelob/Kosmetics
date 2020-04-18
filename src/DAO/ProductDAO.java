@@ -1,5 +1,6 @@
 package DAO;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -226,4 +227,21 @@ public class ProductDAO {
 
     }
 
+    public static void uploadImg(int id, InputStream imagen) {
+        Connection con = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("UPDATE products SET productImg = ? WHERE idProducts = ?");
+            pst.setBlob(1, imagen);
+            pst.setInt(2, id);
+
+            pst.executeUpdate();
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+    }
 }
