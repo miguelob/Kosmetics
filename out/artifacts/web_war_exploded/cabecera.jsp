@@ -30,16 +30,19 @@
                             <a class="nav-link" href="inicio_sesion_usuario.jsp">Iniciar sesión<span class="sr-only">(current)</span></a>
                         </li>
 
-                        <form action="registro_usuario.jsp">
+                        <form action="registro_usuario.jsp" method="post">
                             <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Registrarse</button>
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <c:if test="${sessionScope.user.admin > 0}">
+                        <c:if test="${sessionScope.user.admin}">
                             <form method="POST" action="CargarDatosMarcas">
                                 <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                             </form>
                         </c:if>
+                        <form action="Logout" method="post">
+                            <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Log out</button>
+                        </form>
                     </c:otherwise>
                 </c:choose>
             </ul>

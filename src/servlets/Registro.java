@@ -61,7 +61,7 @@ public class Registro extends HttpServlet {
 
         if(password1.equals(password2)){
             try{
-                user = new User(name,email,password1,brithDate,skinColor,skinCondition,userImg,0);
+                user = new User(name,email,password1,brithDate,skinColor,skinCondition,userImg,false);
                 //System.out.println("user");
 
                 if(name.equals("") || email.equals("") || password1.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
