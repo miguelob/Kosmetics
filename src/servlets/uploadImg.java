@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class uploadImg extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Collection<Part> files = request.getParts();
+        int id = this.getIdCookie(request);
 
         System.out.println(files.size());
 
@@ -33,7 +34,8 @@ public class uploadImg extends HttpServlet {
 
             if (f.getSize() > 0) {
                 System.out.println("Se ha leído la imagen");
-                ProductDAO.uploadImg(this.getIdCookie(request),imagen);
+                int i = ProductDAO.checkImg(id);
+                ProductDAO.uploadImg(id,imagen,i);
             }
         }
 

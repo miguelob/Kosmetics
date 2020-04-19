@@ -227,15 +227,54 @@ public class ProductDAO {
 
     }
 
-    public static void uploadImg(int id, InputStream imagen) {
+    public static void uploadImg(int id, InputStream imagen,int i) {
         Connection con = null;
+        if(i==0){
+            try {
+                con = ConnectionDAO.getInstance().getConnection();
+                PreparedStatement pst = con.prepareStatement("UPDATE products SET productImg = ? WHERE idProducts = ?");
+                pst.setBlob(1, imagen);
+                pst.setInt(2, id);
+
+                pst.executeUpdate();
+
+            } catch (SQLException sqle) {
+                System.out.println(sqle.getMessage());
+                sqle.printStackTrace();
+            } catch (ClassNotFoundException cnfe) {
+                cnfe.printStackTrace();
+            }
+        }else{
+            try {
+                con = ConnectionDAO.getInstance().getConnection();
+                PreparedStatement pst = con.prepareStatement("INSERT INTO productimages (productImg,Products_idProducts) values(?,?)");
+                pst.setBlob(1, imagen);
+                pst.setInt(2, id);
+
+                pst.executeUpdate();
+
+            } catch (SQLException sqle) {
+                System.out.println(sqle.getMessage());
+                sqle.printStackTrace();
+            } catch (ClassNotFoundException cnfe) {
+                cnfe.printStackTrace();
+            }
+        }
+    }
+
+    public static int checkImg(int id) {
+        Connection con = null;
+        int retorno = 0;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("UPDATE products SET productImg = ? WHERE idProducts = ?");
-            pst.setBlob(1, imagen);
-            pst.setInt(2, id);
-
-            pst.executeUpdate();
+            PreparedStatement pst = con.prepareStatement("SELECT productImg FROM products WHERE idProducts = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                if(rs.getBlob(1)!= null){
+                    retorno = 1;
+                }
+            }
 
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
@@ -243,5 +282,6 @@ public class ProductDAO {
         } catch (ClassNotFoundException cnfe) {
             cnfe.printStackTrace();
         }
+        return retorno;
     }
 }
