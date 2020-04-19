@@ -15,7 +15,7 @@
                 <div class = "img-fluid col-xl-6 p-7 mt-4 d-none d-xl-block">
                    <div class="row">
                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                       <span class="rounded-circle userImg m-auto">MT</span>
+                       <span class="rounded-circle icono m-auto">MT</span>
                    </div>
                     <div class="row justify-content-center">
                         <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="registro_usuario.jsp">cambiar imagen de perfil</a></small>
