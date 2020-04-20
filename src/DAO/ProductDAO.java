@@ -284,4 +284,25 @@ public class ProductDAO {
         }
         return retorno;
     }
+
+    public static byte[] getProductImg(int id) {
+        byte[] retorno = null;
+        Connection con = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT productImg FROM products WHERE idProducts = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                retorno = rs.getBytes(1);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+        return retorno;
+    }
 }
