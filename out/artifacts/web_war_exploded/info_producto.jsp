@@ -128,9 +128,8 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
+
             <div class="col-lg-11 pt-5 ">
                 <div class="row">
                     <div class="col-12 pb-5 ">
@@ -152,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="col-4 col-xl-3 py-3 m-auto">
-                                        <form class="form-group my-0 mx-auto">
+                                        <form class="form-group my-0 mx-auto" action="crear_review.jsp" method="post">
                                             <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
                                         </form>
                                     </div>
@@ -189,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <!--Features-->
+                            <!--Encuesta-->
                             <div class="col-8 col-lg-5 pl-0 pt-4 pt-lg-0  m-auto align-self-center">
                                 <div class="row px-4 pt-2">
                                     <span class="h3 text-muted">Fiabilidad características</span>
@@ -198,7 +197,7 @@
 
                                     <div class="row justify-content-center">
                                         <div class="col-4 px-0 m-auto text-center">
-                                            <span class="h6">Acabado natural</span>
+                                            <span class="h6">¿Acabado natural?</span>
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
