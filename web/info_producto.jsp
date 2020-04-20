@@ -45,6 +45,15 @@
                                     </span>
                             </div>
 
+                            <!--Imagen del producto pantallas pequeñas-->
+                            <div class="row d-flex justify-content-center">
+                                <div class="img-fluid col-10  d-lg-none">
+
+                                    <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
+                                    <img src="media/prueba_cuadrada.jpg" class="img-fluid  ">
+
+                                </div>
+                            </div>
 
                             <!--precio y oferta-->
                             <div class="row py-2 d-flex justify-content-center">
@@ -86,6 +95,10 @@
                                 </div>
 
                             </div>
+
+                            <div class="row justify-content-center">
+                                  <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                            </div>
                             <!--Estrellas -->
                             <!--
                             <div class="row justify-content-center">
@@ -116,15 +129,6 @@
                     </div>
                 </div>
 
-                <!--Imagen del producto pantallas pequeñas-->
-                <div class="row d-flex justify-content-center">
-                    <div class="img-fluid col-10  d-lg-none">
-
-                        <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                        <img src="media/prueba_cuadrada.jpg" class="img-fluid  ">
-
-                    </div>
-                </div>
 
             </div>
             <div class="col-lg-11 pt-5 ">
@@ -149,7 +153,7 @@
                                     </div>
                                     <div class="col-4 col-xl-3 py-3 m-auto">
                                         <form class="form-group my-0 mx-auto">
-                                            <button type="submit" class="btn btn-dark btn-block ">Opinar</button>
+                                            <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
                                         </form>
                                     </div>
                                     <div class="col-1">
@@ -157,12 +161,8 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3 ml-auto text-center font-weight-bold">
-                                        <%--<c:if test="${companies.size() > 0}">
+                                    <div class="col-4 ml-auto text-center font-weight-bold">
 
-                                        </c:if><c:if test="${companies.size() > 0}">
-
-                                        </c:if>--%>
                                         <span class="display-3 d-xl-block">4,3</span>
                                         <br>
                                         <span class="h7">73 reviews</span>
@@ -224,42 +224,79 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Reviews</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Información del producto</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active mr-xl" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                       <!--Contenedor review-->
-                        <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
-                            <a href="#" class="btn btn-outline-primary btn-sm float-right">Top Rated</a>
-                            <h5 class="mb-1">All Ratings and Reviews</h5><div class="reviews-members pt-4 pb-4">
-                            <div class="media">
-                                <a href="#"><img alt="Generic placeholder image" src="http://bootdey.com/img/Content/avatar/avatar1.png" class="mr-3 rounded-pill"></a>
-                                <div class="media-body">
-                                    <div class="reviews-members-header">
-                                        <span class="star-rating float-right">
-                                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                            <a href="#"><i class="icofont-ui-rating active"></i></a>
-                                            <a href="#"><i class="icofont-ui-rating"></i></a>
-                                        </span>
-                                        <h6 class="mb-1">
-                                            <a class="text-black" href="#">Singh Osahan</a>
-                                        </h6>
-                                        <p class="text-gray">Tue, 20 Mar 2020</p>
+
+                        <!--Contenedor review-->
+                        <c:forEach var = "i" begin = "1" end = "4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2 pb-2">
+                                            <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
+                                            <!--<span class="rounded-circle icono m-auto">MT</span>-->
+                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">Milo Tatch</a></span>
+                                            <span class="text-secondary pl-1 text-center">12/04/2020</span>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p>
+                                                <span class="float-left h5" ><strong>Gran relación claidad-precio!!</strong></span>
+                                                <span class="float-right fa fa-star fa-lg "></span>
+                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <!-- <span class="fa fa-star fa-2x checked"></span>
+                                                 <span class="fa fa-star fa-2x checked"></span>
+                                                 <span class="fa fa-star fa-2x  checked"></span>
+                                                 <span class="fa fa-star fa-2x "></span>
+                                                 <span class="fa fa-star fa-2x "></span>
+     -->
+                                            </p>
+                                            <div class="clearfix"></div>
+                                            <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                            <p>
+                                                <span class="float-left h5" ><strong>5<span style="color: red">
+                                                    ♥</span></strong></span>
+                                                <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="reviews-members-body">
-                                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto. </p>
-                                    </div>
+                                        <%--<div class="card card-inner">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid">
+                                                        <p class="text-secondary text-center">15 Minutes Ago</p>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
+                                                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                        <p>
+                                                            <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                                                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>--%>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
+
+                    </div>
+            <!--OTRAS VENTANAS-->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
+                        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
+                        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
+                        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
+                        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
+
                     </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
-                    </div>
+
                 </div>
             </div>
         </div>
