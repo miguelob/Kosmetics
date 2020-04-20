@@ -84,13 +84,19 @@
     height: 200px;
 }*/
 /*Pinta un circulo del color especificado en el bakgraund. Probar con span y div. No se a usado de momento*/
-.circulo-colored{
-    width: 100px;
-    height: 100px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    background: #5cb85c;
+.colorIcon{
+    width: 40px;
+    height: 40px;
+    background:#17A2B8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
 }
 #error{
     color: red;
