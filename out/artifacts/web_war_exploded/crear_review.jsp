@@ -67,12 +67,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row py-1 d-flex justify-content-center">
-                                    <div class="col-7">
+                                    <div class="col-7 col-lg-6 col-xl-7">
                                         <div class="form-check m-auto pr-4 ">
                                             <span class="font-italic">¿Tiene un acabado natural?</span>
                                         </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 col-lg-6 col-xl-5">
                                         <div class="form-check form-check-inline ">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                             <label class="form-check-label text-muted" for="inlineRadio1">Si</label>
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option2">
-                                            <label class="form-check-label text-muted" for="inlineRadio2">Sin opinión</label>
+                                            <label class="form-check-label text-muted" for="inlineRadio2">NS/NC</label>
                                         </div>
                                     </div>
                                         <%--<div class="form-check form-check-inline">
