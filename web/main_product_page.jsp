@@ -67,13 +67,12 @@
                                    <!--Contenedor estrellas-->
                                     <div class="col-12 col-xl-4 m-auto offset-4">
                                         <div class="row justify-content-center">
-                                                <c:forEach var = "i" begin = "0" end = "${product.score}">
-                                                    <span class="fa fa-star fa-2x checked"></span>
-                                                </c:forEach>
-                                                <c:forEach var = "i" begin = "0" end = "5-${product.score}">
-                                                    <span class="fa fa-star fa-2x "></span>
-                                                </c:forEach>
-
+                                            <c:forEach var = "i" begin = "1" end = "${product.score}">
+                                                <span class="fa fa-star fa-2x checked"></span>
+                                            </c:forEach>
+                                            <c:forEach var = "i" begin = "1" end = "2">
+                                                <span class="fa fa-star fa-2x "></span>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>
@@ -110,8 +109,8 @@
                                             Envío gratuíto
                                         </c:when>
                                         <c:when test = "${product.offer != 0}">
-                                            <fmt:formatNumber pattern="##00%" value="${product.offer}"/>
-                                            <span class="h6 px-2">Nuevo Precio: ${product.newPrice}</span>
+                                            <fmt:formatNumber pattern="###000%" value="${product.offer}"/>
+                                            <span class="h6 px-2" style="color:red">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
                                         </c:when>
                                         <c:otherwise>
                                             No hay Oferta.

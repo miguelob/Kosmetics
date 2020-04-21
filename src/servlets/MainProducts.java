@@ -27,11 +27,12 @@ public class MainProducts extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("entra a servlet MainProducts");
+        //System.out.println("entra a servlet MainProducts");
         HashMap<Integer,String> brands = BrandsDAO.getAllBrands();
         HashMap<Integer,String> features = FeaturesDAO.getAllFeatures();
         HashMap<Integer,String> questions = QuestionsDAO.getAllQuestions();
         ArrayList<Product> products = ProductDAO.getProductsAllInfo();
+        System.out.println("Productos cargados: "+products.size());
 
         HttpSession session = request.getSession();
         session.setAttribute("brands",brands);
@@ -39,6 +40,7 @@ public class MainProducts extends HttpServlet {
         session.setAttribute("questions",questions);
         session.setAttribute("products",products);
 
+        //System.out.println("Antes del fordward");
         request.getRequestDispatcher("/main_product_page.jsp").forward(request,response);
     }
 }

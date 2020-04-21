@@ -128,6 +128,7 @@ public class ProductDAO {
                 ResultSet rs2 = pst2.executeQuery();
                 if(rs.next()) {
                     products.get(i).setScore(rs.getFloat(1));
+                    //products.get(i).setResto();
                 }
                 PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
                 pst3.setInt(1,products.get(i).getId());

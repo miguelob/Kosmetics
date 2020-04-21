@@ -19,6 +19,7 @@ public class Product implements Serializable{
     private String productCategory;
     private ArrayList<String> colors;
     private int score;
+   // private int resto;
 
     //NUEVO CONTRUSCOTOR PARA AÑADIR NUEVO PRODUCTO
 
@@ -56,8 +57,16 @@ public class Product implements Serializable{
         this.freeDeliver = freeDeliver;
     }
 
+   /* public void setResto() {
+        this.resto = 5-score;
+    }
+
+    public int getResto() {
+        return resto;
+    }*/
+
     private void calculateNewPrice() {
-        newPrice = ogPrice *(1-(offer/100));
+        newPrice = ogPrice * (1-((float)offer/(float)100));
     }
 
     public boolean isFreeDeliver() {
