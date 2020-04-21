@@ -64,6 +64,67 @@
     font-weight: bold;
 }
 
+/*productoImgUserInfo reduce el tamaño del icono en función del width de la pantalla*/
+@media (min-width: 990px) {
+    .imgUserInfo {
+        width: 270px;
+        height: 270px;
+        background: #fcbd84;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        color: white;
+        font-size: 100px;
+        font-weight: bold;
+    }
+    .nameUserInfo{
+    }
+}
+
+@media (max-width: 990px) {
+    .imgUserInfo {
+        width: 200px;
+        height: 200px;
+        background: #fcbd84;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        color: white;
+        font-size: 74px;
+        font-weight: bold;
+
+    }
+    .nameUserInfo{
+    }
+}
+@media (max-width: 763px) {
+    .imgUserInfo {
+        width: 150px;
+        height: 150px;
+        background: #fcbd84;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        color: white;
+        font-size: 60px;
+        font-weight: bold;
+
+    }
+    .nameUserInfo{
+        font-size: 30px;
+        font-weight: normal;
+    }
+}
+
 /*esta clase oculta la imagen slavo para cuando se trata de pantallas pequeñas*/
 @media screen and (max-width: 1200px){
     .imgPantallaPequena{
@@ -83,21 +144,7 @@
 .product_container{
     height: 200px;
 }*/
-/*Pinta un circulo del color especificado en el bakgraund. Probar con span y div. No se a usado de momento*/
-.colorIcon{
-    width: 40px;
-    height: 40px;
-    background:#17A2B8;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    color: white;
-    font-size: 100px;
-    font-weight: bold;
-}
 #error{
     color: red;
     align-content: center;
