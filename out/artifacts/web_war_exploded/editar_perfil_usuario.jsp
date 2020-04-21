@@ -119,6 +119,6 @@
 
 </div>
 
-<%@include file="jsSources.jsp"%>
+<jsp:include page="jSources.jsp"/>
 </body>
 </html>

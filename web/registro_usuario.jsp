@@ -16,7 +16,7 @@
 <body>
     <div class="container-fluid">
         <div class="row p-0 justify-content-center">
-            <img id="registro-inicio_img" src = "media/inicio_sesion_fondo.jpg" class="img-fluid col-lg-6 p-0 d-none d-xl-block">
+            <img id="registro-inicio_img" src = "media/registroFondo.jpg" class="img-fluid col-lg-6 p-0 d-none d-xl-block">
             <div class="col-12 col-xl-6 py-5 d-flex justify-content-center">
                 <div class = "col-lg-8">
                     <h1 class="text-center pt-5">Crea tu perfil</h1>
