@@ -111,16 +111,36 @@ public class ProductDAO {
         return id;
     }
 
-    public static void getProductBasicInfo(ArrayList<Product> lista) {
+    public static ArrayList<Product> getProductsAllInfo() {
+        ArrayList<Product> products = new ArrayList<Product>();
+        int i = 0;
         Connection con = null;
         try{
             con=ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM Products");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM products");
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
                 //this will change
-                lista.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6),rs.getBytes(8)));
+                products.add(new Product(rs.getInt("idProducts"), rs.getString("name"), BrandsDAO.getBrandFromId(rs.getInt("Brands_idBrands")), rs.getString("productCategory"), rs.getDouble("price"), rs.getInt("offer"),rs.getString("description"),rs.getBoolean("freeDeliver")));
+                PreparedStatement pst2 = con.prepareStatement("SELECT AVG(scoreProduct) FROM reviews WHERE Products_idProducts = ?");
+                pst2.setInt(1,products.get(i).getId());
+                ResultSet rs2 = pst2.executeQuery();
+                if(rs.next()) {
+                    products.get(i).setScore(rs.getFloat(1));
+                }
+                PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
+                pst3.setInt(1,products.get(i).getId());
+                ResultSet rs3 = pst3.executeQuery();
+                while (rs3.next()) {
+                    PreparedStatement pst4 = con.prepareStatement("SELECT featuresText FROM features WHERE idFeatures = ?");
+                    pst4.setInt(1,rs3.getInt(1));
+                    ResultSet rs4 = pst4.executeQuery();
+                    while(rs4.next()) {
+                        products.get(i).addFeature(rs4.getString(1));
+                    }
+                }
+                i++;
             }
 
         } catch (SQLException sqle) {
@@ -130,30 +150,7 @@ public class ProductDAO {
         } catch (ClassNotFoundException cnfe){
             cnfe.printStackTrace();
         }
-        for(int i = 0 ; i<lista.size();i++) {
-            try (PreparedStatement pst = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + lista.get(i).getId());
-                 ResultSet rs = pst.executeQuery()) {
-                if(rs.next()) {
-                    lista.get(i).setScore(rs.getFloat(1));
-                }
-            } catch (SQLException sqle) {
-
-                System.out.println(sqle.getMessage());
-            }
-            //FIRST QUERY OF CHARACTERISTICS
-            try (PreparedStatement pst2 = con.prepareStatement("SELECT \"Characteristic\" FROM public.\"Products\" as A1 inner join \"IDs_Prod_Charac\" as B1 on A1.\"ID_Product\" = B1.\"ID_Product\" inner join \"Characteristics\" AS c1 on B1.\"ID_Characteristic\" = C1.\"ID_Characteristic\" WHERE A1.\"ID_Product\" =" + lista.get(i).getId());
-                 ResultSet rs2 = pst2.executeQuery()) {
-
-                while (rs2.next()) {
-                    lista.get(i).addFeature(rs2.getString(1));
-                }
-
-            } catch (SQLException sqle) {
-
-                System.out.println(sqle.getMessage());
-            }
-        }
-
+        return products;
     }
     public static void getProductFullInfo(Product product) {
         Connection con=null;
@@ -216,8 +213,7 @@ public class ProductDAO {
     public static void main(String[] args) {
 
 
-        ArrayList<Product> lista=new ArrayList<Product>();
-        ProductDAO.getProductBasicInfo(lista);
+        ArrayList<Product> lista = ProductDAO.getProductsAllInfo();
 
 
         for (Product producto : lista) {

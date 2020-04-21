@@ -83,7 +83,7 @@ public class Registro extends HttpServlet {
                     }else{
                         //System.out.println("todo ok");
                         session.setAttribute("user",user);
-                        request.getRequestDispatcher("/index.jsp").forward(request,response);
+                        request.getRequestDispatcher("/MainProducts").forward(request,response);
                     }
 
                 }

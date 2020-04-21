@@ -232,7 +232,7 @@ public class UserDAO {
 
                     while (rs.next()) {
                         //this will change
-                        list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6),rs.getBytes(8)));
+                        //list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6),rs.getBytes(8)));
                     }
 
                 } catch (SQLException sqle) {
