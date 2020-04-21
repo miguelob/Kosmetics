@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="tono_piel">tipo de piel</label>
+                                <label for="tono_piel">tono de piel</label>
                                 <select id="tono_piel" class="custom-select" name = "skinColor">
                                     <option selected>sin definir</option>
                                     <option value="marfil" style="background: #fdeec7">marfil</option>

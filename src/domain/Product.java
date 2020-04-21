@@ -8,7 +8,7 @@ public class Product implements Serializable{
     private final int id;
     private String name;
     private double ogPrice;
-    private int offer;
+    private float offer;
     private double newPrice;
     private String brand;
     private String description;
@@ -19,7 +19,7 @@ public class Product implements Serializable{
     private String productCategory;
     private ArrayList<String> colors;
     private int score;
-   // private int resto;
+    private int resto;
 
     //NUEVO CONTRUSCOTOR PARA AÑADIR NUEVO PRODUCTO
 
@@ -52,21 +52,21 @@ public class Product implements Serializable{
         this.setBrand(brand);
         this.setDescription(description);
         this.setProductCategory(productCategory);
-        this.offer = offer;
+        this.offer = (float) offer/100;
         this.calculateNewPrice();
         this.freeDeliver = freeDeliver;
     }
 
-   /* public void setResto() {
+   public void setResto() {
         this.resto = 5-score;
     }
 
     public int getResto() {
         return resto;
-    }*/
+    }
 
     private void calculateNewPrice() {
-        newPrice = ogPrice * (1-((float)offer/(float)100));
+        newPrice = ogPrice * (1-offer);
     }
 
     public boolean isFreeDeliver() {
@@ -81,7 +81,7 @@ public class Product implements Serializable{
         return id;
     }
 
-    public int getOffer() {
+    public float getOffer() {
         return offer;
     }
 

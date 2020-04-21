@@ -70,7 +70,7 @@
                                             <c:forEach var = "i" begin = "1" end = "${product.score}">
                                                 <span class="fa fa-star fa-2x checked"></span>
                                             </c:forEach>
-                                            <c:forEach var = "i" begin = "1" end = "2">
+                                            <c:forEach var = "i" begin = "1" end = "${product.resto}">
                                                 <span class="fa fa-star fa-2x "></span>
                                             </c:forEach>
                                         </div>
@@ -103,14 +103,14 @@
                             <!--Cuarta fila. Precio-->
                             <div class="row">
                                 <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
-                                <span class="h6 px-2">Oferta:
+                                <span class="h6 px-2" style="color:red">Oferta:
                                     <c:choose>
                                         <c:when test = "${product.freeDeliver}">
                                             Envío gratuíto
                                         </c:when>
                                         <c:when test = "${product.offer != 0}">
-                                            <fmt:formatNumber pattern="###000%" value="${product.offer}"/>
-                                            <span class="h6 px-2" style="color:red">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
+                                            <fmt:formatNumber pattern="#%" value="${product.offer}"/>
+                                            <span class="h6 px-2">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
                                         </c:when>
                                         <c:otherwise>
                                             No hay Oferta.

@@ -126,9 +126,9 @@ public class ProductDAO {
                 PreparedStatement pst2 = con.prepareStatement("SELECT AVG(scoreProduct) FROM reviews WHERE Products_idProducts = ?");
                 pst2.setInt(1,products.get(i).getId());
                 ResultSet rs2 = pst2.executeQuery();
-                if(rs.next()) {
-                    products.get(i).setScore(rs.getFloat(1));
-                    //products.get(i).setResto();
+                if(rs2.next()) {
+                    products.get(i).setScore(rs2.getFloat(1));
+                    products.get(i).setResto();
                 }
                 PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
                 pst3.setInt(1,products.get(i).getId());

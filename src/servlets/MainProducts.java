@@ -32,7 +32,7 @@ public class MainProducts extends HttpServlet {
         HashMap<Integer,String> features = FeaturesDAO.getAllFeatures();
         HashMap<Integer,String> questions = QuestionsDAO.getAllQuestions();
         ArrayList<Product> products = ProductDAO.getProductsAllInfo();
-        System.out.println("Productos cargados: "+products.size());
+        //System.out.println("Productos cargados: "+products.size());
 
         HttpSession session = request.getSession();
         session.setAttribute("brands",brands);
