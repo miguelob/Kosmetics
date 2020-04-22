@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 
@@ -26,7 +28,7 @@
                     <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
                         <div class="row">
                             <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                            <img src="media/prueba_cuadrada.jpg" class="img-fluid px-4 pt-0">
+                            <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
 
                         </div>
 
@@ -36,13 +38,12 @@
                         <div class="col-lg-9 px-0">
                             <!--Nombre del producto-->
                             <div class="row text-center">
-                                <h2>Hello Happy Foundation</h2>
+                                <h2>${requestScope.product.name}</h2>
                             </div>
 
                             <!--Descripcipción -->
                             <div class="row text-justify">
-                                    <span class="text-muted py-3 m-auto">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
-                                    </span>
+                                <span class="text-muted py-3 m-auto">${requestScope.product.description}</span>
                             </div>
 
                             <!--Imagen del producto pantallas pequeñas-->
@@ -50,7 +51,7 @@
                                 <div class="img-fluid col-10  d-lg-none">
 
                                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                                    <img src="media/prueba_cuadrada.jpg" class="img-fluid  ">
+                                    <img src="ReadImg?id=${product.id}" class="img-fluid  ">
 
                                 </div>
                             </div>
@@ -58,8 +59,21 @@
                             <!--precio y oferta-->
                             <div class="row py-2 d-flex justify-content-center">
                                 <div class="col-12 m-auto py-2 d-flex justify-content-center text-nowrap">
-                                    <span class="h5 px-4 text-muted m-auto">Precio: 33,95€      </span>
-                                    <span class="h5 px-4 text-muted m-auto">Oferta: -20% </span>
+                                    <span class="h5 px-4 text-muted m-auto">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${requestScope.product.ogPrice}"/>     </span>
+                                    <span class="h5 px-4 text-muted m-auto" style="color:red">Oferta:
+                                        <c:choose>
+                                            <c:when test = "${product.freeDeliver}">
+                                                Envío gratuíto
+                                            </c:when>
+                                            <c:when test = "${product.offer != 0}">
+                                                <fmt:formatNumber pattern="#%" value="${product.offer}"/>
+                                                <span class="h5 px-4 text-muted m-auto">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                No hay Oferta.
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </span>
                                 </div>
                             </div>
 
@@ -68,7 +82,7 @@
 
                                 <div class="col-3 m-auto py-2 text-nowrap text-center">
                                     <!--añadirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr IMAGEN MARCA-->
-                                    <span class="h5 font-weight-bold">BENEFIT</span>
+                                    <span class="h5 font-weight-bold">${requestScope.product.brand}</span>
                                 </div>
 
 
@@ -150,12 +164,12 @@
                                 <div class="row justify-content-center">
                                     <div class="col-5 py-3 m-auto">
                                         <div class="row justify-content-center">
-
-                                            <span class="fa fa-star fa-2x checked"></span>
-                                            <span class="fa fa-star fa-2x checked"></span>
-                                            <span class="fa fa-star fa-2x  checked"></span>
-                                            <span class="fa fa-star fa-2x "></span>
-                                            <span class="fa fa-star fa-2x "></span>
+                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                                                <span class="fa fa-star fa-2x checked"></span>
+                                            </c:forEach>
+                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                                                <span class="fa fa-star fa-2x "></span>
+                                            </c:forEach>
 
                                         </div>
                                     </div>
@@ -171,19 +185,20 @@
                                 <div class="row justify-content-center">
                                     <div class="col-4 ml-auto text-center font-weight-bold">
 
-                                        <span class="display-3 d-xl-block">4,3</span>
+                                        <span class="display-3 d-xl-block"><fmt:formatNumber pattern="#,#0.0" value="${requestScope.product.scoreFloat}"/></span>
                                         <br>
-                                        <span class="h7">73 reviews</span>
+                                        <span class="h7">${requestScope.product.numReviews} reviews</span>
                                     </div>
+
                                     <div class="col-6 mr-auto">
-                                    <c:forEach var = "i" begin = "1" end = "5">
+                                        <c:forEach var = "parcialScore" items="${requestScope.product.parcialScores}">
                                         <div class="row justify-content-center">
                                             <div class="col-1 px-0 m-auto text-center">
-                                                <span class="h7">${i}</span>
+                                                <span class="h7">${parcialScore.key}</span>
                                             </div>
                                             <div class="col-11 px-0 m-auto">
                                                 <div class="progress" style="height: 18px;">
-                                                    <div class="progress-bar" role="progressbar" style= "width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar" role="progressbar" style= "width: 25%;" aria-valuenow="${parcialScore.value}" aria-valuemin="0" aria-valuemax="${requestScope.product.totalScores}"></div>
                                                 </div>
                                             </div>
                                         </div>

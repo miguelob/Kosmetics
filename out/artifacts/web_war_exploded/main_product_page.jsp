@@ -49,7 +49,7 @@
         <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
             <c:forEach var = "product" items="${sessionScope.products}">
-                <a class = "text-decoration-none cajas" href="/LoadAllProduct?id=${product.id}">
+                <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
                     <div class="card mb-3">
                         <div class="row no-gutters">
                             <div class="col-sm-4">

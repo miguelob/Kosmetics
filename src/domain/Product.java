@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Product implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -20,6 +21,10 @@ public class Product implements Serializable{
     private ArrayList<String> colors;
     private int score;
     private int resto;
+    private int totalScores;
+    private int numReviews;
+    private float scoreFloat;
+    private HashMap<Integer,Integer> parcialScores = new HashMap<Integer,Integer>();
 
     //NUEVO CONTRUSCOTOR PARA AÑADIR NUEVO PRODUCTO
 
@@ -142,6 +147,7 @@ public class Product implements Serializable{
             this.productCategory = "EMPTY_FIELD"; // to display that the category is empty
     }
     public void setScore(float fullscore) {
+        scoreFloat = fullscore;
         score = Math.round(fullscore);
     }
 
@@ -176,9 +182,33 @@ public class Product implements Serializable{
     public Survey getSurvey() {
         return survey;
     }
+
+    public int getNumReviews() {
+        return reviews.size();
+    }
+
+    public float getScoreFloat() {
+        return scoreFloat;
+    }
+    public int getTotalScores(){
+        return totalScores;
+    }
+    public HashMap<Integer, Integer> getParcialScores(){
+        int i,valor;
+        for(i=0; i<reviews.size();i++){
+            this.totalScores++;
+           valor = reviews.get(i).getProductScore();
+           if(parcialScores.get(i) ==null){
+               parcialScores.put(valor,1);
+           }else{
+               parcialScores.put(valor,parcialScores.get(valor)+1);
+           }
+        }
+        return parcialScores;
+    }
+
     @Override
     public String toString() {
         return "con nombre: "+this.getName()+" con precio: "+this.getOgPrice()+" con marca: "+this.getBrand()+" con Descripcion: "+this.getDescription();
     }
-
 }
