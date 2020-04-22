@@ -97,7 +97,16 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                  <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="YHE7ZLLYVWLQN">
+                                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet.">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+                                </form>
+
+
+
+                                <button type="submit" class="col-8 btn btn-dark">Comprar</button>
                             </div>
                             <!--Estrellas -->
                             <!--

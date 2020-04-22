@@ -26,8 +26,8 @@
                     <div class="custom-control custom-checkbox">
                         <c:forEach var = "feature" items="${sessionScope.features}">
                             <div class="row">
-                                <input type="checkbox" class="custom-control-input" id="caracteristicas1" value="${feature.key}">
-                                <label class="custom-control-label" for="caracteristicas1">${feature.value}</label>
+                                <input type="checkbox" class="custom-control-input" id = "caracteristicas${feature.key}" value="${feature.key}">
+                                <label class="custom-control-label" for="caracteristicas${feature.key}">${feature.value}</label>
                             </div>
                         </c:forEach>
 
@@ -37,8 +37,8 @@
                     <div class="custom-control custom-checkbox">
                         <c:forEach var = "brand" items="${sessionScope.brands}">
                             <div class="row">
-                                <input type="checkbox" class="custom-control-input" id="marca1" value="${brand.key}">
-                                <label class="custom-control-label" for="marca1">${brand.value}</label>
+                                <input type="checkbox" class="custom-control-input" id="marca${brand.key}" value="${brand.key}">
+                                <label class="custom-control-label" for="marca${brand.key}">${brand.value}</label>
                             </div>
                         </c:forEach>
 
@@ -49,61 +49,60 @@
         <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
             <c:forEach var = "product" items="${sessionScope.products}">
+                <a class = "text-decoration-none cajas" href="/LoadAllProduct?id=${product.id}">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-sm-4">
+                                <img src="ReadImg?id=${product.id}" class="card-img">
+                                <!--<span class=" productoImg  card-img m-auto">P</span>-->
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <div class="row">
+                                            <div class="col-12 col-xl-8 m-auto text-center">
+                                                <h3>${product.name}</h3>
+                                            </div>
 
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-sm-4">
-                       <img src="ReadImg?id=${product.id}" class="card-img">
-                        <!--<span class=" productoImg  card-img m-auto">P</span>-->
-                   </div>
-                   <div class="col-sm-8">
-                       <div class="card-body">
-                           <div class="card-title">
-                               <div class="row">
-                                   <div class="col-12 col-xl-8 m-auto text-center">
-                                       <h3>${product.name}</h3>
-                                   </div>
-
-                                   <!--Contenedor estrellas-->
-                                    <div class="col-12 col-xl-4 m-auto offset-4">
-                                        <div class="row justify-content-center">
-                                            <c:forEach var = "i" begin = "1" end = "${product.score}">
-                                                <span class="fa fa-star fa-2x checked"></span>
-                                            </c:forEach>
-                                            <c:forEach var = "i" begin = "1" end = "${product.resto}">
-                                                <span class="fa fa-star fa-2x "></span>
-                                            </c:forEach>
+                                            <!--Contenedor estrellas-->
+                                            <div class="col-12 col-xl-4 m-auto offset-4">
+                                                <div class="row justify-content-center">
+                                                    <c:forEach var = "i" begin = "1" end = "${product.score}">
+                                                        <span class="fa fa-star fa-2x checked"></span>
+                                                    </c:forEach>
+                                                    <c:forEach var = "i" begin = "1" end = "${product.resto}">
+                                                        <span class="fa fa-star fa-2x "></span>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!--Segunda fila. Contiene categoria y marca-->
-                            <div class="row">
-                                <div class="col-3 m-auto py-2 text-nowrap">
-                                    <span class="h5 text-muted">${product.category}</span>
-                                </div>
+                                    <!--Segunda fila. Contiene categoria y marca-->
+                                    <div class="row">
+                                        <div class="col-3 m-auto py-2 text-nowrap">
+                                            <span class="h5 text-muted">${product.category}</span>
+                                        </div>
 
-                                <div class="col-3 m-auto py-2 text-nowrap">
-                                    <span class="h5 text-muted">${product.brand}</span>
-                                </div>
+                                        <div class="col-3 m-auto py-2 text-nowrap">
+                                            <span class="h5 text-muted">${product.brand}</span>
+                                        </div>
 
-                            </div>
-
-                            <!--Tercera fila. Contiene features-->
-                            <div class="row ">
-                                <!--Hacer con un foreEach-->
-                                <c:forEach var = "feature" items="${product.features}">
-                                    <div class="jumbotron mx-auto my-3 py-1 px-3 text-center">
-                                        <p class="my-0">${feature}</p>
                                     </div>
-                                </c:forEach>
 
-                            </div>
+                                    <!--Tercera fila. Contiene features-->
+                                    <div class="row ">
+                                        <ul class="list-inline">
+                                            <!--Hacer con un foreEach-->
+                                            <c:forEach var = "feature" items="${product.features}">
+                                                <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center">${feature}</li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
 
-                            <!--Cuarta fila. Precio-->
-                            <div class="row">
-                                <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
-                                <span class="h6 px-2" style="color:red">Oferta:
+                                    <!--Cuarta fila. Precio-->
+                                    <div class="row">
+                                        <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
+                                        <span class="h6 px-2" style="color:red">Oferta:
                                     <c:choose>
                                         <c:when test = "${product.freeDeliver}">
                                             Envío gratuíto
@@ -119,13 +118,13 @@
 
                                 </span>
 
-                            </div>
+                                    </div>
 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
+                </a>
             </c:forEach>
 
         </div>

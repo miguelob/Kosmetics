@@ -33,12 +33,14 @@ public class Login extends HttpServlet {
                 //System.out.println("Todo OK");
                 request.getRequestDispatcher("/MainProducts").forward(request,response);
             }else{
-                request.setAttribute("error","Contraseña o email incorrectos");
+                response.setContentType("text/plain");
+                response.getWriter().write("Contraseña o email incorrectos");
                 request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
             }
 
         }else{
-            request.setAttribute("error","Debe rellenar todos los campos");
+            response.setContentType("text/plain");
+            response.getWriter().write("Debe rellenar todos los campos");
             request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
         }
     }

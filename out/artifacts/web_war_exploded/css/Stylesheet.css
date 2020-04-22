@@ -102,4 +102,7 @@
     color: red;
     align-content: center;
 }
-
+.cajas{
+    color:black;
+    !important;
+}

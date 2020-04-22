@@ -153,25 +153,6 @@ public class ProductDAO {
         }
         return products;
     }
-    public static void getProductFullInfo(Product product) {
-        Connection con=null;
-        ReviewDAO.loadProductReview(product);
-        //FALTA RELLENAR LAS IMAGENES QUE FALTAN
-        //QUERY PARA SACAR EL ID DE ENCUESTA ASOCIADA AL PRODUCTO
-        try{
-            con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Survey\" FROM  \"Products\" WHERE \"ID_Product\" = " + product.getId());
-             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                product.setSurvey(SurveyDAO.getSurvey(rs.getInt(1)));
-            }
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            sqle.printStackTrace();
-        } catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
-        }
-    }
     public static int getSurveyID(Product product) {
         int id = -1;
         Connection con = null;
@@ -208,20 +189,6 @@ public class ProductDAO {
             cnfe.printStackTrace();
         }
         return valor;
-    }
-
-
-    public static void main(String[] args) {
-
-
-        ArrayList<Product> lista = ProductDAO.getProductsAllInfo();
-
-
-        for (Product producto : lista) {
-            System.out.println(producto);
-        }
-
-
     }
 
     public static void uploadImg(int id, InputStream imagen,int i) {
@@ -301,5 +268,65 @@ public class ProductDAO {
             cnfe.printStackTrace();
         }
         return retorno;
+    }
+
+    public static Product loadAllInfo(int id) {
+        Product product = null;
+        Connection con = null;
+        try{
+            con=ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM products where idProducts = ?");
+            pst.setInt(1,id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                //this will change
+                product = new Product(rs.getInt("idProducts"), rs.getString("name"), BrandsDAO.getBrandFromId(rs.getInt("Brands_idBrands")), rs.getString("productCategory"), rs.getDouble("price"), rs.getInt("offer"),rs.getString("description"),rs.getBoolean("freeDeliver"));
+                PreparedStatement pst2 = con.prepareStatement("SELECT AVG(scoreProduct) FROM reviews WHERE Products_idProducts = ?");
+                pst2.setInt(1,id);
+                ResultSet rs2 = pst2.executeQuery();
+                if(rs2.next()) {
+                    product.setScore(rs2.getFloat(1));
+                    product.setResto();
+                }
+                PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
+                pst3.setInt(1,id);
+                ResultSet rs3 = pst3.executeQuery();
+                while (rs3.next()) {
+                    PreparedStatement pst4 = con.prepareStatement("SELECT featuresText FROM features WHERE idFeatures = ?");
+                    pst4.setInt(1,rs3.getInt(1));
+                    ResultSet rs4 = pst4.executeQuery();
+                    while(rs4.next()) {
+                        product.addFeature(rs4.getString(1));
+                    }
+                }
+            }
+
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        ProductDAO.getSurvey(product);
+        return product;
+    }
+    public static void getSurvey(Product product) {
+        Connection con=null;
+        ReviewDAO.loadProductReview(product);
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Survey\" FROM  \"Products\" WHERE \"ID_Product\" = " + product.getId());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                product.setSurvey(SurveyDAO.getSurvey(rs.getInt(1)));
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
     }
 }
