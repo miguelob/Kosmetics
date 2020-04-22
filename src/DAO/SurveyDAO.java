@@ -14,26 +14,30 @@ import domain.Question;
 import domain.Survey;
 
 public class SurveyDAO {
-    public static Survey getSurvey(int id) {
+    public static void getSurvey(Product product) {
         Survey survey = new Survey();
         Connection con = null;
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM \"IDs_Surv_Quest\" WHERE \"ID_Survey\" = " + id);
-             ResultSet rs = pst.executeQuery();
-            while(rs.next()) {
-                //System.out.println("\nValor1: "+rs.getInt(2)+"\nValor2: "+rs.getInt(3)+"\nValor3: "+rs.getInt(4));
-                survey.put(SurveyDAO.getQuestion(rs.getInt(2)), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM  products_questions WHERE Products_idProducts = ?");
+            pst.setInt(1,product.getId());
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                PreparedStatement pst1 = con.prepareStatement("SELECT questionText FROM questisons WHERE idQuestion = ?");
+                pst1.setInt(1,rs.getInt(2));
+                ResultSet rs1 = pst.executeQuery();
+                while(rs1.next()) {
+                    //System.out.println("\nValor1: "+rs.getInt(2)+"\nValor2: "+rs.getInt(3)+"\nValor3: "+rs.getInt(4));
+                    survey.put(SurveyDAO.getQuestion(rs1.getInt(1)), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                }
             }
-        } catch (SQLException sqle) {
+            product.setSurvey(survey);
+        } catch (SQLException | ClassNotFoundException sqle) {
 
             System.out.println(sqle.getMessage());
             sqle.printStackTrace();
-        }catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
         }
-        return survey;
     }
     private static Question getQuestion(int id) {
         Question question = null;
@@ -41,7 +45,7 @@ public class SurveyDAO {
         //WE NEED QUERY FOR GET THE INFO WITH EACH ID
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM Questions WHERE idQuestion = ?");
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM questions WHERE idQuestion = ?");
             pst.setInt(1,id);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {

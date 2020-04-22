@@ -11,16 +11,17 @@ import domain.Review;
 import domain.User;
 
 public class ReviewDAO {
-    public static void loadProductReview(final Product product) {
+    public static void loadProductReview(Product product) {
         Connection con = null;
         //QUERY for loading reviews. we also need the query user
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT * FROM reviews WHERE  = Users_idUser " + product.getId());
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM reviews WHERE  Products_idProducts = ?");
+            pst.setInt(1,product.getId());
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                product.addReview(new Review(UserDAO.getUser(rs.getInt(3)), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(5), rs.getString(4)));
+                product.addReview(new Review(UserDAO.getUser(rs.getInt(6)), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
             }
 
         } catch (final SQLException sqle) {
@@ -73,7 +74,7 @@ public class ReviewDAO {
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                reviewList.add(new Review(tempUser, rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(5), rs.getString(4)));
+                //reviewList.add(new Review(tempUser, rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(5), rs.getString(4)));
             }
 
         } catch (final SQLException sqle) {

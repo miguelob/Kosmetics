@@ -30,7 +30,7 @@ public class UserDAO {
             pst.setInt(1,i);
              ResultSet rs = pst.executeQuery();
             if(rs.next()) {
-                user = new User(rs.getString(4), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getBoolean(8));
+                user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getBoolean(8));
             }
         } catch (SQLException sqle) {
 
@@ -70,7 +70,7 @@ public class UserDAO {
              ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {
-                user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),null,rs.getBoolean(9));
+                user = new User(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getBoolean(8));
                 //System.out.println(rs.getInt(8));
             }
         } catch (SQLException sqle) {

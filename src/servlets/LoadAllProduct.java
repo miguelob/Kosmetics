@@ -20,10 +20,12 @@ public class LoadAllProduct extends HttpServlet {
         processRequest(request,response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
         Product product = ProductDAO.loadAllInfo(id);
-       // Product
+        request.setAttribute("product",product);
+
+        request.getRequestDispatcher("/info_producto.jsp").forward(request,response);
     }
 }

@@ -309,15 +309,17 @@ public class ProductDAO {
         } catch (ClassNotFoundException cnfe){
             cnfe.printStackTrace();
         }
-        ProductDAO.getSurvey(product);
+        SurveyDAO.getSurvey(product);
+        ReviewDAO.loadProductReview(product);
         return product;
     }
-    public static void getSurvey(Product product) {
+    /*public static void getSurvey(Product product) {
         Connection con=null;
         ReviewDAO.loadProductReview(product);
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT \"ID_Survey\" FROM  \"Products\" WHERE \"ID_Product\" = " + product.getId());
+            PreparedStatement pst = con.prepareStatement("SELECT Questions_idQuestion FROM  products_questions WHERE Products_idProducts = ?");
+            pst.setInt(1,product.getId());
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 product.setSurvey(SurveyDAO.getSurvey(rs.getInt(1)));
@@ -328,5 +330,5 @@ public class ProductDAO {
         } catch (ClassNotFoundException cnfe){
             cnfe.printStackTrace();
         }
-    }
+    }*/
 }
