@@ -64,7 +64,7 @@ public class Survey implements Serializable{
             return "no";
     }
 
-    public float[] getResult(Question question) {
+    public int getResult(Question question,int j) {
         int[] puntuation=survey.get(question);
         int numParticipants=0;
         float results[]=new float[3];
@@ -74,11 +74,11 @@ public class Survey implements Serializable{
         }
 
         for(int i=0;i<puntuation.length;i++) {
-            results[i]= (((float)puntuation[i])/((float)numParticipants));
+            results[i]= Math.round((((float)puntuation[i])/((float)numParticipants))*100);
             //System.out.println("\nPuntuacion: "+puntuation[i]+"\nParticipantes: "+numParticipants+"\nResultado: "+results[i]);
         }
 
-        return results;
+        return (int) results[j];
     }
     @Override
     public String toString() {

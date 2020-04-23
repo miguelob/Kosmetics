@@ -62,7 +62,7 @@ public class Product implements Serializable{
         this.freeDeliver = freeDeliver;
     }
 
-   public void setResto() {
+    public void setResto() {
         this.resto = 5-score;
     }
 
@@ -195,17 +195,23 @@ public class Product implements Serializable{
     }
     public HashMap<Integer, Integer> getParcialScores(){
         int i,valor;
+        for(i=0;i<5;i++){
+            parcialScores.put(i+1,0);
+        }
+        totalScores = reviews.size();
         for(i=0; i<reviews.size();i++){
-            this.totalScores++;
            valor = reviews.get(i).getProductScore();
-           if(parcialScores.get(i) ==null){
-               parcialScores.put(valor,1);
-           }else{
-               parcialScores.put(valor,parcialScores.get(valor)+1);
-           }
+           parcialScores.put(valor,parcialScores.get(valor)+1);
+        }
+        for(i=1; i<5;i++){
+            parcialScores.put(i,Math.round(((float)parcialScores.get(i)/totalScores)*100));
         }
         return parcialScores;
     }
+    public int getParcialScoresResto(int i){
+        return (100 -i);
+    }
+
 
     @Override
     public String toString() {

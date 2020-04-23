@@ -24,13 +24,8 @@ public class SurveyDAO {
             pst.setInt(1,product.getId());
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                PreparedStatement pst1 = con.prepareStatement("SELECT questionText FROM questisons WHERE idQuestion = ?");
-                pst1.setInt(1,rs.getInt(2));
-                ResultSet rs1 = pst.executeQuery();
-                while(rs1.next()) {
-                    //System.out.println("\nValor1: "+rs.getInt(2)+"\nValor2: "+rs.getInt(3)+"\nValor3: "+rs.getInt(4));
-                    survey.put(SurveyDAO.getQuestion(rs1.getInt(1)), rs.getInt(3), rs.getInt(4), rs.getInt(5));
-                }
+                //System.out.println("\nValor1: "+rs.getInt(2)+"\nValor2: "+rs.getInt(3)+"\nValor3: "+rs.getInt(4));
+                survey.put(SurveyDAO.getQuestion(rs.getInt(2)), rs.getInt(3), rs.getInt(4), rs.getInt(5));
             }
             product.setSurvey(survey);
         } catch (SQLException | ClassNotFoundException sqle) {

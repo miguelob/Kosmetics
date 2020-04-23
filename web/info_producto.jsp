@@ -198,7 +198,7 @@
                                             </div>
                                             <div class="col-11 px-0 m-auto">
                                                 <div class="progress" style="height: 18px;">
-                                                    <div class="progress-bar" role="progressbar" style= "width: 25%;" aria-valuenow="${parcialScore.value}" aria-valuemin="0" aria-valuemax="${requestScope.product.totalScores}"></div>
+                                                    <div class="progress-bar" role="progressbar" style= "width: ${parcialScore.value}%;" aria-valuenow="${parcialScore.value}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,16 +217,16 @@
                                 <div class="row px-4 pt-2">
                                     <span class="h3 text-muted">Fiabilidad características</span>
                                 </div>
-                                    <c:forEach var = "i" begin = "1" end = "4">
+                                <c:forEach var = "question" items="${requestScope.product.survey.questions}">
 
                                     <div class="row justify-content-center">
                                         <div class="col-4 px-0 m-auto text-center">
-                                            <span class="h6">¿Acabado natural?</span>
+                                            <span class="h6">${question.questionText}</span>
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,0)}%" aria-valuenow="${requestScope.product.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,1)}%" aria-valuenow="${requestScope.product.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-xl-1"></div>
