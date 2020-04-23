@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 
@@ -26,7 +28,7 @@
                     <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
                         <div class="row">
                             <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                            <img src="media/prueba_cuadrada.jpg" class="img-fluid px-4 pt-0">
+                            <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
 
                         </div>
 
@@ -36,13 +38,12 @@
                         <div class="col-lg-9 px-0">
                             <!--Nombre del producto-->
                             <div class="row text-center">
-                                <h2>Hello Happy Foundation</h2>
+                                <h2>${requestScope.product.name}</h2>
                             </div>
 
                             <!--Descripcipción -->
                             <div class="row text-justify">
-                                    <span class="text-muted py-3 m-auto">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de texto.
-                                    </span>
+                                <span class="text-muted py-3 m-auto">${requestScope.product.description}</span>
                             </div>
 
                             <!--Imagen del producto pantallas pequeñas-->
@@ -50,7 +51,7 @@
                                 <div class="img-fluid col-10  d-lg-none">
 
                                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                                    <img src="media/prueba_cuadrada.jpg" class="img-fluid  ">
+                                    <img src="ReadImg?id=${product.id}" class="img-fluid  ">
 
                                 </div>
                             </div>
@@ -58,8 +59,21 @@
                             <!--precio y oferta-->
                             <div class="row py-2 d-flex justify-content-center">
                                 <div class="col-12 m-auto py-2 d-flex justify-content-center text-nowrap">
-                                    <span class="h5 px-4 text-muted m-auto">Precio: 33,95€      </span>
-                                    <span class="h5 px-4 text-muted m-auto">Oferta: -20% </span>
+                                    <span class="h5 px-4 text-muted m-auto">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${requestScope.product.ogPrice}"/>     </span>
+                                    <span class="h5 px-4 text-muted m-auto" style="color:red">Oferta:
+                                        <c:choose>
+                                            <c:when test = "${product.freeDeliver}">
+                                                Envío gratuíto
+                                            </c:when>
+                                            <c:when test = "${product.offer != 0}">
+                                                <fmt:formatNumber pattern="#%" value="${product.offer}"/>
+                                                <span class="h5 px-4 text-muted m-auto">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                No hay Oferta.
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </span>
                                 </div>
                             </div>
 
@@ -68,7 +82,7 @@
 
                                 <div class="col-3 m-auto py-2 text-nowrap text-center">
                                     <!--añadirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr IMAGEN MARCA-->
-                                    <span class="h5 font-weight-bold">BENEFIT</span>
+                                    <span class="h5 font-weight-bold">${requestScope.product.brand}</span>
                                 </div>
 
 
@@ -97,7 +111,16 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                  <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="YHE7ZLLYVWLQN">
+                                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet.">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+                                </form>
+
+
+
+                                <button type="submit" class="col-8 btn btn-dark">Comprar</button>
                             </div>
                             <!--Estrellas -->
                             <!--
@@ -141,12 +164,12 @@
                                 <div class="row justify-content-center">
                                     <div class="col-5 py-3 m-auto">
                                         <div class="row justify-content-center">
-
-                                            <span class="fa fa-star fa-2x checked"></span>
-                                            <span class="fa fa-star fa-2x checked"></span>
-                                            <span class="fa fa-star fa-2x  checked"></span>
-                                            <span class="fa fa-star fa-2x "></span>
-                                            <span class="fa fa-star fa-2x "></span>
+                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                                                <span class="fa fa-star fa-2x checked"></span>
+                                            </c:forEach>
+                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                                                <span class="fa fa-star fa-2x "></span>
+                                            </c:forEach>
 
                                         </div>
                                     </div>
@@ -162,19 +185,20 @@
                                 <div class="row justify-content-center">
                                     <div class="col-4 ml-auto text-center font-weight-bold">
 
-                                        <span class="display-3 d-xl-block">4,3</span>
+                                        <span class="display-3 d-xl-block"><fmt:formatNumber pattern="#,#0.0" value="${requestScope.product.scoreFloat}"/></span>
                                         <br>
-                                        <span class="h7">73 reviews</span>
+                                        <span class="h7">${requestScope.product.numReviews} reviews</span>
                                     </div>
+
                                     <div class="col-6 mr-auto">
-                                    <c:forEach var = "i" begin = "1" end = "5">
+                                        <c:forEach var = "parcialScore" items="${requestScope.product.parcialScores}">
                                         <div class="row justify-content-center">
                                             <div class="col-1 px-0 m-auto text-center">
-                                                <span class="h7">${i}</span>
+                                                <span class="h7">${parcialScore.key}</span>
                                             </div>
                                             <div class="col-11 px-0 m-auto">
                                                 <div class="progress" style="height: 18px;">
-                                                    <div class="progress-bar" role="progressbar" style= "width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar" role="progressbar" style= "width: ${parcialScore.value}%;" aria-valuenow="${parcialScore.value}" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,16 +217,16 @@
                                 <div class="row px-4 pt-2">
                                     <span class="h3 text-muted">Fiabilidad características</span>
                                 </div>
-                                    <c:forEach var = "i" begin = "1" end = "4">
+                                <c:forEach var = "question" items="${requestScope.product.survey.questions}">
 
                                     <div class="row justify-content-center">
                                         <div class="col-4 px-0 m-auto text-center">
-                                            <span class="h6">¿Acabado natural?</span>
+                                            <span class="h6">${question.questionText}</span>
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,0)}%" aria-valuenow="${requestScope.product.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,1)}%" aria-valuenow="${requestScope.product.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-xl-1"></div>
@@ -230,24 +254,25 @@
                     <div class="tab-pane fade show active mr-xl" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                         <!--Contenedor review-->
-                        <c:forEach var = "i" begin = "1" end = "4">
+                        <c:forEach var = "review" items="${requestScope.product.reviews}">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-2 pb-2">
                                             <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
                                             <!--<span class="rounded-circle icono m-auto">MT</span>-->
-                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">Milo Tatch</a></span>
-                                            <span class="text-secondary pl-1 text-center">12/04/2020</span>
+                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">${review.user.name}</a></span>
+                                            <span class="text-secondary pl-1 text-center">${review.date}</span>
                                         </div>
                                         <div class="col-md-10">
                                             <p>
-                                                <span class="float-left h5" ><strong>Gran relación claidad-precio!!</strong></span>
-                                                <span class="float-right fa fa-star fa-lg "></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <span class="float-left h5" ><strong>${review.commentTitle}</strong></span>
+                                                <c:forEach var = "i" begin = "1" end = "${review.gerScoreResto()}">
+                                                    <span class="float-right fa fa-star fa-lg"></span>
+                                                </c:forEach>
+                                                <c:forEach var = "i" begin = "1" end = "${review.productScore}">
+                                                    <span class="float-right fa fa-star fa-lg checked"></span>
+                                                </c:forEach>
                                                 <!-- <span class="fa fa-star fa-2x checked"></span>
                                                  <span class="fa fa-star fa-2x checked"></span>
                                                  <span class="fa fa-star fa-2x  checked"></span>
@@ -258,7 +283,7 @@
                                             <div class="clearfix"></div>
                                             <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                                             <p>
-                                                <span class="float-left h5" ><strong>5<span style="color: red">
+                                                <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
                                                     ♥</span></strong></span>
                                                 <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
                                             </p>

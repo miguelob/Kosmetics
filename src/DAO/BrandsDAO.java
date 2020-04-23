@@ -31,4 +31,24 @@ public class BrandsDAO {
         }
         return brands;
     }
+
+    public static String getBrandFromId(int brands_idBrands) {
+        String brand = "";
+        Connection con = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT brandName FROM brands WHERE idBrands = ?");
+            pst.setInt(1,brands_idBrands);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+                brand = rs.getString(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return brand;
+    }
 }

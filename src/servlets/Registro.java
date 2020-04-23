@@ -45,7 +45,6 @@ public class Registro extends HttpServlet {
         String skinCondition = request.getParameter("skinCondition"); //this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
         //System.out.println(skinCondition);
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
-        byte[] userImg = null;
         HttpSession session = request.getSession();
 
         //ERROR CODES
@@ -61,7 +60,7 @@ public class Registro extends HttpServlet {
 
         if(password1.equals(password2)){
             try{
-                user = new User(name,email,password1,brithDate,skinColor,skinCondition,userImg,0);
+                user = new User(name,email,password1,brithDate,skinColor,skinCondition,false);
                 //System.out.println("user");
 
                 if(name.equals("") || email.equals("") || password1.equals("") || skinColor.equals("") || skinCondition.equals("") ){//|| userImg == null){
@@ -83,7 +82,7 @@ public class Registro extends HttpServlet {
                     }else{
                         //System.out.println("todo ok");
                         session.setAttribute("user",user);
-                        request.getRequestDispatcher("/index.jsp").forward(request,response);
+                        request.getRequestDispatcher("/MainProducts").forward(request,response);
                     }
 
                 }

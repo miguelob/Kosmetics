@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 public class User implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    //public final int idUser;
     private String name;
     private String email;
     private String userPassword;
@@ -20,19 +19,17 @@ public class User implements Serializable{
     private String skinColor;
     private String skinCondition;
     private ImageIcon userImage;
-    private int admin;
+    private boolean admin;
 
-    public User(String name,String email,String userPasword,
-                String birthDate,String skinColor,String skinCondition, byte[] image,int admin) throws ParseException {
+    public User( String name,String email,String userPasword,
+                String birthDate,String skinColor,String skinCondition,boolean admin) throws ParseException {
 
-        //this.idUser=idUser;
         this.name=name;
         this.email=email;
         this.userPassword=userPasword;
         this.setBirthDate(birthDate);
         this.skinColor=skinColor;
         this.skinCondition=skinCondition;
-        this.setImage(image);
         this.admin = admin;
     }
 
@@ -54,12 +51,6 @@ public class User implements Serializable{
         this.email=email;
         this.userPassword=String.valueOf(userPassword);
     }
-    private void setImage(byte[] imageBytes) {
-        if(imageBytes != null)
-            userImage = new ImageIcon(imageBytes);
-        else
-            userImage = new ImageIcon("media/images/NF.jpg");
-    }
     public String getName() {
         return name;
     }
@@ -78,25 +69,21 @@ public class User implements Serializable{
     public String getSkinCondition() {
         return skinCondition;
     }
-    public ImageIcon getProfileImage() {
-        return userImage;
-    }
     public void setSkinTone(String skinTone) {
         this.skinColor=skinTone;
     }
     public void setSkinCondition(String skinCondition) {
         this.skinCondition = skinCondition;
     }
-    public int getAdmin(){
+    public boolean getAdmin(){
         return admin;
     }
    public void setBirthDate(String date) throws ParseException {
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
        //birthDate = format.parse(date);
-        birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(date));
         //System.out.println(birthDate);
         //this.birthDate = date;
     }
-
 
 }

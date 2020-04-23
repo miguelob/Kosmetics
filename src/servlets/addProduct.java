@@ -5,13 +5,9 @@ import domain.Product;
 import domain.Question;
 import domain.Survey;
 
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +68,9 @@ public class addProduct extends HttpServlet {
         if(productId != -1){
             ProductDAO.setQuestions(productId,idQuestions);
             ProductDAO.setFeatures(productId,idFeatures);
+            Cookie id = new Cookie("id",Integer.toString(productId));
+            response.addCookie(id);
+            request.getRequestDispatcher("img.html").forward(request,response);
         }
         //request.getRequestDispatcher("/subirimg.jsp").forward(request,response);
 

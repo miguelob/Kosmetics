@@ -21,6 +21,7 @@ public class Login extends HttpServlet {
         processRequest(request,response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //System.out.println("entra a servlet login");
         String email = request.getParameter("userOrEmail");
         String password = request.getParameter("password");
 
@@ -30,14 +31,16 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
                 //System.out.println("Todo OK");
-                request.getRequestDispatcher("/index.jsp").forward(request,response);
+                request.getRequestDispatcher("/MainProducts").forward(request,response);
             }else{
-                request.setAttribute("error","Contraseña o email incorrectos");
+                response.setContentType("text/plain");
+                response.getWriter().write("Contraseña o email incorrectos");
                 request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
             }
 
         }else{
-            request.setAttribute("error","Debe rellenar todos los campos");
+            response.setContentType("text/plain");
+            response.getWriter().write("Debe rellenar todos los campos");
             request.getRequestDispatcher("/inicio_sesion_usuario.jsp").forward(request,response);
         }
     }

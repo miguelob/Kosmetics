@@ -1,2 +1,2 @@
-# Kosmetics_EE
+# Kosmetics
 Repositorio para la web de usuarios de Kosmetics
