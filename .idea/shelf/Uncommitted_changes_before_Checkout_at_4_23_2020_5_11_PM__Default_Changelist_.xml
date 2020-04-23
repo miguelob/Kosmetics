@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_4_23_2020_5_11_PM_[Default_Changelist]" date="1587654680484" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_23_2020_5_11_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 4/23/2020 5:11 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Kosmetics_EE/servlets/Logout.class" />
+    <option name="AFTER_PATH" value="out/production/Kosmetics_EE/servlets/Logout.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_23_2020_5_11_PM_[Default_Changelist]/Logout.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/servlets/Logout.class" />
+    <option name="AFTER_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/servlets/Logout.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_23_2020_5_11_PM_[Default_Changelist]/Logout1.class" />
+  </binary>
+</changelist>
