@@ -254,24 +254,25 @@
                     <div class="tab-pane fade show active mr-xl" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                         <!--Contenedor review-->
-                        <c:forEach var = "i" begin = "1" end = "4">
+                        <c:forEach var = "review" items="${requestScope.product.reviews}">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-2 pb-2">
                                             <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
                                             <!--<span class="rounded-circle icono m-auto">MT</span>-->
-                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">Milo Tatch</a></span>
-                                            <span class="text-secondary pl-1 text-center">12/04/2020</span>
+                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">${review.user.name}</a></span>
+                                            <span class="text-secondary pl-1 text-center">${review.date}</span>
                                         </div>
                                         <div class="col-md-10">
                                             <p>
-                                                <span class="float-left h5" ><strong>Gran relación claidad-precio!!</strong></span>
-                                                <span class="float-right fa fa-star fa-lg "></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
-                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                                <span class="float-left h5" ><strong>${review.commentTitle}</strong></span>
+                                                <c:forEach var = "i" begin = "1" end = "${review.gerScoreResto()}">
+                                                    <span class="float-right fa fa-star fa-lg"></span>
+                                                </c:forEach>
+                                                <c:forEach var = "i" begin = "1" end = "${review.productScore}">
+                                                    <span class="float-right fa fa-star fa-lg checked"></span>
+                                                </c:forEach>
                                                 <!-- <span class="fa fa-star fa-2x checked"></span>
                                                  <span class="fa fa-star fa-2x checked"></span>
                                                  <span class="fa fa-star fa-2x  checked"></span>
@@ -282,7 +283,7 @@
                                             <div class="clearfix"></div>
                                             <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                                             <p>
-                                                <span class="float-left h5" ><strong>5<span style="color: red">
+                                                <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
                                                     ♥</span></strong></span>
                                                 <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
                                             </p>

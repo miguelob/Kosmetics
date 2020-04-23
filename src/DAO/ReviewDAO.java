@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import domain.Product;
@@ -21,7 +22,7 @@ public class ReviewDAO {
              ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                product.addReview(new Review(UserDAO.getUser(rs.getInt(6)), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
+                product.addReview(new Review(UserDAO.getUser(rs.getInt(6)), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),rs.getString(9)));
             }
 
         } catch (final SQLException sqle) {
@@ -30,6 +31,8 @@ public class ReviewDAO {
             sqle.printStackTrace();
         }catch (ClassNotFoundException cnfe){
             cnfe.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
     public static boolean uploadReview(Review review, Product product) {
