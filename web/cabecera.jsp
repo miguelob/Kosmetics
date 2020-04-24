@@ -13,8 +13,8 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="index.jsp" id = "vueltaMenu">
-            <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
+        <a href="index.jsp" id = "vueltaMenu" class = "d-flex">
+            <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><span class="h4 mt-1 pt-2 d-none d-lg-block my-0 mr-5">osmetics.</span></img>
         </a>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
