@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/EliminarProducto")
+@WebServlet(name = "EliminarProducto", urlPatterns = "/EliminarProducto")
 public class EliminarProducto extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request,response);
@@ -25,10 +25,12 @@ public class EliminarProducto extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
+        //System.out.println("elimina producto");
         //ProductDAO.removeProduct(id);
         HttpSession session = request.getSession();
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
-        products.remove(ProductDAO.getProductFromId(id));
+        //products.remove(ProductDAO.getProductFromId(id));
+        products.remove(0);
         session.setAttribute("products",products);
 
         response.sendRedirect("./main_product_page.jsp");
