@@ -111,14 +111,15 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                                    <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="hosted_button_id" value="YHE7ZLLYVWLQN">
-                                    <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet.">
-                                    <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+                                <form name="_xclick"  method="post" action= "https://www.paypal.com/cgi-bin/webscr">
+                                    <input type="hidden" name="cmd" value="_xclick">
+                                    <input type="hidden" name="business" value="oleoblancomiguel@gmail.com">
+                                    <input type="hidden" name="item_name" value="${requestScope.product.name}">
+                                    <input type="hidden" name="notify_url" value="./index.jsp" />
+                                    <input type="hidden" id="buybuttonid" name="custom" value="XXXXX" />
+                                    <input type="hidden" name="amount" value="1">
+                                    <input type="submit" value="Buy Now">
                                 </form>
-
-
 
                                 <button type="submit" class="col-8 btn btn-dark">Comprar</button>
                             </div>

@@ -13,6 +13,6 @@ function getDatos (fuenteDatos, divID) {
                 obj.innerHTML = XHRObject.responseText;
             }
         }
-        //XHRObject.send(null);
+        XHRObject.send(null);
     }
 }

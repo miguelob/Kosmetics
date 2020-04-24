@@ -18,7 +18,6 @@ public class User implements Serializable{
     private Date birthDate;
     private String skinColor;
     private String skinCondition;
-    private ImageIcon userImage;
     private boolean admin;
 
     public User( String name,String email,String userPasword,
@@ -31,6 +30,7 @@ public class User implements Serializable{
         this.skinColor=skinColor;
         this.skinCondition=skinCondition;
         this.admin = admin;
+        //System.out.println(admin);
     }
 
     /*public User(String name,String email,String userPasword,

@@ -13,7 +13,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
+        <a href="index.jsp" id = "vueltaMenu">
+            <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><h4 class="d-none d-lg-block my-0 mr-5">osmetics.</h4></img>
+        </a>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
