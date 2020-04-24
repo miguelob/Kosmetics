@@ -41,6 +41,6 @@ public class MainProducts extends HttpServlet {
         session.setAttribute("products",products);
 
         //System.out.println("Antes del fordward");
-        request.getRequestDispatcher("/main_product_page.jsp").forward(request,response);
+        response.sendRedirect("./main_product_page.jsp");
     }
 }

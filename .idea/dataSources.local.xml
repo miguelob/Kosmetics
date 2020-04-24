@@ -2,18 +2,8 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="DB" uuid="69243eeb-3493-47c5-a436-b229c785f728">
-      <database-info product="MariaDB" version="10.0.28-MariaDB-2+b1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.6.0" dbms="MARIADB" exact-version="10.0.28" exact-driver-version="2.6">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>Admin</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="pat_7" />
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>

@@ -153,3 +153,8 @@
     color:black;
     !important;
 }
+#vueltaMenu{
+    color:black;
+    display: inline-block;
+    !important;
+}
