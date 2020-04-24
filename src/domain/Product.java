@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Product implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -60,6 +61,11 @@ public class Product implements Serializable{
         this.offer = (float) offer/100;
         this.calculateNewPrice();
         this.freeDeliver = freeDeliver;
+    }
+
+    public Product(int idProducts, String name) {
+        this.id = idProducts;
+        this.name = name;
     }
 
     public void setResto() {
@@ -216,5 +222,18 @@ public class Product implements Serializable{
     @Override
     public String toString() {
         return "con nombre: "+this.getName()+" con precio: "+this.getOgPrice()+" con marca: "+this.getBrand()+" con Descripcion: "+this.getDescription();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getId() == product.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

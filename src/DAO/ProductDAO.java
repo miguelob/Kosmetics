@@ -13,7 +13,8 @@ import domain.Product;
 
 public class ProductDAO {
 
-    public static void uploadProduct(String name, String description, String cat, byte[] img, float price, int offer,int descuento, int idBrand) {
+
+    public static void uploadProduct(String name, String description, String cat, byte[] img, float price, int offer, int descuento, int idBrand) {
         Connection con=null;
         int oferta = 0;
         int freeD = 0;
@@ -311,6 +312,27 @@ public class ProductDAO {
         }
         SurveyDAO.getSurvey(product);
         ReviewDAO.loadProductReview(product);
+        return product;
+    }
+
+    public static Product getProductFromId(int id) {
+        Connection con = null;
+        Product product = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM products where idProducts = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                product = new Product(rs.getInt("idProducts"),rs.getString("name"));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return product;
     }
     /*public static void getSurvey(Product product) {

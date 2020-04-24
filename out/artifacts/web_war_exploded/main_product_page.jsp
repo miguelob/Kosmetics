@@ -49,60 +49,66 @@
         <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
             <c:forEach var = "product" items="${sessionScope.products}">
-                <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
-                    <div class="card mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-sm-4">
-                                <img src="ReadImg?id=${product.id}" class="card-img">
-                                <!--<span class=" productoImg  card-img m-auto">P</span>-->
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <div class="row">
-                                            <div class="col-12 col-xl-8 m-auto text-center">
-                                                <h3>${product.name}</h3>
-                                            </div>
+                <div id="listadoProductos">
+                    <c:if test="${sessionScope.user.admin}">
+                        <a href=javascript:getDatos('./ElimiarProducto?id=${product.id}','listadoProductos');" style="color: red;">
+                            Eliminar Producto
+                        </a>
+                    </c:if>
+                    <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-sm-4">
+                                    <img src="ReadImg?id=${product.id}" class="card-img">
+                                    <!--<span class=" productoImg  card-img m-auto">P</span>-->
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-12 col-xl-8 m-auto text-center">
+                                                    <h3>${product.name}</h3>
+                                                </div>
 
-                                            <!--Contenedor estrellas-->
-                                            <div class="col-12 col-xl-4 m-auto offset-4">
-                                                <div class="row justify-content-center">
-                                                    <c:forEach var = "i" begin = "1" end = "${product.score}">
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                    </c:forEach>
-                                                    <c:forEach var = "i" begin = "1" end = "${product.resto}">
-                                                        <span class="fa fa-star fa-2x "></span>
-                                                    </c:forEach>
+                                                <!--Contenedor estrellas-->
+                                                <div class="col-12 col-xl-4 m-auto offset-4">
+                                                    <div class="row justify-content-center">
+                                                        <c:forEach var = "i" begin = "1" end = "${product.score}">
+                                                            <span class="fa fa-star fa-2x checked"></span>
+                                                        </c:forEach>
+                                                        <c:forEach var = "i" begin = "1" end = "${product.resto}">
+                                                            <span class="fa fa-star fa-2x "></span>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--Segunda fila. Contiene categoria y marca-->
-                                    <div class="row">
-                                        <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted">${product.category}</span>
+                                        <!--Segunda fila. Contiene categoria y marca-->
+                                        <div class="row">
+                                            <div class="col-3 m-auto py-2 text-nowrap">
+                                                <span class="h5 text-muted">${product.category}</span>
+                                            </div>
+
+                                            <div class="col-3 m-auto py-2 text-nowrap">
+                                                <span class="h5 text-muted">${product.brand}</span>
+                                            </div>
+
                                         </div>
 
-                                        <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted">${product.brand}</span>
+                                        <!--Tercera fila. Contiene features-->
+                                        <div class="row ">
+                                            <ul class="list-inline">
+                                                <!--Hacer con un foreEach-->
+                                                <c:forEach var = "feature" items="${product.features}">
+                                                    <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center">${feature}</li>
+                                                </c:forEach>
+                                            </ul>
                                         </div>
 
-                                    </div>
-
-                                    <!--Tercera fila. Contiene features-->
-                                    <div class="row ">
-                                        <ul class="list-inline">
-                                            <!--Hacer con un foreEach-->
-                                            <c:forEach var = "feature" items="${product.features}">
-                                                <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center">${feature}</li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-
-                                    <!--Cuarta fila. Precio-->
-                                    <div class="row">
-                                        <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
-                                        <span class="h6 px-2" style="color:red">Oferta:
+                                        <!--Cuarta fila. Precio-->
+                                        <div class="row">
+                                            <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
+                                            <span class="h6 px-2" style="color:red">Oferta:
                                     <c:choose>
                                         <c:when test = "${product.freeDeliver}">
                                             Envío gratuíto
@@ -118,17 +124,18 @@
 
                                 </span>
 
-                                    </div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </c:forEach>
 
         </div>
     </div>
-    <%@include file="jsSources.jsp"%>
+    <jsp:include page="jsSources.jsp"/>
 </body>
 </html>
