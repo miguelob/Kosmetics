@@ -63,9 +63,8 @@ public class Product implements Serializable{
         this.freeDeliver = freeDeliver;
     }
 
-    public Product(int idProducts, String name) {
+    public Product(int idProducts) {
         this.id = idProducts;
-        this.name = name;
     }
 
     public void setResto() {

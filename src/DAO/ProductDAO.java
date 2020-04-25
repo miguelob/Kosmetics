@@ -1,10 +1,7 @@
 package DAO;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -315,7 +312,7 @@ public class ProductDAO {
         return product;
     }
 
-    public static Product getProductFromId(int id) {
+    /*public static Product getProductFromId(int id) {
         Connection con = null;
         Product product = null;
         try {
@@ -334,6 +331,42 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return product;
+    }*/
+
+    public static void removeProduct(int id) {
+        Connection con = null;
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mariadb://kosmeticsserver.ddns.net:5432/pat_7?user=Admin&password=Kosmetics_Admin");
+            PreparedStatement pst3 = con.prepareStatement("DELETE FROM products_features WHERE Products_idProducts = ?");
+            pst3.setInt(1,id);
+            pst3.executeUpdate();
+
+            PreparedStatement pst2 = con.prepareStatement("DELETE FROM products_questions WHERE Products_idProducts = ?");
+            pst2.setInt(1,id);
+            pst2.executeUpdate();
+
+            PreparedStatement pst1 = con.prepareStatement("DELETE FROM reviews WHERE Products_idProducts = ?");
+            pst1.setInt(1,id);
+            pst1.executeUpdate();
+
+            PreparedStatement pst4 = con.prepareStatement("DELETE FROM productcolor WHERE idproductColor = ?");
+            pst4.setInt(1,id);
+            pst4.executeUpdate();
+
+            PreparedStatement pst5 = con.prepareStatement("DELETE FROM productimages WHERE idProductImg = ?");
+            pst5.setInt(1,id);
+            pst5.executeUpdate();
+
+            PreparedStatement pst = con.prepareStatement("DELETE FROM products WHERE idProducts = ?");
+            pst.setInt(1,id);
+            pst.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
     }
     /*public static void getSurvey(Product product) {
         Connection con=null;

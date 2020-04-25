@@ -22,17 +22,17 @@ public class EliminarProducto extends HttpServlet {
         processRequest(request,response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
 
         //System.out.println("elimina producto");
         //ProductDAO.removeProduct(id);
         HttpSession session = request.getSession();
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
-        //products.remove(ProductDAO.getProductFromId(id));
-        products.remove(0);
+        products.remove(new Product(id));;
         session.setAttribute("products",products);
 
-        response.sendRedirect("./main_product_page.jsp");
+        //response.sendRedirect("./main_product_page.jsp");
+        request.getRequestDispatcher("./main_product_page.jsp").forward(request,response);
     }
 }

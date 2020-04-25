@@ -11,7 +11,7 @@
 
     <title>Página principal · Kosmetics </title>
 </head>
-<body id="paginaProductos">
+<body>
     <jsp:include page="cabecera.jsp"/>
     <div class="row">
         <!--Filtros-->
@@ -46,7 +46,7 @@
                 </div>
             </div>
         <!--Productos-->
-        <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
+        <div class="col-12 col-lg-9 pr-4 pl-2 py-1" id = "paginaProductos">
             <!--Contenedor de un producto. Iterar para todos los productos-->
             <c:forEach var = "product" items="${sessionScope.products}">
                 <c:if test="${sessionScope.user.admin}">
