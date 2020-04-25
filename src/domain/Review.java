@@ -55,4 +55,9 @@ public class Review implements Serializable{
     public int getScoreReview() {
         return scoreReview;
     }
+    public String date2string(){
+        String og = date.toString().replace("00:00:00 CEST ", "");
+
+        return og;
+    }
 }

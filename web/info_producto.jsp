@@ -90,12 +90,10 @@
                                 <div class="form-group col-6 m-auto">
                                     <span class="h6">colores disponibles: </span>
                                     <select class="custom-select">
-                                        <option selected="">  </option>
-                                        <option value="1" style="background: #fdeec7">      </option>
-                                        <option value="2" style="background: #fee1b9">      </option>
-                                        <option value="3" style="background: #fcbd84">      </option>
-                                        <option value="4" style="background: #a87256; color:white">      </option>
-                                        <option value="5" style="background: #633c1d; color:white">      </option>
+                                        <option selected="">Colores</option>
+                                        <c:forEach var = "color" items="${requestScope.product.colors}">
+                                            <option value="${color}" style="background: #${color}">      </option>
+                                        </c:forEach>
                                     </select>
                                     <!--<label for="tono_producto">colores disponibles</label>
                                     <select id="tono_producto" class="custom-select" >
@@ -111,17 +109,22 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <form name="_xclick"  method="post" action= "https://www.paypal.com/cgi-bin/webscr">
-                                    <input type="hidden" name="cmd" value="_xclick">
-                                    <input type="hidden" name="business" value="oleoblancomiguel@gmail.com">
-                                    <input type="hidden" name="item_name" value="${requestScope.product.name}">
-                                    <input type="hidden" name="notify_url" value="./index.jsp" />
-                                    <input type="hidden" id="buybuttonid" name="custom" value="XXXXX" />
-                                    <input type="hidden" name="amount" value="1">
-                                    <input type="submit" value="Buy Now">
-                                </form>
+                                <c:if test = "${not empty sessionScope.user}">
+                                    <form name="_xclick"  method="post" action= "https://www.paypal.com/cgi-bin/webscr">
+                                        <input type="hidden" name="cmd" value="_xclick">
+                                        <input type="hidden" name="business" value="oleoblancomiguel@gmail.com">
+                                        <input type="hidden" name="item_name" value="${requestScope.product.name}">
+                                        <input type="hidden" name="notify_url" value="./index.jsp" />
+                                        <input type="hidden" id="buybuttonid" name="custom" value="XXXXX" />
+                                        <input type="hidden" name="amount" value="1">
+                                        <input type="submit" value="Buy Now">
+                                    </form>
 
-                                <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                                    <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                                </c:if>
+                                <c:if test = "${empty sessionScope.user}">
+                                    <h6 style="color: red">Para opinar y comprar debe estar logueado</h6>
+                                </c:if>
                             </div>
                             <!--Estrellas -->
                             <!--
@@ -175,9 +178,11 @@
                                         </div>
                                     </div>
                                     <div class="col-4 col-xl-3 py-3 m-auto">
-                                        <form class="form-group my-0 mx-auto" action="crear_review.jsp" method="post">
-                                            <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
-                                        </form>
+                                        <c:if test = "${not empty sessionScope.user}">
+                                            <form class="form-group my-0 mx-auto" action="crear_review.jsp" method="post">
+                                                <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
+                                            </form>
+                                        </c:if>
                                     </div>
                                     <div class="col-1">
 
@@ -263,7 +268,7 @@
                                             <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
                                             <!--<span class="rounded-circle icono m-auto">MT</span>-->
                                             <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">${review.user.name}</a></span>
-                                            <span class="text-secondary pl-1 text-center">${review.date}</span>
+                                            <span class="text-secondary pl-1 text-center">${review.date2string()}</span>
                                         </div>
                                         <div class="col-md-10">
                                             <p>
@@ -283,11 +288,13 @@
                                             </p>
                                             <div class="clearfix"></div>
                                             <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                            <p>
-                                                <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
-                                                    ♥</span></strong></span>
-                                                <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                            </p>
+                                            <c:if test = "${not empty sessionScope.user}">
+                                                <p>
+                                                    <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
+                                                        ♥</span></strong></span>
+                                                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                                </p>
+                                            </c:if>
                                         </div>
                                     </div>
                                         <%--<div class="card card-inner">
