@@ -26,7 +26,7 @@ public class EliminarProducto extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
 
         //System.out.println("elimina producto");
-        //ProductDAO.removeProduct(id);
+        ProductDAO.removeProduct(id);
         HttpSession session = request.getSession();
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
         products.remove(new Product(id));;

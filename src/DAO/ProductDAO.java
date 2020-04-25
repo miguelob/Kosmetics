@@ -279,25 +279,33 @@ public class ProductDAO {
 
             if (rs.next()) {
                 //this will change
-                product = new Product(rs.getInt("idProducts"), rs.getString("name"), BrandsDAO.getBrandFromId(rs.getInt("Brands_idBrands")), rs.getString("productCategory"), rs.getDouble("price"), rs.getInt("offer"),rs.getString("description"),rs.getBoolean("freeDeliver"));
+                product = new Product(rs.getInt("idProducts"), rs.getString("name"), BrandsDAO.getBrandFromId(rs.getInt("Brands_idBrands")), rs.getString("productCategory"), rs.getDouble("price"), rs.getInt("offer"), rs.getString("description"), rs.getBoolean("freeDeliver"));
                 PreparedStatement pst2 = con.prepareStatement("SELECT AVG(scoreProduct) FROM reviews WHERE Products_idProducts = ?");
-                pst2.setInt(1,id);
+                pst2.setInt(1, id);
                 ResultSet rs2 = pst2.executeQuery();
-                if(rs2.next()) {
+                if (rs2.next()) {
                     product.setScore(rs2.getFloat(1));
                     product.setResto();
                 }
                 PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
-                pst3.setInt(1,id);
+                pst3.setInt(1, id);
                 ResultSet rs3 = pst3.executeQuery();
                 while (rs3.next()) {
                     PreparedStatement pst4 = con.prepareStatement("SELECT featuresText FROM features WHERE idFeatures = ?");
-                    pst4.setInt(1,rs3.getInt(1));
+                    pst4.setInt(1, rs3.getInt(1));
                     ResultSet rs4 = pst4.executeQuery();
-                    while(rs4.next()) {
+                    while (rs4.next()) {
                         product.addFeature(rs4.getString(1));
                     }
                 }
+                PreparedStatement pst4 = con.prepareStatement("SELECT color FROM productcolor WHERE Products_idProducts = ?");
+                pst4.setInt(1, id);
+                ArrayList<String> colores = new ArrayList<String>();
+                ResultSet rs4 = pst4.executeQuery();
+                while (rs4.next()) {
+                    colores.add(rs4.getString(1));
+                }
+                product.setColors(colores);
             }
 
         } catch (SQLException sqle) {
