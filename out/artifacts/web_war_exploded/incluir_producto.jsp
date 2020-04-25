@@ -156,6 +156,7 @@
                 </div>
 
                 <div class="form-row">
+                    <div id="error">${requestScope.errorNewProduct}</div>
                     <button class="btn btn-dark btn-block px-3 my-4 mx-auto" type="submit">Submit form</button>
                 </div>
             </div>

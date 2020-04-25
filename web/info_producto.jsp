@@ -287,7 +287,7 @@
      -->
                                             </p>
                                             <div class="clearfix"></div>
-                                            <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                            <p>${review.comment}</p>
                                             <c:if test = "${not empty sessionScope.user}">
                                                 <p>
                                                     <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
