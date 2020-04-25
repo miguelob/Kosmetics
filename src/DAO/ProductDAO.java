@@ -368,6 +368,28 @@ public class ProductDAO {
             cnfe.printStackTrace();
         }
     }
+
+    public static void uploadColors(int productId, String colores) {
+        Connection con = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            String[] coloresSplit = colores.split(";");
+            for (String color: coloresSplit
+                 ) {
+                PreparedStatement pst = con.prepareStatement("INSERT INTO productColor (color,Products_idProducts) values(?,?)");
+                pst.setString(1,color);
+                pst.setInt(2, productId);
+
+                pst.executeUpdate();
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+    }
     /*public static void getSurvey(Product product) {
         Connection con=null;
         ReviewDAO.loadProductReview(product);

@@ -23,24 +23,24 @@ public class addProduct extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        System.out.println("Nombre: "+name);
+        //System.out.println("Nombre: "+name);
         String descripcion = request.getParameter("descripcion");
-        System.out.println("Descrip: "+descripcion);
+        //System.out.println("Descrip: "+descripcion);
         System.out.println("Categoria String: "+request.getParameter("categoria"));
         String categoria = num2Cat(Integer.parseInt(request.getParameter("categoria")));
-        System.out.println("Categoria: "+categoria);
+        //System.out.println("Categoria: "+categoria);
         String colores = request.getParameter("colores");
-        System.out.println("Colores: "+colores);
+        //ystem.out.println("Colores: "+colores);
         int marca = Integer.parseInt(request.getParameter("marca"));
-        System.out.println("Marca: "+marca);
+        //System.out.println("Marca: "+marca);
         float precio = Float.parseFloat(request.getParameter("precio"));
-        System.out.println("Precio: "+precio);
+        //System.out.println("Precio: "+precio);
         int oferta = Integer.parseInt(request.getParameter("oferta"));
-        System.out.println("Oferta:" +oferta);
+        //System.out.println("Oferta:" +oferta);
         int descuento = 0;
         if (oferta == 4){
             descuento = Integer.parseInt(request.getParameter("descuento"));
-            System.out.println("Descuento:" +descuento);
+           //System.out.println("Descuento:" +descuento);
         }
 
         String[] idFeatures = request.getParameterValues("features");
@@ -53,24 +53,28 @@ public class addProduct extends HttpServlet {
 
         for (String feature: idFeatures) {
             features.add(featuresHM.get(Integer.parseInt(feature)));
-            System.out.println("feature: "+feature);
+           //System.out.println("feature: "+feature);
         }
         Survey survey = new Survey();
         String[] idQuestions = request.getParameterValues("questions");
         for (String question: idQuestions) {
             int id = Integer.parseInt(question);
             survey.put(new Question(id,questionsHM.get(id)),0,0,0);
-            System.out.println("Questions: "+question);
+            //System.out.println("Questions: "+question);
         }
 
         ProductDAO.uploadProduct(name,descripcion,categoria,null,precio,oferta,descuento,marca);
         int productId = ProductDAO.getProductID(name);
         if(productId != -1){
+            ProductDAO.uploadColors(productId,colores);
             ProductDAO.setQuestions(productId,idQuestions);
             ProductDAO.setFeatures(productId,idFeatures);
             Cookie id = new Cookie("id",Integer.toString(productId));
             response.addCookie(id);
             request.getRequestDispatcher("img.html").forward(request,response);
+        }else{
+            request.setAttribute("errorNewProduct","Ha ocurrido algun error al subir el producto. Inetentelo de nuevo.");
+            request.getRequestDispatcher("/incluir_producto.jsp").forward(request,response);
         }
         //request.getRequestDispatcher("/subirimg.jsp").forward(request,response);
 
