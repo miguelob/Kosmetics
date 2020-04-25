@@ -26,6 +26,10 @@ public class LoadAllProduct extends HttpServlet {
         Product product = ProductDAO.loadAllInfo(id);
         request.setAttribute("product",product);
 
-        request.getRequestDispatcher("/info_producto.jsp").forward(request,response);
+        if(request.getParameter("opc") != null){
+            request.getRequestDispatcher("/crear_review.jsp").forward(request,response);
+        }else{
+            request.getRequestDispatcher("/info_producto.jsp").forward(request,response);
+        }
     }
 }
