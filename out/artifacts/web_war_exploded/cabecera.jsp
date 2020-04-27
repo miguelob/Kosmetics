@@ -17,8 +17,8 @@
             <img src="media/LogoBueno.svg" height="42" width="42" class="navbar-brand mr-0 align-bottom" href="#"><span class="h4 mt-1 pt-2 d-none d-lg-block my-0 mr-5">osmetics.</span></img>
         </a>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchBar">
+            <button class="btn btn-outline-info d-none d-lg-block my-2 my-sm-0" type="submit" onclick="buscar();">Search</button>
         </form>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

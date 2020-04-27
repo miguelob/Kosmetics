@@ -19,7 +19,7 @@ function petAsinc(url, div) {
     xmlHttpReq.send();
 }
 function getDatos (fuenteDatos, divID) {
-    console.log("prueba");
+    //console.log("prueba");
     if (XHRObject) {
         var obj = document.getElementById(divID);
         XHRObject.open("GET", fuenteDatos);
@@ -30,4 +30,15 @@ function getDatos (fuenteDatos, divID) {
         }
         XHRObject.send(null);
     }
+}
+document.getElementById('searchBar').addEventListener("keypress", function (e) {
+    if(e.key === 'Enter'){
+        buscar();
+    }
+})
+function buscar(){
+    var busqueda = document.getElementById('searchBar').value
+    var url = "./Filtros?busqueda=";
+    var urlCompleta = url.concat(busqueda.replace(" ","-"));
+    getDatos(urlCompleta,'paginaProductos');
 }

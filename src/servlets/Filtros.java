@@ -17,8 +17,7 @@ import java.util.HashMap;
 @WebServlet("/Filtros")
 public class Filtros extends HttpServlet {
     ArrayList<Product> productos;
-    ArrayList<Product> copy;
-    boolean start = true;
+    ArrayList<Product> copy = new ArrayList<Product>();;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request,response);
     }
@@ -29,13 +28,8 @@ public class Filtros extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(start){
-            productos = (ArrayList<Product>) session.getAttribute("products");
-            copy = new ArrayList<Product>();
-            //this.inicializaCokiesMarcas(request,response,session);
-            start = false;
-        }
-
+        this.inicializaMainProductPage(request,session);
+        productos = (ArrayList<Product>) session.getAttribute("products");
         if(request.getParameter("Marca") != null){
 //            System.out.println("ENTRA FILTRO");
             String formatedBrand = request.getParameter("Marca");
@@ -63,8 +57,6 @@ public class Filtros extends HttpServlet {
 
         }else if(request.getParameter("tipo") != null){
             String tipo = request.getParameter("tipo");
-            if(session.getAttribute("products") == null)
-                this.inicializaMainProductPage(request,session);
             this.searchByType(tipo.replace('-',' ').toUpperCase());
             session.setAttribute("products",copy);
         } else if(request.getParameter("feature") != null){
@@ -77,17 +69,43 @@ public class Filtros extends HttpServlet {
                 status = new Cookie(featureFormated,"1");
                 this.procesarFiltroFeature(featureFormated.replace('-',' '),1);
             }else{
-                System.out.println("cookie no null");
                 status.setValue("");
                 status.setMaxAge(0);
                 procesarFiltroFeature(featureFormated.replace('-',' '),0);
             }
             session.setAttribute("products",copy);
             response.addCookie(status);
+        }else if(request.getParameter("busqueda") != null){
+            String[] busqueda = request.getParameter("busqueda").split("-");
+            this.busqueda(busqueda);
+            session.setAttribute("products",copy);
         }
+        System.out.println(copy);
         request.getRequestDispatcher("./main_product_page.jsp").forward(request,response);
 
 
+    }
+
+    private void busqueda(String[] busqueda) {
+        copy.clear();
+        for(int i = 0;i < productos.size();i++){
+            for (String palabra: busqueda
+                 ) {
+                if(productos.get(i).getName().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getName().toUpperCase().contains(palabra.toLowerCase())){
+                    if(!copy.contains(productos.get(i)))
+                        copy.add(productos.get(i));
+                }else if(productos.get(i).getProductCategory().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getProductCategory().toUpperCase().contains(palabra.toLowerCase())){
+                    if(!copy.contains(productos.get(i)))
+                        copy.add(productos.get(i));
+                }else if(productos.get(i).getBrand().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getBrand().toUpperCase().contains(palabra.toLowerCase())){
+                    if(!copy.contains(productos.get(i)))
+                        copy.add(productos.get(i));
+                }else if(productos.get(i).getFeatures().contains(palabra.toUpperCase()) || productos.get(i).getFeatures().contains(palabra.toLowerCase())){
+                    if(!copy.contains(productos.get(i)))
+                        copy.add(productos.get(i));
+                }
+            }
+        }
     }
 
     private Cookie getCookie(HttpServletRequest request, String filt, Cookie status) {

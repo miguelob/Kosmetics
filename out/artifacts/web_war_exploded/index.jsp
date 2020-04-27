@@ -28,7 +28,7 @@
                     <div class="mr-lg-3 ml-xl-auto mt-lg-5 pr-xl-5">
                         <p class="h1" id="Letrero"><strong>Kosmetics.</strong></p>
                         <small class="h4 text-nowrap " id="Letrero_2" >Diseñado por consumidores para consumidores</small>
-                        <input class="form-control mr-sm-2 mt-3" type="search" placeholder="Search high-quality products" aria-label="Search">
+                        <input class="form-control mr-sm-2 mt-3" type="search" placeholder="Search high-quality products" aria-label="Search" id="searchBarIndex">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-
+<%--    <script src="js/index.js"></script>--%>
     <jsp:include page="jsSources.jsp"/>
 </body>
 </html>
