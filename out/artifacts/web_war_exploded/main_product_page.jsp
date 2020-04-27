@@ -26,12 +26,14 @@
                     <div class="custom-control custom-checkbox">
                         <c:forEach var = "feature" items="${sessionScope.features}">
                             <div class="row">
-                                <c:if test = "${not empty cookie.get(feature.value.replace(' ','-'))}">
-                                    <input type="checkbox" class="custom-control-input" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}">
-                                </c:if>
-                                <c:if test = "${empty cookie.get(feature.value.replace(' ','-'))}">
-                                    <input type="checkbox" class="custom-control-input" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}" checked>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test = "${not empty cookie.get(feature.value.replace(' ','-'))}">
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?feature=${feature.value.replace(' ','-')}','paginaProductos');" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?feature=${feature.value.replace(' ','-')}','paginaProductos');" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}" checked>
+                                    </c:otherwise>
+                                </c:choose>
                                 <label class="custom-control-label" for="caracteristicas${feature.key}">${feature.value}</label>
                             </div>
                         </c:forEach>
@@ -44,10 +46,10 @@
                             <div class="row">
                                 <c:choose>
                                     <c:when test = "${not empty cookie.get(brand.value.replace(' ','-'))}">
-                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.key}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}">
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.value.replace(' ','-')}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}">
                                     </c:when>
                                     <c:otherwise>
-                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.key}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}" checked>
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.value.replace(' ','-')}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}" checked>
                                     </c:otherwise>
                                 </c:choose>
                                 <label class="custom-control-label" for="marca${brand.key}">${brand.value}</label>

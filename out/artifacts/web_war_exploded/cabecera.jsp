@@ -57,39 +57,39 @@
         <div class="collapse navbar-collapse text-nowrap justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav justify-content-center">
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">BASES</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=bases','paginaProductos');">BASES</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">MÁSCARAS DE PESTAÑAS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=máscaras-de-pestañas','paginaProductos');">MÁSCARAS DE PESTAÑAS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">PINTALABIOS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=pintalabios','paginaProductos');">PINTALABIOS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">SOMBRAS DE OJOS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=sombras-de-ojos','paginaProductos');">SOMBRAS DE OJOS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">PESTAÑAS POSTIZAS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=pestañas-postizas','paginaProductos');">PESTAÑAS POSTIZAS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">CONTOURING</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=contouring','paginaProductos');">CONTOURING</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">COLORETE</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=colorete','paginaProductos');">COLORETE</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">CEJAS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=cejas','paginaProductos');">CEJAS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">CORRECTORES</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=cejas','paginaProductos');">CORRECTORES</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="#">EYELINERS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=eyeliner','paginaProductos');">EYELINERS</a>
                 </li>
 
             </ul>
         </div>
     </nav>
-   <%@include file="jsSources.jsp"%>
+   <jsp:include page="jsSources.jsp"/>
 </body>
 </html>

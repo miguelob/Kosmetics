@@ -42,14 +42,7 @@ public class Filtros extends HttpServlet {
             //String marca = BrandsDAO.getBrandFromId(id);
 
             Cookie status = null; //new Cookie(marca.replace(' ','-'),"");
-            Cookie[] cookies = request.getCookies();
-            if(cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals(formatedBrand)) {
-                        status = cookies[i];
-                    }
-                }
-            }
+            status = this.getCookie(request,formatedBrand,status);
 //            System.out.println("Despues de iterar cookies");
 
             if(status == null){
@@ -78,14 +71,7 @@ public class Filtros extends HttpServlet {
             String featureFormated = request.getParameter("feature");
 
             Cookie status = null;
-            Cookie[] cookies = request.getCookies();
-            if(cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if (cookies[i].getName().equals(featureFormated)) {
-                        status = cookies[i];
-                    }
-                }
-            }
+            status = this.getCookie(request,featureFormated,status);
 
             if(status == null){
                 status = new Cookie(featureFormated,"1");
@@ -102,6 +88,18 @@ public class Filtros extends HttpServlet {
         request.getRequestDispatcher("./main_product_page.jsp").forward(request,response);
 
 
+    }
+
+    private Cookie getCookie(HttpServletRequest request, String filt, Cookie status) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies!=null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals(filt)) {
+                    status = cookies[i];
+                }
+            }
+        }
+        return status;
     }
 
     private void procesarFiltroFeature(String feature, int opc) {
