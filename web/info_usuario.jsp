@@ -9,13 +9,13 @@
 <html>
 <head>
 
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Crear tu review · Kosmetics </title>
 </head>
 <body>
-<%@include file="cabecera.jsp"%>
+<jsp:include page="cabecera.jsp"/>
 <div class="container">
     <div class = "row">
         <div class="col-12 py-3 justify-content-center ">
@@ -286,6 +286,6 @@
 
 </div>
 
-<%@include file="jsSources.jsp"%>
+<jsp:include page="jsSources.jsp"/>
 </body>
 </html>

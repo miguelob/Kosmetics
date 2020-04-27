@@ -11,7 +11,7 @@
 
     <title>Página principal · Kosmetics </title>
 </head>
-<body>
+<body id = "paginaProductos">
     <jsp:include page="cabecera.jsp"/>
     <div class="row">
         <!--Filtros-->
@@ -26,7 +26,12 @@
                     <div class="custom-control custom-checkbox">
                         <c:forEach var = "feature" items="${sessionScope.features}">
                             <div class="row">
-                                <input type="checkbox" class="custom-control-input" id = "caracteristicas${feature.key}" value="${feature.key}">
+                                <c:if test = "${not empty cookie.get(feature.value.replace(' ','-'))}">
+                                    <input type="checkbox" class="custom-control-input" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}">
+                                </c:if>
+                                <c:if test = "${empty cookie.get(feature.value.replace(' ','-'))}">
+                                    <input type="checkbox" class="custom-control-input" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}" checked>
+                                </c:if>
                                 <label class="custom-control-label" for="caracteristicas${feature.key}">${feature.value}</label>
                             </div>
                         </c:forEach>
@@ -37,7 +42,14 @@
                     <div class="custom-control custom-checkbox">
                         <c:forEach var = "brand" items="${sessionScope.brands}">
                             <div class="row">
-                                <input type="checkbox" class="custom-control-input" id="marca${brand.key}" value="${brand.key}">
+                                <c:choose>
+                                    <c:when test = "${not empty cookie.get(brand.value.replace(' ','-'))}">
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.key}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.key}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}" checked>
+                                    </c:otherwise>
+                                </c:choose>
                                 <label class="custom-control-label" for="marca${brand.key}">${brand.value}</label>
                             </div>
                         </c:forEach>
@@ -46,7 +58,7 @@
                 </div>
             </div>
         <!--Productos-->
-        <div class="col-12 col-lg-9 pr-4 pl-2 py-1" id = "paginaProductos">
+        <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
             <c:forEach var = "product" items="${sessionScope.products}">
                 <c:if test="${sessionScope.user.admin}">

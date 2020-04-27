@@ -22,7 +22,7 @@ public class Logout extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("user",null);
 
-        response.sendRedirect("/index.jsp");
+        response.sendRedirect("./index.jsp");
         //request.getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }

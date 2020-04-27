@@ -32,6 +32,7 @@ public class EliminarProducto extends HttpServlet {
         products.remove(new Product(id));;
         session.setAttribute("products",products);
 
+        //System.out.println(request.getAttribute("features"));
         //response.sendRedirect("./main_product_page.jsp");
         request.getRequestDispatcher("./main_product_page.jsp").forward(request,response);
     }
