@@ -31,6 +31,8 @@ public class Filtros extends HttpServlet {
         this.inicializaMainProductPage(request,session);
         productos = (ArrayList<Product>) session.getAttribute("products");
 
+//        System.out.println(request.getParameter("btn"));
+
 
         if(request.getParameter("Marca") != null){
 //            System.out.println("ENTRA FILTRO");
@@ -81,6 +83,16 @@ public class Filtros extends HttpServlet {
         }else if(request.getParameter("indexBusqueda") != null){
             String[] busqueda = request.getParameter("indexBusqueda").split(" ");
             this.busqueda(busqueda);
+        }else if(request.getParameter("precio") != null){
+           int precio = Integer.parseInt(request.getParameter("precio"));
+           request.setAttribute("precio",precio);
+            this.filtroPrecio(precio);
+        }
+        if(request.getParameter("btn") != null){
+//            System.out.println("entra");
+            request.setAttribute("precio",50);
+            copy.clear();
+            copy = productos;
         }
         session.setAttribute("products",copy);
         //System.out.println(copy);
@@ -89,23 +101,40 @@ public class Filtros extends HttpServlet {
 
     }
 
+    private void filtroPrecio(int precio) {
+
+        for(int i = 0;i < productos.size();i++){
+            if(productos.get(i).getNewPrice() <= precio){
+                if(!copy.contains(productos.get(i)))
+                    copy.add(productos.get(i));
+            }else{
+                if(copy.contains(productos.get(i)))
+                    copy.remove(productos.get(i));
+            }
+        }
+    }
+
     private void busqueda(String[] busqueda) {
         copy.clear();
         for(int i = 0;i < productos.size();i++){
             for (String palabra: busqueda
                  ) {
-                if(productos.get(i).getName().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getName().toUpperCase().contains(palabra.toLowerCase())){
+                if(productos.get(i).getName().toUpperCase().contains(palabra.toUpperCase())){
                     if(!copy.contains(productos.get(i)))
                         copy.add(productos.get(i));
-                }else if(productos.get(i).getProductCategory().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getProductCategory().toUpperCase().contains(palabra.toLowerCase())){
+                }else if(productos.get(i).getProductCategory().toUpperCase().contains(palabra.toUpperCase())){
                     if(!copy.contains(productos.get(i)))
                         copy.add(productos.get(i));
-                }else if(productos.get(i).getBrand().toUpperCase().contains(palabra.toUpperCase()) || productos.get(i).getBrand().toUpperCase().contains(palabra.toLowerCase())){
+                }else if(productos.get(i).getBrand().toUpperCase().contains(palabra.toUpperCase())){
                     if(!copy.contains(productos.get(i)))
                         copy.add(productos.get(i));
-                }else if(productos.get(i).getFeatures().contains(palabra.toUpperCase()) || productos.get(i).getFeatures().contains(palabra.toLowerCase())){
-                    if(!copy.contains(productos.get(i)))
-                        copy.add(productos.get(i));
+                }
+                ArrayList<String> features = productos.get(i).getFeatures();
+                for (int j = 0; j<features.size(); j++){
+                    if(features.get(i).toUpperCase().equals(palabra.toUpperCase())){
+                        if(!copy.contains(productos.get(i)))
+                            copy.add(productos.get(i));
+                    }
                 }
             }
         }
