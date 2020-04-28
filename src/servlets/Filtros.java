@@ -30,6 +30,8 @@ public class Filtros extends HttpServlet {
         HttpSession session = request.getSession();
         this.inicializaMainProductPage(request,session);
         productos = (ArrayList<Product>) session.getAttribute("products");
+
+
         if(request.getParameter("Marca") != null){
 //            System.out.println("ENTRA FILTRO");
             String formatedBrand = request.getParameter("Marca");
@@ -49,7 +51,6 @@ public class Filtros extends HttpServlet {
                 status.setMaxAge(0);
                 procesarFiltroMarca(formatedBrand.replace('-',' '),0);
             }
-            session.setAttribute("products",copy);
 //            System.out.println(copy);
 //            System.out.println("antes de añadir cookie");
             response.addCookie(status);
@@ -58,7 +59,6 @@ public class Filtros extends HttpServlet {
         }else if(request.getParameter("tipo") != null){
             String tipo = request.getParameter("tipo");
             this.searchByType(tipo.replace('-',' ').toUpperCase());
-            session.setAttribute("products",copy);
         } else if(request.getParameter("feature") != null){
             String featureFormated = request.getParameter("feature");
 
@@ -78,9 +78,12 @@ public class Filtros extends HttpServlet {
         }else if(request.getParameter("busqueda") != null){
             String[] busqueda = request.getParameter("busqueda").split("-");
             this.busqueda(busqueda);
-            session.setAttribute("products",copy);
+        }else if(request.getParameter("indexBusqueda") != null){
+            String[] busqueda = request.getParameter("indexBusqueda").split(" ");
+            this.busqueda(busqueda);
         }
-        System.out.println(copy);
+        session.setAttribute("products",copy);
+        //System.out.println(copy);
         request.getRequestDispatcher("./main_product_page.jsp").forward(request,response);
 
 
@@ -159,6 +162,7 @@ public class Filtros extends HttpServlet {
         session.setAttribute("brands",brands);
         session.setAttribute("features",features);
         session.setAttribute("products",products);
+        this.productos = products;
     }
 
     private void inicializaCokiesMarcas(HttpServletRequest request, HttpServletResponse response, HttpSession session) {

@@ -19,8 +19,8 @@
                 <div class="col-9 m-auto">
 
                     <h4 class="text-left pt-5 pb-1 px-3">Filtros</h4>
-                    <label for="customRange1">Precio</label>
-                    <input type="range" class="custom-range" id="customRange1">
+                    <label for="customRange1">Precio: </label><label style="color : red" id ="precioFiltro"> </label><label style="color: red">€</label>
+                    <input type="range" class="custom-range" id="customRange1" min="0" max="100" value = "50">
 
                     <h4 class="text-left pt-5 pb-1 px-3">Características</h4>
                     <div class="custom-control custom-checkbox">
@@ -145,6 +145,7 @@
             </c:forEach>
         </div>
     </div>
+    <script src="js/MainProductPage.js"></script>
     <jsp:include page="jsSources.jsp"/>
 </body>
 </html>
