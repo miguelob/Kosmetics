@@ -85,7 +85,8 @@ public class Filtros extends HttpServlet {
             this.busqueda(busqueda);
         }else if(request.getParameter("precio") != null){
            int precio = Integer.parseInt(request.getParameter("precio"));
-           request.setAttribute("precio",precio);
+           Cookie p = new Cookie("precio",String.valueOf(precio));
+           response.addCookie(p);
             this.filtroPrecio(precio);
         }
         if(request.getParameter("btn") != null){

@@ -21,7 +21,7 @@
                     <h4 class="text-left pt-5 pb-1 px-3">Filtros</h4>
                     <label for="customRange1">Precio: </label><label style="color : red" id ="precioFiltro"> </label><label style="color: red">€</label>
                     <form   method = "POST" id = "formulario" action="Filtros">
-                        <input type="range" class="custom-range" id="customRange1" min="0" max="100" value="${requseestScope.precio}" name = "precio">
+                        <input type="range" class="custom-range" id="customRange1" min="0" max="100" value="${cookie.precio}" name = "precio">
                         <button class="btn btn-info my-2 mx-2 my-sm-0 mb-3" type="submit">Aplicar</button>
                         <button class="btn btn-info my-2 mx-2 my-sm-0 mb-3" type="submit" value="resetear" name = "btn">Resetear</button>
                     </form>

@@ -85,5 +85,19 @@ public class User implements Serializable{
         //System.out.println(birthDate);
         //this.birthDate = date;
     }
+    public String getIniciales(){
+        String iniciales = "";
+        iniciales = String.valueOf(name.charAt(0));
+        if(name.contains(" ")){
+            iniciales = iniciales + name.charAt(name.indexOf(" ") + 1);
+
+        }else{
+            iniciales = iniciales + name.charAt(1);
+        }
+        return iniciales.toUpperCase();
+    }
+    public String getEdad(){
+
+    }
 
 }
