@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="es-es">
 <head>
     <jsp:include page="head.jsp"/>
@@ -22,7 +23,7 @@
                             <label for="userInputPassword">Contraseña</label>
                             <input type="password" class="form-control" id="userInputPassword" name = "password">
                         </div>
-                        <div id = "error"><c:out value ="${requestScope.error}"/></div>
+                        <div id = "error"><c:out value="${requestScope.error}"/></div>
                         <button type="submit" class="btn btn-dark btn-block mt-5">Iniciar sesión</button>
                         <small class="form-text text-muted mt-3">¿Aun no tienes cuenta? <a class="p-2 text-dark" href="registro_usuario.jsp">¡Regístrate!</a></small>
 
