@@ -70,12 +70,12 @@
                                 <div class="row py-1 d-flex justify-content-center">
                                     <div class="col-7 col-lg-6 col-xl-7">
                                         <div class="form-check m-auto pr-4 ">
-                                            <span class="font-italic">${question.questionText}</span>
+                                            <span class="font-italic"><c:out value ="${question.questionText}"/></span>
                                         </div>
                                     </div>
                                     <div class="col-5 col-lg-6 col-xl-5">
                                         <div class="form-check form-check-inline ">
-                                            <input class="form-check-input" type="radio" name="<c:out value = "${iteracion}"/>" id="inlineRadio1" value="Si">
+                                            <input class="form-check-input" type="radio" name="" id="inlineRadio1" value="Si"> // OJO AL NAME QUE TIENE QUE SER DISTINTO PARA CADA PREGUNTA
                                             <label class="form-check-label text-muted" for="inlineRadio1">Si</label>
                                         </div>
                                         <div class="form-check form-check-inline">

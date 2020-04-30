@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <jsp:include page="cabecera.jsp"/>
+    <jsp:include page="cabeceraSinAjax.jsp"/>
 
     <div class = "container">
         <div class = "row d-flex justify-content-center">
@@ -110,17 +110,7 @@
 
                             <div class="row justify-content-center">
                                 <c:if test = "${not empty sessionScope.user}">
-                                    <form name="_xclick"  method="post" action= "https://www.paypal.com/cgi-bin/webscr">
-                                        <input type="hidden" name="cmd" value="_xclick">
-                                        <input type="hidden" name="business" value="oleoblancomiguel@gmail.com">
-                                        <input type="hidden" name="item_name" value="${requestScope.product.name}">
-                                        <input type="hidden" name="notify_url" value="./index.jsp" />
-                                        <input type="hidden" id="buybuttonid" name="custom" value="XXXXX" />
-                                        <input type="hidden" name="amount" value="1">
-                                        <input type="submit" value="Buy Now">
-                                    </form>
-
-                                    <button type="submit" class="col-8 btn btn-dark">Comprar</button>
+                                    <button type="submit" class="col-8 btn btn-dark">Añadir a la cesta</button>
                                 </c:if>
                                 <c:if test = "${empty sessionScope.user}">
                                     <h6 style="color: red">Para opinar y comprar debe estar logueado</h6>

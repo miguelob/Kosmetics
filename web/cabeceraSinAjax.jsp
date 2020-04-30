@@ -42,6 +42,9 @@
                                 <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                             </form>
                         </c:if>
+                        <form>
+                            <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Carrito</button>
+                        </form>
                         <form action="./info_usuario.jsp">
                             <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Perfil</button>
                         </form>
