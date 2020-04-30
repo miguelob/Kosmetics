@@ -7,7 +7,8 @@
     <title>Editar perfil · Kosmetics</title>
 </head>
 <body>
-<jsp:include page="cabecera.jsp"/>
+<jsp:include page="cabecera.jsp"/
+>
 <div class = "container">
     <div class = "row">
         <div class="col-12 py-0 d-flex justify-content-center">

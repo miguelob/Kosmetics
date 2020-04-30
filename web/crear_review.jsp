@@ -70,7 +70,7 @@
                                 <div class="row py-1 d-flex justify-content-center">
                                     <div class="col-7 col-lg-6 col-xl-7">
                                         <div class="form-check m-auto pr-4 ">
-                                            <span class="font-italic">${question.questionText}</span>
+                                            <span class="font-italic"><c:out value ="${question.questionText}"/></span>
                                         </div>
                                     </div>
                                     <div class="col-5 col-lg-6 col-xl-5">

@@ -71,7 +71,7 @@
                             </div>
 
                         </div>
-                        <div id = "error">${requestScope.error}</div>
+                        <div id = "error"><c:out value ="${requestScope.error}"/></div>
                         <button type="submit" class="btn btn-dark btn-block mt-5">Registrarse</button>
 
                     </form>

@@ -11,14 +11,14 @@
 <html>
 <head>
 
-    <%@include file="head.jsp"%>
+    <jsp:include page="head.jsp"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Información del producto · Kosmetics </title>
 </head>
 <body>
 
-    <%@include file="cabecera.jsp"%>
+    <jsp:include page="cabecera.jsp"/>
 
     <div class = "container">
         <div class = "row d-flex justify-content-center">
@@ -38,12 +38,12 @@
                         <div class="col-lg-9 px-0">
                             <!--Nombre del producto-->
                             <div class="row text-center">
-                                <h2>${requestScope.product.name}</h2>
+                                <h2><c:out value ="${requestScope.product.name}"/></h2>
                             </div>
 
                             <!--Descripcipción -->
                             <div class="row text-justify">
-                                <span class="text-muted py-3 m-auto">${requestScope.product.description}</span>
+                                <span class="text-muted py-3 m-auto"><c:out value ="${requestScope.product.description}"/></span>
                             </div>
 
                             <!--Imagen del producto pantallas pequeñas-->
@@ -82,7 +82,7 @@
 
                                 <div class="col-3 m-auto py-2 text-nowrap text-center">
                                     <!--añadirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr IMAGEN MARCA-->
-                                    <span class="h5 font-weight-bold">${requestScope.product.brand}</span>
+                                    <span class="h5 font-weight-bold"><c:out value ="${requestScope.product.brand}"/></span>
                                 </div>
 
 
@@ -193,14 +193,14 @@
 
                                         <span class="display-3 d-xl-block"><fmt:formatNumber pattern="#,#0.0" value="${requestScope.product.scoreFloat}"/></span>
                                         <br>
-                                        <span class="h7">${requestScope.product.numReviews} reviews</span>
+                                        <span class="h7"><c:out value ="${requestScope.product.numReviews}"/> reviews</span>
                                     </div>
 
                                     <div class="col-6 mr-auto">
                                         <c:forEach var = "parcialScore" items="${requestScope.product.parcialScores}">
                                         <div class="row justify-content-center">
                                             <div class="col-1 px-0 m-auto text-center">
-                                                <span class="h7">${parcialScore.key}</span>
+                                                <span class="h7"><c:out value ="${parcialScore.key}"/></span>
                                             </div>
                                             <div class="col-11 px-0 m-auto">
                                                 <div class="progress" style="height: 18px;">
@@ -227,7 +227,7 @@
 
                                     <div class="row justify-content-center">
                                         <div class="col-4 px-0 m-auto text-center">
-                                            <span class="h6">${question.questionText}</span>
+                                            <span class="h6"><c:out value ="${question.questionText}"/></span>
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
@@ -267,12 +267,12 @@
                                         <div class="col-md-2 pb-2">
                                             <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
                                             <!--<span class="rounded-circle icono m-auto">MT</span>-->
-                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">${review.user.name}</a></span>
-                                            <span class="text-secondary pl-1 text-center">${review.date2string()}</span>
+                                            <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp"><c:out value ="${review.user.name}"/></a></span>
+                                            <span class="text-secondary pl-1 text-center"><c:out value ="${review.date2string()}"/></span>
                                         </div>
                                         <div class="col-md-10">
                                             <p>
-                                                <span class="float-left h5" ><strong>${review.commentTitle}</strong></span>
+                                                <span class="float-left h5" ><strong><c:out value ="${review.commentTitle}"/></strong></span>
                                                 <c:forEach var = "i" begin = "1" end = "${review.gerScoreResto()}">
                                                     <span class="float-right fa fa-star fa-lg"></span>
                                                 </c:forEach>
@@ -290,7 +290,7 @@
                                             <p>${review.comment}</p>
                                             <c:if test = "${not empty sessionScope.user}">
                                                 <p>
-                                                    <span class="float-left h5" ><strong>${review.scoreReview}<span style="color: red">
+                                                    <span class="float-left h5" ><strong><c:out value ="${review.scoreReview}"/><span style="color: red">
                                                         ♥</span></strong></span>
                                                     <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
                                                 </p>
@@ -334,6 +334,6 @@
         </div>
 
     </div>
-    <%@include file="jsSources.jsp"%>
+    <jsp:include page="jsSources.jsp"/>
 </body>
 </html>

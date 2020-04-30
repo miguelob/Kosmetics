@@ -37,7 +37,7 @@
                                         <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?feature=${feature.value.replace(' ','-')}','paginaProductos');" name = "features" id = "caracteristicas${feature.key}" value="${feature.key}" checked>
                                     </c:otherwise>
                                 </c:choose>
-                                <label class="custom-control-label" for="caracteristicas${feature.key}">${feature.value}</label>
+                                <label class="custom-control-label" for="caracteristicas${feature.key}"><c:out value ="${feature.value}"/></label>
                             </div>
                         </c:forEach>
 
@@ -55,7 +55,7 @@
                                         <input type="checkbox" class="custom-control-input" onclick="getDatos('./Filtros?Marca=${brand.value.replace(' ','-')}','paginaProductos');" name = "marcas" id="marca${brand.key}" value="${brand.key}" checked>
                                     </c:otherwise>
                                 </c:choose>
-                                <label class="custom-control-label" for="marca${brand.key}">${brand.value}</label>
+                                <label class="custom-control-label" for="marca${brand.key}"><c:out value ="${brand.value}"/></label>
                             </div>
                         </c:forEach>
 
@@ -100,11 +100,11 @@
                                     <!--Segunda fila. Contiene categoria y marca-->
                                     <div class="row">
                                         <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted">${product.category}</span>
+                                            <span class="h5 text-muted"><c:out value ="${product.category}"/></span>
                                         </div>
 
                                         <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted">${product.brand}</span>
+                                            <span class="h5 text-muted"><c:out value ="${product.brand}"/></span>
                                         </div>
 
                                     </div>
@@ -114,7 +114,7 @@
                                         <ul class="list-inline">
                                             <!--Hacer con un foreEach-->
                                             <c:forEach var = "feature" items="${product.features}">
-                                                <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center">${feature}</li>
+                                                <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center"><c:out value ="${feature}"/></li>
                                             </c:forEach>
                                         </ul>
                                     </div>

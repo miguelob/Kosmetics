@@ -73,7 +73,7 @@
                     <label for="productMarca">Marca</label>
                     <select id="productMarca" class="custom-select" required name = "marca">
                         <c:forEach var="brand" items="${sessionScope.brands}">
-                            <option value=${brand.key} >${brand.value} </option>
+                            <option value="${brand.key}" ><c:out value ="${brand.value}"/> </option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">
@@ -133,7 +133,7 @@
                     <label for="productCaracteristicas">¿Que características desea resaltar del producto?</label>
                     <select id="productCaracteristicas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="5" multiple data-selected-text-format="count" name="features">
                         <c:forEach var="feature" items="${sessionScope.features}">
-                            <option value=${feature.key} >${feature.value} </option>
+                            <option value="${feature.key}" ><c:out value ="${feature.value}"/> </option>
                         </c:forEach>
 
 
@@ -147,7 +147,7 @@
                     <label for="productPreguntas">¿Que preguntas desea encuestara los usuarios?</label>
                     <select id="productPreguntas" class="selectpicker" multiple data-live-search="true" multiple data-max-options="3" multiple data-selected-text-format="count" name="questions">
                         <c:forEach var="question" items="${sessionScope.questions}">
-                            <option value=${question.key} >${question.value} </option>
+                            <option value="${question.key}"><c:out value ="${question.value}"/> </option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">
@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div id="error">${requestScope.errorNewProduct}</div>
+                    <div id="error"><c:out value ="${requestScope.errorNewProduct}"/></div>
                     <button class="btn btn-dark btn-block px-3 my-4 mx-auto" type="submit">Submit form</button>
                 </div>
             </div>
