@@ -70,85 +70,12 @@
         <div class="col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-fav-tab" data-toggle="tab" href="#nav-fav" role="tab" aria-controls="nav-fav" aria-selected="true">Productos favoritos</a>
-                    <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Últimas compras</a>
+                    <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false" aria-selected="true">Últimas compras</a>
                     <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Reviews</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <!--Productos fav-->
-                <div class="tab-pane fade show active" id="nav-fav" role="tabpanel" aria-labelledby="nav-fav-tab">
-
-                    <!--Contenedor de un producto. Iterar para todos los productos-->
-                    <c:forEach var = "i" begin = "1" end = "5">
-
-                        <div class="card mb-3">
-                            <div class="row no-gutters">
-                                <div class="col-sm-4">
-                                    <img src="media/prueba_cuadrada.jpg" class="card-img">
-                                    <!--<span class=" productoImg  card-img m-auto">P</span>-->
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <div class="row">
-                                                <div class="col-12 col-xl-8 m-auto text-center">
-                                                    <h3>Hello Happy Foundation</h3>
-                                                </div>
-
-                                                <!--Contenedor estrellas-->
-                                                <div class="col-12 col-xl-4 m-auto offset-4">
-                                                    <div class="row justify-content-center">
-
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                        <span class="fa fa-star fa-2x  checked"></span>
-                                                        <span class="fa fa-star fa-2x "></span>
-                                                        <span class="fa fa-star fa-2x "></span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Segunda fila. Contiene categoria y marca-->
-                                        <div class="row">
-
-                                            <div class="col-3 m-auto py-2 text-nowrap">
-                                                <span class="h5 text-muted">BASE</span>
-                                            </div>
-
-                                            <div class="col-3 m-auto py-2 text-nowrap">
-                                                <span class="h5 text-muted">BENEFIT</span>
-                                            </div>
-
-                                        </div>
-
-                                        <!--Tercera fila. Contiene features-->
-                                        <div class="row ">
-                                            <!--Hacer con un foreEach-->
-                                            <c:forEach var = "i" begin = "1" end = "4">
-                                                <div class="jumbotron mx-auto my-3 py-1 px-3 text-center">
-                                                    <p class="my-0">Acabado natural</p>
-                                                </div>
-                                            </c:forEach>
-
-                                        </div>
-
-                                        <!--Cuarta fila. Precio-->
-                                        <div class="row">
-                                            <span class="h6 px-2">Precio: 33,95€ </span>
-                                            <span class="h6 px-2">Oferta: -20% </span>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </c:forEach>
-
-                </div>
                 <!--Productos comprados-->
                 <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
                     <!--Contenedor de un producto. Iterar para todos los productos-->

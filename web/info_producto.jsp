@@ -254,8 +254,15 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2 pb-2">
-                                            <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
+                                        <div class="col-md-2 pb-2 ">
+                                            <a href="info_usuario.jsp">
+                                                <c:if test="${review.user.imagen}">
+                                                    <img src="ReadImg?name=${review.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                                                </c:if>
+                                                <c:if test="${review.user.imagen == false}">
+                                                    <img src="./media/profile.jpg" class="img img-rounded img-fluid d-none d-md-block">
+                                                </c:if>
+                                            </a>
                                             <!--<span class="rounded-circle icono m-auto">MT</span>-->
                                             <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp"><c:out value ="${review.user.name}"/></a></span>
                                             <span class="text-secondary pl-1 text-center"><c:out value ="${review.date2string()}"/></span>

@@ -63,6 +63,21 @@
     font-size: 100px;
     font-weight: bold;
 }
+.imgUserReview{
+    width: 153px;
+    height: 153px;
+    background: #fcbd84;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+    !important;
+}
 
 /*productoImgUserInfo reduce el tamaño del icono en función del width de la pantalla*/
 @media (min-width: 990px) {
@@ -87,6 +102,7 @@
 @media (max-width: 990px) {
     .imgUserInfo {
         width: 200px;
+        height: 200px;
         height: 200px;
         background: #fcbd84;
 
