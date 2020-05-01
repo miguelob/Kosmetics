@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 
@@ -23,7 +25,7 @@
                 <div class="img-fluid col-9 col-sm-4 p-7 mt-4 mx-auto ">
                     <div class="row">
                         <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                        <span class="rounded-circle icono imgUserInfo m-auto">MT</span>
+                        <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
                     </div>
                 </div>
                 <div class="col-8 px-0 mt-5 mx-auto d-flex justify-content-right">
@@ -31,7 +33,7 @@
                     <div class="col-12 px-0">
                         <div class="row">
                             <div class="col-8">
-                                <span class="display-4 nameUserInfo"><strong>Milo Tatch</strong></span>
+                                <span class="display-4 nameUserInfo"><strong><c:out value ="${sessionScope.user.name}"/></strong></span>
                             </div>
                             <div class="col-4">
                                 <form action="editar_perfil_usuario.jsp" method="post">
@@ -41,12 +43,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2">Piel mixta</span>
+                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.skinCondition}"/></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2">25 años</span>
+                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.edad}"/> años</span>
                             </div>
                         </div>
                         <div class="row">

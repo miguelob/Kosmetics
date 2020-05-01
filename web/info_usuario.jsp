@@ -43,12 +43,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2">Piel mixta</span>
+                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.skinCondition}"/></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2">25 años</span>
+                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.edad}"/> años</span>
                             </div>
                         </div>
                         <div class="row">
