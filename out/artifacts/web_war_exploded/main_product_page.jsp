@@ -81,7 +81,7 @@
                                     <div class="card-title">
                                         <div class="row">
                                             <div class="col-12 col-xl-8 m-auto text-center">
-                                                <h3>${product.name}</h3>
+                                                <h3><c:out value="${product.name}"/></h3>
                                             </div>
 
                                             <!--Contenedor estrellas-->
