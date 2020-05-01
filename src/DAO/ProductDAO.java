@@ -151,6 +151,47 @@ public class ProductDAO {
         }
         return products;
     }
+    public static Product getProductFromId(int id) {
+        Product product = null;
+        Connection con = null;
+        try{
+            con=ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM products WHERE idProducts = ?");
+            pst.setInt(1,id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                //this will change
+               product =new Product(rs.getInt("idProducts"), rs.getString("name"), BrandsDAO.getBrandFromId(rs.getInt("Brands_idBrands")), rs.getString("productCategory"), rs.getDouble("price"), rs.getInt("offer"),rs.getString("description"),rs.getBoolean("freeDeliver"));
+                PreparedStatement pst2 = con.prepareStatement("SELECT AVG(scoreProduct) FROM reviews WHERE Products_idProducts = ?");
+                pst2.setInt(1,id);
+                ResultSet rs2 = pst2.executeQuery();
+                if(rs2.next()) {
+                    product.setScore(rs2.getFloat(1));
+                    product.setResto();
+                }
+                PreparedStatement pst3 = con.prepareStatement("SELECT Features_idFeatures FROM products_features WHERE Products_idProducts = ?");
+                pst3.setInt(1,id);
+                ResultSet rs3 = pst3.executeQuery();
+                while (rs3.next()) {
+                    PreparedStatement pst4 = con.prepareStatement("SELECT featuresText FROM features WHERE idFeatures = ?");
+                    pst4.setInt(1,rs3.getInt(1));
+                    ResultSet rs4 = pst4.executeQuery();
+                    while(rs4.next()) {
+                        product.addFeature(rs4.getString(1));
+                    }
+                }
+            }
+
+        } catch (SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return product;
+    }
     public static int getSurveyID(Product product) {
         int id = -1;
         Connection con = null;
@@ -169,25 +210,25 @@ public class ProductDAO {
         }
         return id;
     }
-    public static int refreshScore(Product product) {
-        int valor = 0;
-        Connection con = null;
-        try {
-            con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(product.getName()));
-             ResultSet rs = pst.executeQuery();
-            if(rs.next()) {
-                valor = (int) rs.getFloat(1);
-                product.setScore(valor);
-            }
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            sqle.printStackTrace();
-        }catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
-        }
-        return valor;
-    }
+//    public static int refreshScore(Product product) {
+//        int valor = 0;
+//        Connection con = null;
+//        try {
+//            con = ConnectionDAO.getInstance().getConnection();
+//            PreparedStatement pst = con.prepareStatement("SELECT AVG(\"Score_Product\") FROM public.\"Reviews\" WHERE \"ID_Product\" = " + ProductDAO.getProductID(product.getName()));
+//             ResultSet rs = pst.executeQuery();
+//            if(rs.next()) {
+//                valor = (int) rs.getFloat(1);
+//                product.setScore(valor);
+//            }
+//        } catch (SQLException sqle) {
+//            System.out.println(sqle.getMessage());
+//            sqle.printStackTrace();
+//        }catch (ClassNotFoundException cnfe){
+//            cnfe.printStackTrace();
+//        }
+//        return valor;
+//    }
 
     public static void uploadImg(int id, InputStream imagen,int i) {
         Connection con = null;

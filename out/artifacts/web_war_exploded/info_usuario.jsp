@@ -25,11 +25,11 @@
                 <div class="img-fluid col-9 col-sm-4 p-7 mt-4 mx-auto ">
                     <div class="row">
                         <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                        <c:if test="${sessionScope.user.imagen}">
-                            <img src="ReadImg?name=${sessionScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                        <c:if test="${requestScope.user.imagen}">
+                            <img src="ReadImg?name=${requestScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
                         </c:if>
-                        <c:if test="${sessionScope.user.imagen == false}">
-                            <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
+                        <c:if test="${requestScope.user.imagen == false}">
+                            <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${requestScope.user.iniciales}"/></span>
                         </c:if>
 <%--                        <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>--%>
                     </div>
@@ -39,22 +39,24 @@
                     <div class="col-12 px-0">
                         <div class="row">
                             <div class="col-8">
-                                <span class="display-4 nameUserInfo"><strong><c:out value ="${sessionScope.user.name}"/></strong></span>
+                                <span class="display-4 nameUserInfo"><strong><c:out value ="${requestScope.user.name}"/></strong></span>
                             </div>
                             <div class="col-4">
-                                <form action="editar_perfil_usuario.jsp" method="post">
-                                    <button type="button" class="btn btn-outline-dark">Editar perfil</button>
-                                </form>
+                                <c:if test="${requestScope.user.equals(sessionScope.user)}">
+                                    <form action="editar_perfil_usuario.jsp" method="post">
+                                        <button type="button" class="btn btn-outline-dark">Editar perfil</button>
+                                    </form>
+                                </c:if>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2">Piel <c:out value ="${sessionScope.user.skinCondition}"/></span>
+                                <span class="font-weight-bold py-2">Piel <c:out value ="${requestScope.user.skinCondition}"/></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.edad}"/> años</span>
+                                <span class="font-weight-bold py-2"><c:out value ="${requestScope.user.edad}"/> años</span>
                             </div>
                         </div>
                         <div class="row">
@@ -81,11 +83,10 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <!--Productos fav-->
                 <!--Productos comprados-->
                 <div class="tab-pane fade show active" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
                     <!--Contenedor de un producto. Iterar para todos los productos-->
-                    <c:forEach var = "i" begin = "1" end = "3">
+                    <c:forEach var = "product" items="${requestScope.compras}">
 
                         <div class="card mb-3">
                             <div class="row no-gutters">
@@ -98,19 +99,18 @@
                                         <div class="card-title">
                                             <div class="row">
                                                 <div class="col-12 col-xl-8 m-auto text-center">
-                                                    <h3>Hello Happy Foundation</h3>
+                                                    <h3><c:out value="${product.name}"/></h3>
                                                 </div>
 
                                                 <!--Contenedor estrellas-->
                                                 <div class="col-12 col-xl-4 m-auto offset-4">
                                                     <div class="row justify-content-center">
-
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                        <span class="fa fa-star fa-2x  checked"></span>
-                                                        <span class="fa fa-star fa-2x "></span>
-                                                        <span class="fa fa-star fa-2x "></span>
-
+                                                        <c:forEach var = "i" begin = "1" end = "${product.score}">
+                                                            <span class="fa fa-star fa-2x checked"></span>
+                                                        </c:forEach>
+                                                        <c:forEach var = "i" begin = "1" end = "${product.resto}">
+                                                            <span class="fa fa-star fa-2x "></span>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,11 +119,11 @@
                                         <div class="row">
 
                                             <div class="col-3 m-auto py-2 text-nowrap">
-                                                <span class="h5 text-muted">BASE</span>
+                                                <span class="h5 text-muted"><c:out value ="${product.category}"/></span>
                                             </div>
 
                                             <div class="col-3 m-auto py-2 text-nowrap">
-                                                <span class="h5 text-muted">BENEFIT</span>
+                                                <span class="h5 text-muted"><c:out value ="${product.brand}"/></span>
                                             </div>
 
                                         </div>
@@ -131,9 +131,9 @@
                                         <!--Tercera fila. Contiene features-->
                                         <div class="row ">
                                             <!--Hacer con un foreEach-->
-                                            <c:forEach var = "i" begin = "1" end = "4">
+                                            <c:forEach var = "feature" items="${product.features}">
                                                 <div class="jumbotron mx-auto my-3 py-1 px-3 text-center">
-                                                    <p class="my-0">Acabado natural</p>
+                                                    <p class="my-0"><c:out value ="${feature}"/></p>
                                                 </div>
                                             </c:forEach>
 
@@ -141,9 +141,22 @@
 
                                         <!--Cuarta fila. Precio-->
                                         <div class="row">
-                                            <span class="h6 px-2">Precio: 33,95€ </span>
-                                            <span class="h6 px-2">Oferta: -20% </span>
+                                            <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
+                                            <span class="h6 px-2" style="color:red">Oferta:
+                                            <c:choose>
+                                                <c:when test = "${product.freeDeliver}">
+                                                    Envío gratuíto
+                                                </c:when>
+                                                <c:when test = "${product.offer != 0}">
+                                                    <fmt:formatNumber pattern="#%" value="${product.offer}"/>
+                                                    <span class="h6 px-2">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    No hay Oferta.
+                                                </c:otherwise>
+                                            </c:choose>
 
+                                        </span>
                                         </div>
 
                                     </div>

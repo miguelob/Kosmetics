@@ -255,7 +255,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-2 pb-2 ">
-                                            <a href="info_usuario.jsp">
+                                            <a href="LoadAllUser?name=${review.user.name.replace(' ','-')}">
                                                 <c:if test="${review.user.imagen}">
                                                     <img src="ReadImg?name=${review.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
                                                 </c:if>

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 
 public class User implements Serializable{
@@ -122,5 +123,18 @@ public class User implements Serializable{
 
     public boolean isImagen() {
         return imagen;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getName(), user.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }

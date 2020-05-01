@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Merge_at_5_1_2020_10_02_AM_[Default_Changelist]" date="1588320158940" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_5_1_2020_10_02_AM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Merge at 5/1/2020 10:02 AM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/domain/User.class" />
+    <option name="AFTER_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/domain/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_5_1_2020_10_02_AM_[Default_Changelist]/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Kosmetics_EE/domain/User.class" />
+    <option name="AFTER_PATH" value="out/production/Kosmetics_EE/domain/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_5_1_2020_10_02_AM_[Default_Changelist]/User1.class" />
+  </binary>
+</changelist>

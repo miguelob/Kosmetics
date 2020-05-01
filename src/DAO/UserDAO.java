@@ -241,4 +241,45 @@ public class UserDAO {
         }
         return retorno;
         }
+
+    public static ArrayList<Product> getCompras(User user) {
+        ArrayList<Product> productos = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idProduct FROM compras WHERE idUser = ?");
+            pst.setInt(1,UserDAO.getUserID(user));
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                productos.add(ProductDAO.getProductFromId(rs.getInt(1)));
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+        return productos;
+    }
+
+    public static int getUserIDFromName(String name) {
+        int id = -1;
+        Connection con = null;
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT idUser FROM  users WHERE name = ?");
+            pst.setString(1,name);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        } catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        }
+        return id;
+    }
 }
