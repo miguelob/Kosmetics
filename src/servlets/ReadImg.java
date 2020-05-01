@@ -1,6 +1,7 @@
 package servlets;
 
 import DAO.ProductDAO;
+import DAO.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +20,16 @@ public class ReadImg extends HttpServlet {
         processRequest(request,response);
     }
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        byte[] img = null;
         OutputStream os;
 
-        byte[] img = ProductDAO.getProductImg(id);
+        if(request.getParameter("id") != null){
+            int id = Integer.parseInt(request.getParameter("id"));
+            img = ProductDAO.getProductImg(id);
+        }else if(request.getParameter("name") != null){
+            String name = request.getParameter("name").replace('-',' ');
+            img = UserDAO.getUserImg(name);
+        }
         response.setContentType("image/gif");
         os = response.getOutputStream();
         os.write(img);

@@ -24,9 +24,10 @@ public class User implements Serializable{
     private String skinColor;
     private String skinCondition;
     private boolean admin;
+    private boolean imagen;
 
     public User( String name,String email,String userPasword,
-                String birthDate,String skinColor,String skinCondition,boolean admin) throws ParseException {
+                String birthDate,String skinColor,String skinCondition,boolean admin, boolean imagen) throws ParseException {
 
         this.name=name;
         this.email=email;
@@ -35,6 +36,7 @@ public class User implements Serializable{
         this.skinColor=skinColor;
         this.skinCondition=skinCondition;
         this.admin = admin;
+        this.imagen = imagen;
         //System.out.println(admin);
     }
 
@@ -118,4 +120,7 @@ public class User implements Serializable{
         return cal;
     }
 
+    public boolean isImagen() {
+        return imagen;
+    }
 }
