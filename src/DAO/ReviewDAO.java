@@ -62,11 +62,6 @@ public class ReviewDAO {
         }
         return status;
     }
-    public static void main(final String[] args) {
-
-        final Product product = null;
-        ReviewDAO.loadProductReview(product);
-    }
     public static void getReviews(User tempUser, ArrayList<Review> reviewList) {
         // TODO Auto-generated method stub
         Connection con = null;
@@ -88,5 +83,31 @@ public class ReviewDAO {
             cnfe.printStackTrace();
         }
 
+    }
+
+    public static ArrayList<Review> getAllUserReviews(User user) {
+        ArrayList<Review> reviews = new ArrayList<Review>();
+        Connection con = null;
+        //QUERY for loading reviews. we also need the query user
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM reviews WHERE  Users_idUser = ?");
+            pst.setInt(1,UserDAO.getUserID(user));
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                reviews.add(new Review(user, rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),rs.getString(9)));
+            }
+
+        } catch (final SQLException sqle) {
+
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
+        }catch (ClassNotFoundException cnfe){
+            cnfe.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return reviews;
     }
 }

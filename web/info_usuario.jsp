@@ -25,7 +25,13 @@
                 <div class="img-fluid col-9 col-sm-4 p-7 mt-4 mx-auto ">
                     <div class="row">
                         <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                        <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
+                        <c:if test="${sessionScope.user.imagen}">
+                            <img src="ReadImg?name=${sessionScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                        </c:if>
+                        <c:if test="${sessionScope.user.imagen == false}">
+                            <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
+                        </c:if>
+<%--                        <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>--%>
                     </div>
                 </div>
                 <div class="col-8 px-0 mt-5 mx-auto d-flex justify-content-right">
@@ -43,7 +49,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 pt-2">
-                                <span class="font-weight-bold py-2"><c:out value ="${sessionScope.user.skinCondition}"/></span>
+                                <span class="font-weight-bold py-2">Piel <c:out value ="${sessionScope.user.skinCondition}"/></span>
                             </div>
                         </div>
                         <div class="row">
@@ -70,14 +76,14 @@
         <div class="col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false" aria-selected="true">Últimas compras</a>
+                    <a class="nav-item nav-link active" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="true">Últimas compras</a>
                     <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Reviews</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <!--Productos fav-->
                 <!--Productos comprados-->
-                <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
+                <div class="tab-pane fade show active" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
                     <!--Contenedor de un producto. Iterar para todos los productos-->
                     <c:forEach var = "i" begin = "1" end = "3">
 
@@ -151,38 +157,37 @@
                 <!--Review-->
                 <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                     <!--Contenedor review-->
-                    <c:forEach var = "i" begin = "1" end = "4">
+                    <c:forEach var = "review" items="${requestScope.reviews}">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2 pb-2">
-                                        <a href="info_usuario.jsp"><img src="media/prueba_cuadrada.jpg" class="img img-rounded img-fluid d-none d-md-block"></a>
-                                        <!--<span class="rounded-circle icono m-auto">MT</span>-->
-                                        <span class="text-secondary pl-1 text-center"><a href="info_usuario.jsp">Milo Tatch</a></span>
-                                        <span class="text-secondary pl-1 text-center">12/04/2020</span>
+                                        <c:if test="${review.user.imagen}">
+                                            <img src="ReadImg?name=${review.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                                        </c:if>
+                                        <c:if test="${review.user.imagen == false}">
+                                            <img src="./media/profile.jpg" class="img img-rounded img-fluid d-none d-md-block">
+                                        </c:if>
+                                        <span class="text-secondary pl-1 text-center"><c:out value ="${review.user.name}"/></span>
+                                        <span class="text-secondary pl-1 text-center"><c:out value ="${review.date2string()}"/></span>
                                     </div>
                                     <div class="col-md-10">
                                         <p>
-                                            <span class="float-left h5" ><strong>Gran relación claidad-precio!!</strong></span>
-                                            <span class="float-right fa fa-star fa-lg "></span>
-                                            <span class="float-right fa fa-star fa-lg checked"></span>
-                                            <span class="float-right fa fa-star fa-lg checked"></span>
-                                            <span class="float-right fa fa-star fa-lg checked"></span>
-                                            <span class="float-right fa fa-star fa-lg checked"></span>
-                                            <!-- <span class="fa fa-star fa-2x checked"></span>
-                                             <span class="fa fa-star fa-2x checked"></span>
-                                             <span class="fa fa-star fa-2x  checked"></span>
-                                             <span class="fa fa-star fa-2x "></span>
-                                             <span class="fa fa-star fa-2x "></span>
-    -->
+                                            <span class="float-left h5" ><strong><c:out value ="${review.commentTitle}"/></strong></span>
+                                            <c:forEach var = "i" begin = "1" end = "${review.gerScoreResto()}">
+                                                <span class="float-right fa fa-star fa-lg"></span>
+                                            </c:forEach>
+                                            <c:forEach var = "i" begin = "1" end = "${review.productScore}">
+                                                <span class="float-right fa fa-star fa-lg checked"></span>
+                                            </c:forEach>
                                         </p>
                                         <div class="clearfix"></div>
-                                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                        <p>
-                                                <span class="float-left h5" ><strong>5<span style="color: red">
-                                                    ♥</span></strong></span>
-                                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                        </p>
+                                        <p>${review.comment}</p>
+<%--                                        <p>--%>
+<%--                                                <span class="float-left h5" ><strong>5<span style="color: red">--%>
+<%--                                                    ♥</span></strong></span>--%>
+<%--                                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>--%>
+<%--                                        </p>--%>
                                     </div>
                                 </div>
                                     <%--<div class="card card-inner">
