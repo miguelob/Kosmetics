@@ -75,7 +75,7 @@
                     <a class="nav-link" href="./Filtros?tipo=sombras-de-ojos">SOMBRAS DE OJOS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="./Filtros?tipo=pestañas-postizas">PESTAÑAS POSTIZAS</a>
+                    <a class="nav-link" href="./Filtros?top=top-ventas">TOP VENTAS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
                     <a class="nav-link" href="./Filtros?tipo=contouring">CONTOURING</a>

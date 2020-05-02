@@ -90,7 +90,7 @@ public class Filtros extends HttpServlet {
            response.addCookie(p);
             this.filtroPrecio(precio);
         }else if(request.getParameter("top") != null){
-            //copy = ProductDAO.getBestSales();
+            copy = ProductDAO.getBestSales();
         }
         if(request.getParameter("btn") != null){
 //            System.out.println("entra");
