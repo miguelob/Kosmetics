@@ -311,7 +311,7 @@ public class UserDAO {
         Connection con = null;
         try{
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("UPDATE users SET birthDate = ?, skinColor = ?, skinCondition = ?, WHERE name =  ?");
+            PreparedStatement pst = con.prepareStatement("UPDATE users SET birthDate = ?, skinColor = ?, skinCondition = ? WHERE name =  ?");
 
             pst.setDate(1, UserDAO.convertUtilToSql(UserDAO.string2Date(bday)));
             pst.setString(2,skinColor);

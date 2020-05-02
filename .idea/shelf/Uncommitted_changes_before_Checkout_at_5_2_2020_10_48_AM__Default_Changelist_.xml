@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_5_2_2020_10_48_AM_[Default_Changelist]" date="1588409310272" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_2_2020_10_48_AM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 5/2/2020 10:48 AM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/DAO/ProductDAO.class" />
+    <option name="AFTER_PATH" value="out/artifacts/web_war_exploded/WEB-INF/classes/DAO/ProductDAO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_2_2020_10_48_AM_[Default_Changelist]/ProductDAO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Kosmetics_EE/DAO/ProductDAO.class" />
+    <option name="AFTER_PATH" value="out/production/Kosmetics_EE/DAO/ProductDAO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_2_2020_10_48_AM_[Default_Changelist]/ProductDAO1.class" />
+  </binary>
+</changelist>

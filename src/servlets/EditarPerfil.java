@@ -68,9 +68,9 @@ public class EditarPerfil extends HttpServlet {
 
         }else if(request.getParameter("btn").equals("second")){
             String skinColor = this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
-            String skinCondition = this.num2SkinColor(Integer.parseInt(request.getParameter("skinCondition")));
+            String skinCondition = this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
             String bday = request.getParameter("fecha_nacimiento");
-            String genero = this.num2genero(Integer.getInteger(request.getParameter("genero")));
+            String genero = this.num2genero(Integer.parseInt(request.getParameter("genero")));
             String direccion = request.getParameter("direccion");
 
             boolean status = UserDAO.editUser2(user.getName(),bday,skinColor,skinCondition);
@@ -87,7 +87,7 @@ public class EditarPerfil extends HttpServlet {
 
     }
 
-    private String num2genero(Integer genero) {
+    private String num2genero(int genero) {
         String retorno = "";
         switch (genero){
             case 1:

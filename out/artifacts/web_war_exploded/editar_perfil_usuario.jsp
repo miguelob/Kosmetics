@@ -22,29 +22,35 @@
                        </c:if>
                    </div>
                     <div class="row justify-content-center">
-                        <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="registro_usuario.jsp">cambiar imagen de perfil</a></small>
+                        <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="">cambiar imagen de perfil</a></small>
                     </div>
 
                 </div>
                 <div class="col-12 col-xl-6 px-0 d-flex justify-content-center">
 
                     <div class = "col-lg-9 px-0">
-                        <form>
+                        <form action="EditarPerfil" method="POST" onsubmit="return validarEdicion1();">
                             <div class="form-group">
                                 <label for="userInputName">nombre de usuario</label>
-                                <input value="${sessionScope.user.name}" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp">
+                                <input value="${sessionScope.user.name}" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp" name="name">
                             </div>
                             <div class="form-group">
                                 <label for="userInputEmail">correo electrónico</label>
-                                <input value="${sessionScope.user.email}" type="email" class="form-control" id="userInputEmail">
+                                <input value="${sessionScope.user.email}" type="email" class="form-control" id="userInputEmail" name = "email">
                             </div>
                             <div class="form-group">
                                 <label for="userInputPassword">contraseña</label>
-                                <input type="password" class="form-control" id="userInputPassword" value="${sessionScope.user.password}">
+                                <input type="password" class="form-control" id="userInputPassword" value="${sessionScope.user.password}" name="pass">
                             </div>
                             <div class="form-group">
                                 <label for="userInputPasswordRepit">repetir la contraseña</label>
                                 <input type="password" class="form-control" id="userInputPasswordRepit" value="${sessionScope.user.password}">
+                            </div>
+                            <div style="color: red; align-content: center; text-align: center;" id="error">
+                                ${requestScope.error}
+                            </div>
+                            <div class="form-group col-md-10 mx-auto">
+                                <button type="submit" class="btn btn-dark btn-block mt-5" name = "btn" value = "first">Actualizar</button>
                             </div>
                         </form>
                     </div>
@@ -59,11 +65,11 @@
             <div class = "col-lg-9">
                 <h5 class="text-muted py-3">Información adicional </h5>
 
-                <form onsubmit="return validarEdicion();">
+                <form action="EditarPerfil" method="post" onsubmit="return validarEdicion2();">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="tono_piel">tipo de piel</label>
-                            <select id="tono_piel" class="custom-select" >
+                            <select id="tono_piel" class="custom-select" name="skinColor">
                                 <option selected>sin definir</option>
                                 <option value="1" style="background: #fdeec7">marfil</option>
                                 <option value="2" style="background: #fee1b9">palida</option>
@@ -76,7 +82,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="tipo_piel">tipo de piel</label>
-                            <select id="tipo_piel" class="custom-select">
+                            <select id="tipo_piel" class="custom-select" name="skinCondition">
                                 <option selected>sin definir</option>
                                 <option value="1" >mixta</option>
                                 <option value="2" >grasa</option>
@@ -98,7 +104,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="genero">género</label>
-                            <select id="genero" class="custom-select">
+                            <select id="genero" class="custom-select" name = "genero">
                                 <option selected>mostrar valor actual</option>
                                 <option value="1" >Mujer</option>
                                 <option value="2" >Hombre</option>
@@ -109,15 +115,15 @@
 
                         <div class="form-group col-md-9">
                             <label for="userInputDireccion">Dirección</label>
-                            <input placeholder="C/ Luis Jorge Castaños 23. 4º-2ª; Urbanización Las Cascajuelas; 28999 Valdecillas de Jarama, Madrid" type="text" class="form-control" id="userInputDireccion" aria-describedby="emailHelp">
+                            <input placeholder="C/ Luis Jorge Castaños 23. 4º-2ª; Urbanización Las Cascajuelas; 28999 Valdecillas de Jarama, Madrid" type="text" class="form-control" id="userInputDireccion" aria-describedby="emailHelp" name="direccion">
                         </div>
 
                     </div>
-                    <div style="color: red; align-content: center; text-align: center;" id="error">
-                        ${requestScope.error}
+                    <div style="color: red; align-content: center; text-align: center;" id="error1">
+                        ${requestScope.error1}
                     </div>
                     <div class="form-group col-md-10 mx-auto">
-                        <button type="submit" class="btn btn-dark btn-block mt-5">Actualizar</button>
+                        <button type="submit" class="btn btn-dark btn-block mt-5" name = "btn" value = "second">Actualizar</button>
                     </div>
                 </form>
             </div>
