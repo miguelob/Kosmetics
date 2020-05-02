@@ -75,7 +75,7 @@
                     <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=sombras-de-ojos','paginaProductos');">SOMBRAS DE OJOS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
-                    <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=pestañas-postizas','paginaProductos');">PESTAÑAS POSTIZAS</a>
+                    <a class="nav-link" href="javascript:getDatos('./Filtros?top=top-ventas','paginaProductos');">TOP VENTAS</a>
                 </li>
                 <li class="nav-item mx-2 d-none d-xl-block">
                     <a class="nav-link" href="javascript:getDatos('./Filtros?tipo=contouring','paginaProductos');">CONTOURING</a>

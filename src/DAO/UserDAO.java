@@ -247,7 +247,7 @@ public class UserDAO {
         Connection con = null;
         try {
             con = ConnectionDAO.getInstance().getConnection();
-            PreparedStatement pst = con.prepareStatement("SELECT idProduct FROM compras WHERE idUser = ?");
+            PreparedStatement pst = con.prepareStatement("SELECT Products_idProducts FROM invoice WHERE Users_idUser = ?");
             pst.setInt(1,UserDAO.getUserID(user));
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

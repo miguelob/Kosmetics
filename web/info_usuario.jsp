@@ -91,7 +91,7 @@
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-sm-4">
-                                    <img src="media/prueba_cuadrada.jpg" class="card-img">
+                                    <img src="ReadImg?id=${product.id}" class="card-img">
                                     <!--<span class=" productoImg  card-img m-auto">P</span>-->
                                 </div>
                                 <div class="col-sm-8">

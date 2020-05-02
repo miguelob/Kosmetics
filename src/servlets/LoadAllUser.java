@@ -33,7 +33,7 @@ public class LoadAllUser extends HttpServlet {
                 User user = UserDAO.getUser(id);
                 request.setAttribute("user",user);
                 request.setAttribute("reviews",ReviewDAO.getAllUserReviews(user));
-                //request.setAttribute("compras", UserDAO.getCompras(user));
+                request.setAttribute("compras", UserDAO.getCompras(user));
             }
 
         }else{
@@ -41,7 +41,7 @@ public class LoadAllUser extends HttpServlet {
             request.setAttribute("user",session.getAttribute("user"));
 //        System.out.println(ReviewDAO.getAllUserReviews((User) session.getAttribute("user")));
             request.setAttribute("reviews",ReviewDAO.getAllUserReviews((User) session.getAttribute("user")));
-            //request.setAttribute("compras", UserDAO.getCompras((User) session.getAttribute("user")));
+            request.setAttribute("compras", UserDAO.getCompras((User) session.getAttribute("user")));
         }
         //response.sendRedirect("./info_usuario.jsp");
         request.getRequestDispatcher("./info_usuario.jsp").forward(request,response);

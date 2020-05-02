@@ -439,6 +439,28 @@ public class ProductDAO {
             cnfe.printStackTrace();
         }
     }
+
+//    public static ArrayList<Product> getBestSales() {
+//        Connection con = null;
+//        ArrayList<Product> products = new ArrayList<Product>();
+//        try {
+//            con = ConnectionDAO.getInstance().getConnection();
+//            PreparedStatement pst = con.prepareStatement("SELECT productImg FROM products WHERE idProducts = ?");
+//            pst.setInt(1, );
+//            ResultSet rs = pst.executeQuery();
+//            if (rs.next()) {
+//                if(rs.getBlob(1)!= null){ ;
+//                }
+//            }
+//
+//        } catch (SQLException sqle) {
+//            System.out.println(sqle.getMessage());
+//            sqle.printStackTrace();
+//        } catch (ClassNotFoundException cnfe) {
+//            cnfe.printStackTrace();
+//        }
+//        return products;
+//    }
     /*public static void getSurvey(Product product) {
         Connection con=null;
         ReviewDAO.loadProductReview(product);

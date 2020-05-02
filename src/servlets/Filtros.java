@@ -18,6 +18,7 @@ import java.util.HashMap;
 public class Filtros extends HttpServlet {
     ArrayList<Product> productos;
     ArrayList<Product> copy = new ArrayList<Product>();;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request,response);
     }
@@ -88,6 +89,8 @@ public class Filtros extends HttpServlet {
            Cookie p = new Cookie("precio",String.valueOf(precio));
            response.addCookie(p);
             this.filtroPrecio(precio);
+        }else if(request.getParameter("top") != null){
+            //copy = ProductDAO.getBestSales();
         }
         if(request.getParameter("btn") != null){
 //            System.out.println("entra");
