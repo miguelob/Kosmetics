@@ -40,6 +40,11 @@ public class User implements Serializable{
         this.imagen = imagen;
         //System.out.println(admin);
     }
+    public User(String name, String email, String pass){
+        this.name = name;
+        this.email = email;
+        this.userPassword = pass;
+    }
 
     /*public User(String name,String email,String userPasword,
             Date birthDate,String skinColor,String skinCondition, byte[] imageBytes){

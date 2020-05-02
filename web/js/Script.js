@@ -47,26 +47,37 @@ function validarLogin(){
 
     return retorno;
 }
-function validarEdicion() {
+function validarEdicion1() {
     var name = document.getElementById("userInputName").value;
     var email = document.getElementById("userInputEmail").value;
     var pass1 = document.getElementById("userInputPassword").value;
     var pass2 = document.getElementById("userInputPasswordRepit").value;
-    var tonoPiel = document.getElementById("tono_piel").value;
-    var tipoPiel = document.getElementById("tipo_piel").value;
-    var fecha = document.getElementById("fecha_nacimiento").value;
-    var genero = document.getElementById("genero").value;
-    var direccion = document.getElementById("userInputDireccion").value
     var error = document.getElementById("error");
     var retorno = true;
 
-    if(name === "" || email === "" || pass1 === "" || pass2 === "" || tonoPiel === "" || tipoPiel === "" || fecha === "" || genero === "" || direccion === ""){
+    if(name === "" || email === "" || pass1 === "" || pass2 === ""){
         error.innerHTML = "Debe rellenar todos los campos.";
         retorno = false;
     }else if(pass1 !== pass2){
         error.innerHTML = "Las contraseñas deben coincidir.";
         retorno = false;
     }
+    return retorno;
+}
+function validarEdicion2() {
+    var tonoPiel = document.getElementById("tono_piel").value;
+    var tipoPiel = document.getElementById("tipo_piel").value;
+    var fecha = document.getElementById("fecha_nacimiento").value;
+    var genero = document.getElementById("genero").value;
+    var direccion = document.getElementById("userInputDireccion").value
+    var error = document.getElementById("error1");
+    var retorno = true;
+
+    if(tonoPiel === "" || tipoPiel === "" || fecha === "" || genero === "" || direccion === ""){
+        error.innerHTML = "Debe rellenar todos los campos.";
+        retorno = false;
+    }
+
     return retorno;
 }
 
