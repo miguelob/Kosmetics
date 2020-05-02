@@ -43,8 +43,8 @@
                             </div>
                             <div class="col-4">
                                 <c:if test="${requestScope.user.equals(sessionScope.user)}">
-                                    <form action="editar_perfil_usuario.jsp" method="post">
-                                        <button type="button" class="btn btn-outline-dark">Editar perfil</button>
+                                    <form action="editar_perfil_usuario.jsp" method = "POST">
+                                        <button type="submit" class="btn btn-outline-dark">Editar perfil</button>
                                     </form>
                                 </c:if>
                             </div>

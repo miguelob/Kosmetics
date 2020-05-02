@@ -1,8 +1,7 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-
     <jsp:include page="head.jsp"/>
     <title>Editar perfil · Kosmetics</title>
 </head>
@@ -15,7 +14,12 @@
                 <div class = "img-fluid col-xl-6 p-7 mt-4 d-none d-xl-block">
                    <div class="row">
                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                       <span class="rounded-circle icono m-auto">MT</span>
+                       <c:if test="${sessionScope.user.imagen}">
+                           <img src="ReadImg?name=${sessionScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                       </c:if>
+                       <c:if test="${sessionScope.user.imagen == false}">
+                           <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
+                       </c:if>
                    </div>
                     <div class="row justify-content-center">
                         <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="registro_usuario.jsp">cambiar imagen de perfil</a></small>
@@ -28,19 +32,19 @@
                         <form>
                             <div class="form-group">
                                 <label for="userInputName">nombre de usuario</label>
-                                <input placeholder="mostrar valor actual" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp">
+                                <input value="${sessionScope.user.name}" type="text" class="form-control" id="userInputName" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
                                 <label for="userInputEmail">correo electrónico</label>
-                                <input placeholder="mostrar valor actual" type="email" class="form-control" id="userInputEmail">
+                                <input value="${sessionScope.user.email}" type="email" class="form-control" id="userInputEmail">
                             </div>
                             <div class="form-group">
                                 <label for="userInputPassword">contraseña</label>
-                                <input type="password" class="form-control" id="userInputPassword">
+                                <input type="password" class="form-control" id="userInputPassword" value="${sessionScope.user.password}">
                             </div>
                             <div class="form-group">
                                 <label for="userInputPasswordRepit">repetir la contraseña</label>
-                                <input type="password" class="form-control" id="userInputPasswordRepit">
+                                <input type="password" class="form-control" id="userInputPasswordRepit" value="${sessionScope.user.password}">
                             </div>
                         </form>
                     </div>
@@ -55,7 +59,7 @@
             <div class = "col-lg-9">
                 <h5 class="text-muted py-3">Información adicional </h5>
 
-                <form>
+                <form onsubmit="return validarEdicion();">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="tono_piel">tipo de piel</label>
@@ -85,7 +89,7 @@
                         <div class="form-group col-md-4">
                             <label for="fecha_nacimiento">fecha de nacimiento </label>
                             <input type="date" name="fecha_nacimiento" class="form-control"id="fecha_nacimiento"
-                                   value="2020-04-2"
+                                   value="${sessionScope.user.birthDate}"
                                    min="1920-01-01" max="2020-12-31">
                         </div>
 
@@ -109,6 +113,9 @@
                         </div>
 
                     </div>
+                    <div style="color: red; align-content: center; text-align: center;" id="error">
+                        ${requestScope.error}
+                    </div>
                     <div class="form-group col-md-10 mx-auto">
                         <button type="submit" class="btn btn-dark btn-block mt-5">Actualizar</button>
                     </div>
@@ -118,7 +125,7 @@
     </div>
 
 </div>
-
-<jsp:include page="jSources.jsp"/>
+<script src = "./js/Script.js"></script>
+<jsp:include page="jsSources.jsp"/>
 </body>
 </html>
