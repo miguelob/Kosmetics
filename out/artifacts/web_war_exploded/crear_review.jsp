@@ -22,7 +22,7 @@
         <!--Imagen del producto pantallas grandes-->
         <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
             <div class="row">
-                <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
+                <!-- <img src = ".\media\prueba_cuadrada.jpg" class="img img-fluid p-4">-->
                 <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
 
             </div>
@@ -43,23 +43,24 @@
                 <div class="row justify-content-center">
                     <div class="col-11 py-3 ">
                         <div class="row">
-                            <span class="fa fa-star fa-2x checked"></span>
-                            <span class="fa fa-star fa-2x checked"></span>
-                            <span class="fa fa-star fa-2x  checked"></span>
-                            <span class="fa fa-star fa-2x "></span>
-                            <span class="fa fa-star fa-2x "></span>
+                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                                <span class="fa fa-star fa-2x checked"></span>
+                            </c:forEach>
+                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                                <span class="fa fa-star fa-2x "></span>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
 
-                <form class="justify-content-center">
+                <form id="createReviewForm" class="justify-content-center" action="EditarPerfil" method="POST" onsubmit="return validarReview();">
                     <!--Texto -->
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Ponle un título a tu review" rows="1" name="titulo"></textarea>
+                        <textarea  id="tituloReview" form="createReviewForm" class="form-control" placeholder="Ponle un título a tu review" rows="1" name="titulo"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Cuentanos tu experiencia!" rows="4" name="comentario"></textarea>
+                        <textarea id="textReview" form="createReviewForm" class="form-control" placeholder="Cuentanos tu experiencia!" rows="4" name="comentario"></textarea>
                     </div>
 
                     <div class="form-group ">
@@ -75,7 +76,7 @@
                                     </div>
                                     <div class="col-5 col-lg-6 col-xl-5">
                                         <div class="form-check form-check-inline ">
-                                            <input class="form-check-input" type="radio" name="" id="inlineRadio1" value="Si"> // OJO AL NAME QUE TIENE QUE SER DISTINTO PARA CADA PREGUNTA
+                                            <input class="form-check-input" type="radio" name="" id="inlineRadio1" value="Si">
                                             <label class="form-check-label text-muted" for="inlineRadio1">Si</label>
                                         </div>
                                         <div class="form-check form-check-inline">

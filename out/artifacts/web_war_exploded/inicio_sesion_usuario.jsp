@@ -9,7 +9,6 @@
 <body>
     <div class="container-fluid">
         <div class="row p-0 justify-content-center">
-            <img id="registro-inicio_img" src = "media/inicio_sesion_fondo.jpg" class="img-fluid col-lg-6 p-0 d-none d-xl-block">
             <div class="col-12 col-xl-6 py-5 d-flex justify-content-center">
                 <div class = "col-lg-8">
                     <h1 class="text-center pt-5">Login</h1>
@@ -26,11 +25,11 @@
                         <div id = "error"><c:out value="${requestScope.error}"/></div>
                         <button type="submit" class="btn btn-dark btn-block mt-5">Iniciar sesión</button>
                         <small class="form-text text-muted mt-3">¿Aun no tienes cuenta? <a class="p-2 text-dark" href="registro_usuario.jsp">¡Regístrate!</a></small>
-
                     </form>
                 </div>
-
             </div>
+
+            <img id="registro-inicio_img" src = "media/inicio_sesion_fondo.jpg" class="img-fluid col-lg-6 p-0 d-none d-xl-block">
 
         </div>
 
