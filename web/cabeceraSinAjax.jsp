@@ -42,7 +42,7 @@
                                 <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                             </form>
                         </c:if>
-                        <form>
+                        <form action="carrito.jsp">
                             <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Carrito</button>
                         </form>
                         <form action="LoadAllUser" method="POST">

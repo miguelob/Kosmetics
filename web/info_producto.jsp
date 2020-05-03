@@ -16,7 +16,7 @@
 
     <title>Información del producto · Kosmetics </title>
 </head>
-<body>
+<body id ="productBody">
 
     <jsp:include page="cabeceraSinAjax.jsp"/>
 
@@ -28,7 +28,7 @@
                     <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
                         <div class="row">
                             <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                            <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
+                            <img src="ReadImg?id=${sessionScope.allProduct.id}" class="img-fluid px-4 pt-0">
 
                         </div>
 
@@ -38,12 +38,12 @@
                         <div class="col-lg-9 px-0">
                             <!--Nombre del producto-->
                             <div class="row text-center">
-                                <h2><c:out value ="${requestScope.product.name}"/></h2>
+                                <h2><c:out value ="${sessionScope.allProduct.name}"/></h2>
                             </div>
 
                             <!--Descripcipción -->
                             <div class="row text-justify">
-                                <span class="text-muted py-3 m-auto"><c:out value ="${requestScope.product.description}"/></span>
+                                <span class="text-muted py-3 m-auto"><c:out value ="${sessionScope.allProduct.description}"/></span>
                             </div>
 
                             <!--Imagen del producto pantallas pequeñas-->
@@ -51,7 +51,7 @@
                                 <div class="img-fluid col-10  d-lg-none">
 
                                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
-                                    <img src="ReadImg?id=${product.id}" class="img-fluid  ">
+                                    <img src="ReadImg?id=${sessionScope.allProduct.id}" class="img-fluid  ">
 
                                 </div>
                             </div>
@@ -59,15 +59,15 @@
                             <!--precio y oferta-->
                             <div class="row py-2 d-flex justify-content-center">
                                 <div class="col-12 m-auto py-2 d-flex justify-content-center text-nowrap">
-                                    <span class="h5 px-4 text-muted m-auto">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${requestScope.product.ogPrice}"/>     </span>
+                                    <span class="h5 px-4 text-muted m-auto">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.allProduct.ogPrice}"/>     </span>
                                     <span class="h5 px-4 text-muted m-auto" style="color:red">Oferta:
                                         <c:choose>
-                                            <c:when test = "${product.freeDeliver}">
+                                            <c:when test = "${sessionScope.allProduct.freeDeliver}">
                                                 Envío gratuíto
                                             </c:when>
-                                            <c:when test = "${product.offer != 0}">
-                                                <fmt:formatNumber pattern="#%" value="${product.offer}"/>
-                                                <span class="h5 px-4 text-muted m-auto">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.newPrice}"/></span>
+                                            <c:when test = "${sessionScope.allProduct.offer != 0}">
+                                                <fmt:formatNumber pattern="#%" value="${sessionScope.allProduct.offer}"/>
+                                                <span class="h5 px-4 text-muted m-auto">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.allProduct.newPrice}"/></span>
                                             </c:when>
                                             <c:otherwise>
                                                 No hay Oferta.
@@ -82,7 +82,7 @@
 
                                 <div class="col-3 m-auto py-2 text-nowrap text-center">
                                     <!--añadirrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr IMAGEN MARCA-->
-                                    <span class="h5 font-weight-bold"><c:out value ="${requestScope.product.brand}"/></span>
+                                    <span class="h5 font-weight-bold"><c:out value ="${sessionScope.allProduct.brand}"/></span>
                                 </div>
 
 
@@ -91,57 +91,23 @@
                                     <span class="h6">colores disponibles: </span>
                                     <select class="custom-select">
                                         <option selected="">Colores</option>
-                                        <c:forEach var = "color" items="${requestScope.product.colors}">
+                                        <c:forEach var = "color" items="${sessionScope.allProduct.colors}">
                                             <option value="${color}" style="background: #${color}">      </option>
                                         </c:forEach>
                                     </select>
-                                    <!--<label for="tono_producto">colores disponibles</label>
-                                    <select id="tono_producto" class="custom-select" >
-                                        <option selected>  </option>
-                                        <option value="1" style="background: #fdeec7">      </option>
-                                        <option value="2" style="background: #fee1b9">      </option>
-                                        <option value="3" style="background: #fcbd84">      </option>
-                                        <option value="4" style="background: #a87256; color:white">      </option>
-                                        <option value="5" style="background: #633c1d; color:white">      </option>
-                                    </select>-->
                                 </div>
 
                             </div>
 
                             <div class="row justify-content-center">
                                 <c:if test = "${not empty sessionScope.user}">
-                                    <button type="submit" class="col-8 btn btn-dark">Añadir a la cesta</button>
+                                    <button type="submit" class="col-8 btn btn-dark" onclick="getDatos('./CarritoManager?id=${sessionScope.allProduct.id}','productBody')">Añadir a la cesta</button>
+                                    <h6 style="color: green">${requestScope.carrito}</h6>
                                 </c:if>
                                 <c:if test = "${empty sessionScope.user}">
                                     <h6 style="color: red">Para opinar y comprar debe estar logueado</h6>
                                 </c:if>
                             </div>
-                            <!--Estrellas -->
-                            <!--
-                            <div class="row justify-content-center">
-                                <div class="col-6 py-3 m-auto">
-                                    <div class="row justify-content-center">
-
-                                        <span class="fa fa-star fa-2x checked"></span>
-                                        <span class="fa fa-star fa-2x checked"></span>
-                                        <span class="fa fa-star fa-2x  checked"></span>
-                                        <span class="fa fa-star fa-2x "></span>
-                                        <span class="fa fa-star fa-2x "></span>
-
-                                    </div>
-                                </div>
-                                <div class="col-3 py-3 m-auto">
-                                    <form class="form-group my-0 mx-auto">
-                                        <button type="submit" class="btn btn-dark btn-block ">Opinar</button>
-                                    </form>
-                                </div>
-                            </div>
-                            -->
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -158,10 +124,10 @@
                                 <div class="row justify-content-center">
                                     <div class="col-5 py-3 m-auto">
                                         <div class="row justify-content-center">
-                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                                            <c:forEach var = "i" begin = "1" end = "${sessionScope.allProduct.score}">
                                                 <span class="fa fa-star fa-2x checked"></span>
                                             </c:forEach>
-                                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                                            <c:forEach var = "i" begin = "1" end = "${sessionScope.allProduct.resto}">
                                                 <span class="fa fa-star fa-2x "></span>
                                             </c:forEach>
 
@@ -169,7 +135,7 @@
                                     </div>
                                     <div class="col-4 col-xl-3 py-3 m-auto">
                                         <c:if test = "${not empty sessionScope.user}">
-                                            <form class="form-group my-0 mx-auto" action="LoadAllProduct?id=${requestScope.product.id}&opc=review" method="post">
+                                            <form class="form-group my-0 mx-auto" action="LoadAllProduct?id=${sessionScope.allProduct.id}&opc=review" method="post">
                                                 <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
                                             </form>
                                         </c:if>
@@ -181,13 +147,13 @@
                                 <div class="row justify-content-center">
                                     <div class="col-4 ml-auto text-center font-weight-bold">
 
-                                        <span class="display-3 d-xl-block"><fmt:formatNumber pattern="#,#0.0" value="${requestScope.product.scoreFloat}"/></span>
+                                        <span class="display-3 d-xl-block"><fmt:formatNumber pattern="#,#0.0" value="${sessionScope.allProduct.scoreFloat}"/></span>
                                         <br>
-                                        <span class="h7"><c:out value ="${requestScope.product.numReviews}"/> reviews</span>
+                                        <span class="h7"><c:out value ="${sessionScope.allProduct.numReviews}"/> reviews</span>
                                     </div>
 
                                     <div class="col-6 mr-auto">
-                                        <c:forEach var = "parcialScore" items="${requestScope.product.parcialScores}">
+                                        <c:forEach var = "parcialScore" items="${sessionScope.allProduct.parcialScores}">
                                         <div class="row justify-content-center">
                                             <div class="col-1 px-0 m-auto text-center">
                                                 <span class="h7"><c:out value ="${parcialScore.key}"/></span>
@@ -213,7 +179,7 @@
                                 <div class="row px-4 pt-2">
                                     <span class="h3 text-muted">Fiabilidad características</span>
                                 </div>
-                                <c:forEach var = "question" items="${requestScope.product.survey.questions}">
+                                <c:forEach var = "question" items="${sessionScope.allProduct.survey.questions}">
 
                                     <div class="row justify-content-center">
                                         <div class="col-4 px-0 m-auto text-center">
@@ -221,8 +187,8 @@
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
-                                                <div class="progress-bar" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,0)}%" aria-valuenow="${requestScope.product.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,1)}%" aria-valuenow="${requestScope.product.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,0)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,1)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-xl-1"></div>
@@ -250,7 +216,7 @@
                     <div class="tab-pane fade show active mr-xl" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                         <!--Contenedor review-->
-                        <c:forEach var = "review" items="${requestScope.product.reviews}">
+                        <c:forEach var = "review" items="${sessionScope.allProduct.reviews}">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
@@ -331,6 +297,7 @@
         </div>
 
     </div>
+        <script src="js/petAsinc.js"></script>
     <jsp:include page="jsSources.jsp"/>
 </body>
 </html>

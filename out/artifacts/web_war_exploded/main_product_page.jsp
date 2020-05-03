@@ -148,6 +148,7 @@
             </c:forEach>
         </div>
     </div>
+    <script src="js/petAsinc.js"></script>
     <script src="js/MainProductPage.js"></script>
     <jsp:include page="jsSources.jsp"/>
 </body>

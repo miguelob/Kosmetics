@@ -12,7 +12,7 @@
     <title>Carrito · Kosmetics </title>
 </head>
 <body id = "paginaProductos">
-<jsp:include page="cabecera.jsp"/>
+<jsp:include page="cabeceraSinAjax.jsp"/>
 <div class="row justify-content-center">
 
     <!--Filtros pantalla pequeña-->
