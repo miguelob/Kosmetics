@@ -50,8 +50,8 @@
 
 /*imagen por defecto de producto*/
 .productoImg{
-    width: 270px;
-    height: 270px;
+    width: 245px;
+    height: 245px;
     background:#17A2B8;
 
     display: flex;
