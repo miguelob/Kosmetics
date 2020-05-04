@@ -101,8 +101,8 @@
 
                             <div class="row justify-content-center">
                                 <c:if test = "${not empty sessionScope.user}">
-                                    <button type="submit" class="col-8 btn btn-dark" onclick="getDatos('./CarritoManager?id=${sessionScope.allProduct.id}','productBody')">Añadir a la cesta</button>
-                                    <h6 style="color: green">${requestScope.carrito}</h6>
+                                    <button type="submit" class="col-8 btn btn-dark" onclick="getDatos('./CarritoManager?sumaInfo=1','productBody')">Añadir a la cesta</button>
+                                    <h6 style="color: green">${requestScope.mensaje}</h6>
                                 </c:if>
                                 <c:if test = "${empty sessionScope.user}">
                                     <h6 style="color: red">Para opinar y comprar debe estar logueado</h6>

@@ -24,7 +24,7 @@
             <form action="finalizar_compra.jsp" method = "POST">
                 <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
             </form>
-            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody')">Vaciar carrito</button>
+            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
         </div>
     </div>
 
@@ -118,11 +118,11 @@
                                                 <label>Cantidad: <c:out value ="${carrito.value}"/></label>
                                             </li>
                                             <li class="list-inline-item text-center">
-                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager','carritoBody');">+</a>
-                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?cantidad=-1','carritoBody');">-</a>
+                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?suma=1&id=${sessionScope.allProduct.id}','carritoBody');">+</a>
+                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?resta=1&id=${sessionScope.allProduct.id}','carritoBody');">-</a>
                                             </li>
                                             <li class="list-inline-item text-center">
-                                                <button type="submit" class="btn btn-outline-dark mx-5 ">Eliminar del carrito</button>
+                                                <button type="submit" class="btn btn-outline-dark mx-5 " onclick="getDatos('./CarritoManager?eliminar=1&id=${sessionScope.allProduct.id}','carritoBody');">Eliminar del carrito</button>
                                             </li>
 
                                         </ul>
@@ -150,7 +150,7 @@
             <form action="finalizar_compra.jsp" method = "POST">
                 <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
             </form>
-            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody')">Vaciar carrito</button>
+            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
 
         </div>
     </div>

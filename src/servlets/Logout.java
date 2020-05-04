@@ -1,5 +1,7 @@
 package servlets;
 
+import domain.Carrito;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,9 @@ public class Logout extends HttpServlet {
     private void processRequest(HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("user",null);
+        Carrito carrito = Carrito.getInstance();
+        carrito.empty();
+        session.setAttribute("carrito",null);
 
         response.sendRedirect("./index.jsp");
         //request.getRequestDispatcher("/index.jsp").forward(request,response);

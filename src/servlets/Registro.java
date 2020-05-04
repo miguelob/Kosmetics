@@ -1,6 +1,7 @@
 package servlets;
 
 import DAO.UserDAO;
+import domain.Carrito;
 import domain.User;
 
 import javax.imageio.ImageIO;
@@ -82,6 +83,9 @@ public class Registro extends HttpServlet {
                     }else{
                         //System.out.println("todo ok");
                         session.setAttribute("user",user);
+                        Carrito carrito = Carrito.getInstance();
+                        carrito.empty();
+                        session.setAttribute("carrito",null);
                         request.getRequestDispatcher("/MainProducts").forward(request,response);
                     }
 

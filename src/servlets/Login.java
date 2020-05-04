@@ -1,6 +1,7 @@
 package servlets;
 
 import DAO.UserDAO;
+import domain.Carrito;
 import domain.User;
 
 import javax.servlet.ServletException;
@@ -31,6 +32,9 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
                 //System.out.println("Todo OK");
+                Carrito carrito = Carrito.getInstance();
+                carrito.empty();
+                session.setAttribute("carrito",null);
                 request.getRequestDispatcher("/MainProducts").forward(request,response);
             }else{
                 request.setAttribute("error","Contraseña o email incorrectos");
