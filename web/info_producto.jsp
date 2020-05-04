@@ -251,13 +251,13 @@
                                             </p>
                                             <div class="clearfix"></div>
                                             <p>${review.comment}</p>
-                                            <c:if test = "${not empty sessionScope.user}">
-                                                <p>
-                                                    <span class="float-left h5" ><strong><c:out value ="${review.scoreReview}"/><span style="color: red">
-                                                        ♥</span></strong></span>
-                                                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                                </p>
-                                            </c:if>
+<%--                                            <c:if test = "${not empty sessionScope.user}">--%>
+<%--                                                <p>--%>
+<%--                                                    <span class="float-left h5" ><strong><c:out value ="${review.scoreReview}"/><span style="color: red">--%>
+<%--                                                        ♥</span></strong></span>--%>
+<%--                                                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>--%>
+<%--                                                </p>--%>
+<%--                                            </c:if>--%>
                                         </div>
                                     </div>
                                         <%--<div class="card card-inner">

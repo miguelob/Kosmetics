@@ -6,6 +6,9 @@
     <title>Editar perfil · Kosmetics</title>
 </head>
 <body>
+<c:if test="${empty sessionScope.user}">
+    <jsp:forward page="./inicio_sesion_usuario.jsp"></jsp:forward>
+</c:if>
 <jsp:include page="cabeceraSinAjax.jsp"/>
 <div class = "container">
     <div class = "row">
