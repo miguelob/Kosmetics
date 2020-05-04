@@ -21,10 +21,12 @@
             <h1 class="text-center py-3 mt-5 "><strong>Finaliza tu pedido!!</strong></h1>
             <h5>Número de productos: <c:out value="${sessionScope.carrito.elementos}"/></h5>
             <h5>Coste: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.carrito.total}"/></h5>
-            <form action="finalizar_compra.jsp" method = "POST">
-                <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
-            </form>
-            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
+            <c:if test="${not empty sessionScope.carrito.carrito}">
+                <form action="finalizar_compra.jsp" method = "POST">
+                    <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
+                </form>
+                <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
+            </c:if>
         </div>
     </div>
 
@@ -32,7 +34,7 @@
     <div class="col-lg-1"></div>
     <div class="col-11 col-lg-8 pr-4 pl-2 py-1">
         <!--Contenedor de un producto. Iterar para todos los productos-->
-        <c:if test="${not empty sessionScope.carrito}">
+        <c:if test="${not empty sessionScope.carrito.carrito}">
             <c:forEach var ="carrito" items="${sessionScope.carrito.carrito}">
                 <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${carrito.key.id}">
                     <div class="card mb-3">
@@ -118,11 +120,11 @@
                                                 <label>Cantidad: <c:out value ="${carrito.value}"/></label>
                                             </li>
                                             <li class="list-inline-item text-center">
-                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?suma=1&id=${sessionScope.allProduct.id}','carritoBody');">+</a>
-                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?resta=1&id=${sessionScope.allProduct.id}','carritoBody');">-</a>
+                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?suma=1&id=${carrito.key.id}','carritoBody');">+</a>
+                                                <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?resta=1&id=${carrito.key.id}','carritoBody');">-</a>
                                             </li>
                                             <li class="list-inline-item text-center">
-                                                <button type="submit" class="btn btn-outline-dark mx-5 " onclick="getDatos('./CarritoManager?eliminar=1&id=${sessionScope.allProduct.id}','carritoBody');">Eliminar del carrito</button>
+                                                <button type="submit" class="btn btn-outline-dark mx-5 " onclick="getDatos('./CarritoManager?eliminar=1&id=${carrito.key.id}','carritoBody');">Eliminar del carrito</button>
                                             </li>
 
                                         </ul>
@@ -136,7 +138,7 @@
                 </a>
             </c:forEach>
         </c:if>
-        <c:if test="${empty sessionScope.carrito}">
+        <c:if test="${empty sessionScope.carrito.carrito}">
             <label style="color: red; text-align: center">No hay ningún producto en el carrito.</label>
         </c:if>
     </div>
@@ -147,11 +149,12 @@
             <h1 class="text-center py-3 mt-5 "><strong>Finaliza tu pedido!!</strong></h1>
             <h5>Número de productos: <c:out value="${sessionScope.carrito.elementos}"/></h5>
             <h5>Coste: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.carrito.total}"/></h5>
-            <form action="finalizar_compra.jsp" method = "POST">
-                <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
-            </form>
-            <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
-
+            <c:if test="${not empty sessionScope.carrito.carrito}">
+                <form action="finalizar_compra.jsp" method = "POST">
+                    <button type="submit" class="btn btn-dark mt-5">Tramitar</button>
+                </form>
+                <button type="submit" class="btn btn-dark mt-5" onclick="getDatos('./CarritoManager?empty=1','carritoBody');">Vaciar carrito</button>
+            </c:if>
         </div>
     </div>
 </div>

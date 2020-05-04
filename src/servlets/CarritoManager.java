@@ -30,7 +30,8 @@ public class CarritoManager extends HttpServlet {
 
         if(request.getParameter("empty") != null){
             carrito.empty();
-            session.setAttribute("carrito",null);
+            session.setAttribute("carrito",carrito);
+            request.getRequestDispatcher("/carrito.jsp").forward(request,response);
         }else if(request.getParameter("sumaInfo") != null) {
             carrito.mas1((Product) session.getAttribute("allProduct"));
             request.setAttribute("mensaje","Se ha añadido al carrito correctamente.");
