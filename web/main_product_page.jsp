@@ -65,7 +65,7 @@
         <!--Productos-->
         <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
-            <c:forEach var = "product" items="${sessionScope.products}">
+            <c:forEach var ="product" items="${sessionScope.products}">
                 <c:if test="${sessionScope.user.admin}">
                     <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" onclick="getDatos('./EliminarProducto?id=${product.id}','paginaProductos');">Eliminar producto</button>
                 </c:if>

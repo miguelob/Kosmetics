@@ -187,8 +187,8 @@
                                         </div>
                                         <div class="col-7 pl-0 py-1 m-auto">
                                             <div class="progress" style="height: 19px;">
-                                                <div class="progress-bar" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,0)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${requestScope.product.survey.getResult(question,1)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar" role="progressbar" style="width: ${sessionScope.allProduct.survey.getResult(question,0)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,0)}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: ${sessionScope.allProduct.survey.getResult(question,1)}%" aria-valuenow="${sessionScope.allProduct.survey.getResult(question,1)}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="col-xl-1"></div>

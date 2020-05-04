@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/CarritoManager")
@@ -24,17 +25,30 @@ public class CarritoManager extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = ProductDAO.getProductFromId(Integer.parseInt(request.getParameter("id")));
+        HttpSession session = request.getSession();
 
         if(request.getParameter("cantidad") != null){
             int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+            if(cantidad == -1){
+                int acumulado = carrito.getCarrito().get(product);
+                if(acumulado - 1 == 0){
+                    carrito.getCarrito().remove(product);
+                }else{
+                    carrito.add(product,-1);
+                }
+            }
             carrito.add(product,cantidad);
+            session.setAttribute("carrito",carrito);
         }else{
             carrito.add(product,1);
             request.setAttribute("carrito","Se ha añadido correctamente al carrito");
+            session.setAttribute("carrito",carrito);
             request.getRequestDispatcher("/info_producto.jsp").forward(request,response);
         }
         if(request.getParameter("empty") != null){
             carrito.empty();
+            session.setAttribute("carrito",carrito);
+            request.getRequestDispatcher("/carrito.jsp").forward(request,response);
         }
     }
 }
