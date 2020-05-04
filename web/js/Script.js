@@ -80,5 +80,20 @@ function validarEdicion2() {
 
     return retorno;
 }
+function validarCompra() {
+    var direccion = document.getElementById("address").value;
+    var nombre = document.getElementById("cc-name").value;
+    var tarjeta = document.getElementById("cc-number").value;
+    var caducidad = document.getElementById("caducidad").value;
+    var cvv = document.getElementById("cc-cvv").value;
+    var error = document.getElementById("error");
+    var retorno = true;
 
+    if(direccion === "" || nombre === "" || tarjeta === "" || caducidad === "" || cvv === ""){
+        error.innerHTML = "Debe rellenar todos los campos."
+        retorno = false
+    }
+
+    return retorno;
+}
 

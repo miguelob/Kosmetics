@@ -12,6 +12,9 @@
     <title>Carrito · Kosmetics </title>
 </head>
 <body id = "carritoBody">
+<c:if test="${empty sessionScope.user}">
+    <jsp:forward page="./inicio_sesion_usuario.jsp"></jsp:forward>
+</c:if>
 <jsp:include page="cabeceraSinAjax.jsp"/>
 <div class="row justify-content-center">
 
@@ -105,8 +108,9 @@
                                                 <span class="h6 px-2" style="color:red">Envío gratuíto</span>
                                             </c:when>
                                             <c:when test = "${carrito.key.offer != 0}">
-                                                <fmt:formatNumber pattern="#%" value="${carrito.key.offer}"/>
-                                                <span class="h6 px-2">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${carrito.key.newPrice}"/></span>
+                                                <span class="h6 px-2" style="color:red"><fmt:formatNumber pattern="#%" value="${carrito.key.offer}"/></span>
+                                                <span class="h6 px-2" style="color:red">Nuevo Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${carrito.key.newPrice}"/></span>
+                                                <span class="h6 px-2" style="color:red">Envío 4 €</span>
                                             </c:when>
                                             <c:otherwise>
                                                 No hay Oferta.
@@ -124,7 +128,7 @@
                                                 <a class="btn btn-dark" href="javascript:getDatos('./CarritoManager?resta=1&id=${carrito.key.id}','carritoBody');">-</a>
                                             </li>
                                             <li class="list-inline-item text-center">
-                                                <button type="submit" class="btn btn-outline-dark mx-5 " onclick="getDatos('./CarritoManager?eliminar=1&id=${sessionScope.allProduct.id}','carritoBody');">Eliminar del carrito</button>
+                                                <button type="submit" class="btn btn-outline-dark mx-5 " onclick="getDatos('./CarritoManager?eliminar=1&id=${carrito.key.id}','carritoBody');">Eliminar del carrito</button>
                                             </li>
 
                                         </ul>

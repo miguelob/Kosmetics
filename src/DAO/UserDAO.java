@@ -12,11 +12,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.sun.source.tree.CaseTree;
+import domain.Carrito;
 import domain.Product;
 import domain.User;
 
@@ -328,5 +330,30 @@ public class UserDAO {
     }
     public static java.util.Date string2Date(String date) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(date));
+    }
+
+    public static void generateInvoice(User user, Carrito carrito) {
+        Connection con = null;
+        int idUser = UserDAO.getUserID(user);
+        try{
+            con = ConnectionDAO.getInstance().getConnection();
+            for (Map.Entry<Product, Integer> entry: carrito.getCarrito().entrySet()
+                 ) {
+                for(int i = 0; i<entry.getValue();i++){
+                    PreparedStatement pst = con.prepareStatement("INSERT INTO invoice(Products_idProducts, Users_idUser, date) VALUES(?,?,?)");
+
+                    pst.setInt(1,entry.getKey().getId());
+                    pst.setInt(2,idUser);
+                    pst.setDate(3,UserDAO.convertUtilToSql(new Date()));
+
+                    pst.executeUpdate();
+                }
+            }
+
+        } catch (SQLException sqle) {
+            System.err.format("SQL State: %s\n%s", sqle.getSQLState(), sqle.getMessage());
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
     }
 }

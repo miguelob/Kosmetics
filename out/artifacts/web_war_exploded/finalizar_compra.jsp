@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 
@@ -15,6 +17,9 @@
     <title>Crear tu review · Kosmetics </title>
 </head>
 <body>
+<c:if test="${empty sessionScope.user}">
+    <jsp:forward page="./inicio_sesion_usuario.jsp"></jsp:forward>
+</c:if>
 <jsp:include page="cabecera.jsp"/>
     <div class="row justify-content-center">
 
@@ -31,7 +36,10 @@
             <!--Informacion del envio-->
             <div class="row">
                 <div class="mb-6 pl-3">
-                    <p>Precio final: 3 € Coste envio: 3 Tiempo estimado: ...</p>
+                    <p>Precio final: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.carrito.total}"/>
+                        Envio: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.carrito.envio}"/>
+                        Total: <fmt:formatNumber pattern="#,##0.00 €" value="${sessionScope.carrito.totalPedido}"/>
+                    </p>
 
                 </div>
             </div>
@@ -40,35 +48,47 @@
                     <label for="address">Address</label>
                     <input type="text" class="form-control" id="address" placeholder="C/ Luis Jorge Castaños 23. 4º-2ª; Urbanización Las Cascajuelas; 28999 Valdecillas de Jarama, Madrid"g required="">
                     <div class="invalid-feedback">
-                        Please enter your shipping address.
+                        Por favor intruduzca la direccion de entrega.
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="cc-name">Nombre completo</label>
-                    <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                    <input type="text" class="form-control" id="cc-name" value="<c:out value="${sessionScope.user.name}"/>" placeholder="" required="">
 
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cc-number">Número bancario</label>
                     <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-
+                    <div class="invalid-feedback">
+                        Por favor intruduzca el número de la tarjeta.
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label for="cc-expiration">Fecha de caducidad</label>
-                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-
+                    <input type="date" name = "birthDate" class="form-control"id="caducidad"
+                    value="2020-04-2"
+                    min="2020-04-11" max="2030-12-31">
+                    <div class="invalid-feedback">
+                        Por favor intruduzca la fecha de caducidad de la tarjeta.
+                    </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                    <input type="number" step="1" min="1" max="999" class="form-control" id="cc-cvv" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Por favor intruduzca el CVV.
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="col-5 btn btn-dark mt-5 px-5">Pagar</button>
+                <form action="GenerateInvoice" method="POST" onsubmit="return validarCompra();">
+                    <button class="btn btn-info my-2 mx-2 my-sm-0" type="submit" >Pagar</button>
+                </form><br>
+                <span style="color: red;justify-content: center;text-align: center" id="error"></span>
             </div>
         </div>
     </div>
