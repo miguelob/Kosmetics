@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import domain.Product;
 import domain.Review;
@@ -37,18 +38,17 @@ public class ReviewDAO {
     }
     public static boolean uploadReview(Review review, Product product) {
         boolean status = false;
-        final Connection con = null;
         try{
-            ConnectionDAO.getInstance().getConnection();
-            final PreparedStatement pst = con.prepareStatement("INSERT INTO reviews (Products_idProducts, Users_idUser, title, text, scoreProduct, scoreReview, scoreReviewParticipants) VALUES(?,?,?,?,?,?,?)");
+            final Connection con=ConnectionDAO.getInstance().getConnection();
+            final PreparedStatement pst = con.prepareStatement("INSERT INTO reviews (scoreProduct, title, text, Users_idUser,  Products_idProducts, Products_Brands_idBrands, fechaReview) VALUES(?,?,?,?,?,?,?)");
 
-            pst.setInt(1,ProductDAO.getProductID(product.getName()));
-            pst.setInt(2,UserDAO.getUserID(review.getUser()));
-            pst.setString(3,review.getCommentTitle());
-            pst.setString(4, review.getComment());
-            pst.setInt(5, review.getProductScore());
-            pst.setInt(6, 0);
-            pst.setInt(7, 0);
+            pst.setInt(1,review.getProductScore());
+            pst.setString(2,review.getCommentTitle());
+            pst.setString(3,review.getComment());
+            pst.setInt(4,UserDAO.getUserID(review.getUser()));
+            pst.setInt(5,product.getId());
+            pst.setInt(6,0);
+            pst.setDate(7,convertUtilToSql(review.getDate()));
 
             pst.executeUpdate();
             status = true;
@@ -109,5 +109,9 @@ public class ReviewDAO {
             e.printStackTrace();
         }
         return reviews;
+    }
+    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        return sDate;
     }
 }

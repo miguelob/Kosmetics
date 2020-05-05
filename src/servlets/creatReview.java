@@ -47,8 +47,6 @@ public class creatReview extends HttpServlet {
                 String scoreProduct = request.getParameter("estrellas");
 
                 if (comentarioTitle == null || comentario == null || scoreProduct == null) {
-                    System.out.println(4);
-                    System.out.println(comentarioTitle+"/"+comentario+"/"+scoreProduct);
 
                     request.setAttribute("error", "Debe rellenar todos los campos.");
                     request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
@@ -56,37 +54,39 @@ public class creatReview extends HttpServlet {
                 } else {
                     int scoreReview = 0;
                     Review review = new Review(user, Integer.parseInt(scoreProduct), scoreReview, comentario, comentarioTitle, new Date());
-                    System.out.println(review);
-                    ReviewDAO.uploadReview(review, product);
+                    boolean correcto=ReviewDAO.uploadReview(review, product);
+                    if(correcto){
+                        //Cargar survey
+                        SurveyDAO.getSurvey(product);
+                        Survey survey = product.getSurvey();
 
-                    //Cargar survey
-                    SurveyDAO.getSurvey(product);
-                    Survey survey = product.getSurvey();
+                        for (Question q:survey.getQuestions()) {
 
-                    for (Question q:survey.getQuestions()) {
+                            String  value= request.getParameter("inlineRadioOptions" + "@" + ((Integer) q.getIdQuestion()).toString());
+                            int resultado[]=survey.getQuestionRespuesta(q);
+                            if(value.equals("Si")){
+                                resultado[0]++;
+                            }else if (value.equals("No")){
+                                resultado[1]++;
+                            }else if(value.equals("NS/NC")){
+                                resultado[2]++;
+                            }else{
+                                request.setAttribute("error", "Debe responder a todas las preguntas.");
+                                request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
+                            }
 
-                        String  value= request.getParameter("inlineRadioOptions" + "@" + ((Integer) q.getIdQuestion()).toString());
-                        int resultado[]=survey.getQuestionRespuesta(q);
-                        if(value.equals("Si")){
-                            resultado[0]++;
-                        }else if (value.equals("No")){
-                            resultado[1]++;
-                        }else if(value.equals("NS/NC")){
-                            resultado[2]++;
-                        }else{
-                            request.setAttribute("error", "Debe responder a todas las preguntas.");
-                            request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
+                            survey.put(q, resultado[0],resultado[1],resultado[2]);
+                            System.out.println(resultado[0]+"/"+resultado[1]+"/"+resultado[2]);
                         }
-
-                        survey.put(q, resultado[0],resultado[1],resultado[2]);
-                        System.out.println(survey);
-                    }
-                    product.setSurvey(survey);
-                    boolean correcto=SurveyDAO.uploadSurvey(product);
-                    if(correcto)
-                        request.getRequestDispatcher("./LoadAllProducto.jsp").forward(request, response);
-                    else{
-                        System.out.println(3);
+                        product.setSurvey(survey);
+                        correcto=SurveyDAO.uploadSurvey(product);
+                        if(correcto)
+                            request.getRequestDispatcher("LoadAllProduct").forward(request, response);
+                        else{
+                            request.setAttribute("error", "Error en la carga de la review.");
+                            request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
+                        }
+                    }else{
                         request.setAttribute("error", "Error en la carga de la review.");
                         request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
                     }
