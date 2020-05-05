@@ -43,28 +43,28 @@ public class EditarPerfil extends HttpServlet {
 
             User temp = new User(name,email,pass);
 
-            if(user.getName() != name){
+            if(!user.getName().toLowerCase().equals(name.toLowerCase())){
                 if(UserDAO.checkUsername(temp) != -1){
                     request.setAttribute("error","Ese nombre de usuario ya existe.");
                     request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request,response);
                 }
-            }else if(user.getEmail() != email){
+            }else if(!user.getEmail().toLowerCase().equals(email.toLowerCase())){
                 if(UserDAO.checkEmail(temp) != -1){
                     request.setAttribute("error","Ese email ya existe.");
                     request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request,response);
                 }
-            }
-            boolean status = UserDAO.editUser1(user.getName(),temp);
-//            System.out.println("Estado upload: "+status);
-            if(!status){
-                request.setAttribute("error1","Error al actualizar, inténtelo de nuevo.");
-                request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request,response);
             }else{
-                temp = UserDAO.getUser(UserDAO.getUserID(temp));
-                session.setAttribute("user",temp);
-                response.sendRedirect("./LoadAllUser");
+                boolean status = UserDAO.editUser1(user.getName(),temp);
+//            System.out.println("Estado upload: "+status);
+                if(!status){
+                    request.setAttribute("error1","Error al actualizar, inténtelo de nuevo.");
+                    request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request,response);
+                }else{
+                    temp = UserDAO.getUser(UserDAO.getUserID(temp));
+                    session.setAttribute("user",temp);
+                    response.sendRedirect("./LoadAllUser");
+                }
             }
-
 
         }else if(request.getParameter("btn").equals("second")){
             String skinColor = this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));

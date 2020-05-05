@@ -23,15 +23,21 @@ public class LoadAllProduct extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-
-        Product product = ProductDAO.loadAllInfo(id);
         HttpSession session = request.getSession();
-        session.setAttribute("allProduct",product);
+        int id = 0;
+        Product product = null;
 
         if(request.getParameter("opc") != null){
+            product = (Product) session.getAttribute("allProduct");
+
+            session.setAttribute("allProduct",ProductDAO.loadAllInfo(product.getId()));
             request.getRequestDispatcher("/crear_review.jsp").forward(request,response);
+
         }else{
+            id = Integer.parseInt(request.getParameter("id"));
+            product = ProductDAO.loadAllInfo(id);
+            session.setAttribute("allProduct",product);
+
             request.getRequestDispatcher("/info_producto.jsp").forward(request,response);
         }
     }

@@ -23,7 +23,7 @@
         <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
             <div class="row">
                 <!-- <img src = ".\media\prueba_cuadrada.jpg" class="img img-fluid p-4">-->
-                <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
+                <img src="ReadImg?id=${sessionScope.allProduct.id}" class="img-fluid px-4 pt-0">
 
             </div>
 
@@ -35,14 +35,14 @@
                 <!--Nombre del producto-->
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-6 text-left">
-                        <h2>${requestScope.product.name}</h2>
+                        <h2>${sessionScope.allProduct.name}</h2>
                     </div>
                     <div class="col-11 col-lg-5 py-3 ">
                         <div class="row">
-                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                            <c:forEach var = "i" begin = "1" end = "${sessionScope.allProduct.score}">
                                 <span class="fa fa-star fa-2x checked"></span>
                             </c:forEach>
-                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                            <c:forEach var = "i" begin = "1" end = "${sessionScope.allProduct.resto}">
                                 <span class="fa fa-star fa-2x "></span>
                             </c:forEach>
                         </div>
@@ -77,7 +77,7 @@
 
                     <div class="form-group row">
                     <!--Preguntas-->
-                    <c:forEach var = "question" items="${requestScope.product.survey.questions}">
+                    <c:forEach var = "question" items="${sessionScope.allProduct.survey.questions}">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row py-1 d-flex justify-content-center">
