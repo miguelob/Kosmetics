@@ -135,7 +135,7 @@ public class Filtros extends HttpServlet {
                 }
                 ArrayList<String> features = productos.get(i).getFeatures();
                 for (int j = 0; j<features.size(); j++){
-                    if(features.get(i).toUpperCase().equals(palabra.toUpperCase())){
+                    if(features.get(j).toUpperCase().equals(palabra.toUpperCase())){
                         if(!copy.contains(productos.get(i)))
                             copy.add(productos.get(i));
                     }

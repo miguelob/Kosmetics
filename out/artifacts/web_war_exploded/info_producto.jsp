@@ -135,8 +135,8 @@
                                     </div>
                                     <div class="col-4 col-xl-3 py-3 m-auto">
                                         <c:if test = "${not empty sessionScope.user}">
-                                            <form class="form-group my-0 mx-auto" action="LoadAllProduct?id=${sessionScope.allProduct.id}&opc=review" method="post">
-                                                <button type="submit" class="btn btn-outline-dark btn-block ">Opinar</button>
+                                            <form class="form-group my-0 mx-auto" action="LoadAllProduct" method="post">
+                                                <button type="submit" class="btn btn-outline-dark btn-block" name = "opc" value="review">Opinar</button>
                                             </form>
                                         </c:if>
                                     </div>
