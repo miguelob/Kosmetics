@@ -161,7 +161,7 @@ public class Filtros extends HttpServlet {
             ArrayList<String> features = productos.get(i).getFeatures();
             int check = 0;
             for(int j = 0;j < features.size();j++){
-                if(features.get(i).equals(feature))
+                if(features.get(j).equals(feature))
                     check = 1;
             }
             if(check == 1){
