@@ -55,50 +55,24 @@ public class SurveyDAO {
         }
         return question;
     }
-    public static boolean uploadSurvey(Product product, HashMap<Integer,int[]> ans) {
-        boolean status = false;
+    public static boolean uploadSurvey(Product product) {
+        boolean status=true;
         try {
             Connection con = ConnectionDAO.getInstance().getConnection();
-            int idSurvey = ProductDAO.getSurveyID(product);
-            Collection<Question> questions = product.getSurvey().getQuestions();
-            int contador = 1;
-            Iterator<Question> it = questions.iterator();
-            while (it.hasNext()) {
-                Question question = (Question) it.next();
-                int[] yes = {1, 0, 0};
-                int[] no = {0, 0, 1};
-                int[] yesNo = {0, 1, 0};
-                if (Arrays.equals(ans.get(contador), yes)) {
-                    try {
-                        final PreparedStatement pst = con.prepareStatement("UPDATE \"IDs_Surv_Quest\" SET \"Number_Yes\" = \"Number_Yes\" + 1 WHERE \"ID_Survey\" = '" + idSurvey + "' AND \"ID_Question\" = '" + question.getIdQuestion() + "'");
-                        pst.executeUpdate();
-                        status = true;
-                    } catch (SQLException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                } else if (Arrays.equals(ans.get(contador), no)) {
-                    try {
-                        final PreparedStatement pst = con.prepareStatement("UPDATE \"IDs_Surv_Quest\" SET \"Number_No\" = \"Number_No\" + 1 WHERE \"ID_Survey\" = '" + idSurvey + "' AND \"ID_Question\" = '" + question.getIdQuestion() + "'");
-                        pst.executeUpdate();
-                        status = true;
-                    } catch (SQLException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                } else if (Arrays.equals(ans.get(contador), yesNo)) {
-                    try {
-                        final PreparedStatement pst = con.prepareStatement("UPDATE \"IDs_Surv_Quest\" SET \"Number_No_answer\" = \"Number_No_answer\" + 1 WHERE \"ID_Survey\" = '" + idSurvey + "' AND \"ID_Question\" = '" + question.getIdQuestion() + "'");
-                        pst.executeUpdate();
-                        status = true;
-                    } catch (SQLException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                }
-                contador++;
+            Survey survey=product.getSurvey();
+            for (Question q:survey.getQuestions()) {
+
+                PreparedStatement pst = con.prepareStatement("UPDATE questions SET numYes= ?, numNo= ?, noAnswer= ? WHERE idQuestion= ?");
+
+                pst.setInt(1,survey.getQuestionRespuesta(q)[0]);
+                pst.setInt(2,survey.getQuestionRespuesta(q)[1]);
+                pst.setInt(3,survey.getQuestionRespuesta(q)[2]);
+                pst.setInt(2, q.getIdQuestion());
             }
-        }catch (ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
+            status=false;
         }
         return status;
     }

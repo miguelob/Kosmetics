@@ -120,7 +120,7 @@
                                            <select id="inputState" class="form-control">
                                                 <option selected>1</option>
                                                 <option value="2">2</option>
-                                                <option value="3">3</option>
+                                                    <option value="3">3</option>
                                           </select>
                                        </li>
                                         <li class="list-inline-item text-center">

@@ -1,7 +1,9 @@
 package servlets;
 
+import DAO.ReviewDAO;
+import DAO.SurveyDAO;
 import DAO.UserDAO;
-import domain.User;
+import domain.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.HashMap;
 
 @WebServlet("/creatReview")
 public class creatReview {
@@ -33,55 +37,65 @@ public class creatReview {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ParseException, ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        Product product = (Product) session.getAttribute("product");
 
-        if (request.getParameter("btn").equals("first")) {
-//            System.out.println("entra");
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
+        if(product != null) {
+            if (user != null) {
 
-            User temp = new User(name, email, pass);
+                String comentarioTitle = request.getParameter("title");
+                String comentario = request.getParameter("comentario");
+                String scoreProduct = request.getParameter("estrellas");
 
-            if (user.getName() != name) {
-                if (UserDAO.checkUsername(temp) != -1) {
-                    request.setAttribute("error", "Ese nombre de usuario ya existe.");
-                    request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request, response);
+                if (comentarioTitle == null || comentario == null || scoreProduct == null) {
+                    request.setAttribute("error", "Debe rellenar todos los campos.");
+                    request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
+
+                } else {
+                    int scoreReview = 0;
+                    Review review = new Review(user, Integer.parseInt(scoreProduct), scoreReview, comentario, comentarioTitle, new Date());
+                    ReviewDAO.uploadReview(review, product);
+
+                    //Cargar survey
+                    SurveyDAO.getSurvey(product);
+                    Survey survey = product.getSurvey();
+
+                    for (Question q:survey.getQuestions()) {
+
+                        String  value= request.getParameter("inlineRadioOptions" + "@" + ((Integer) q.getIdQuestion()).toString());
+                        int resultado[]=survey.getQuestionRespuesta(q);
+                        if(value.equals("Si")){
+                            resultado[0]++;
+                        }else if (value.equals("No")){
+                            resultado[1]++;
+                        }else if(value.equals("NS/NC")){
+                            resultado[2]++;
+                        }else{
+                            request.setAttribute("error", "Debe responder a todas las preguntas.");
+                            request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
+                        }
+
+                        survey.put(q, resultado[0],resultado[1],resultado[2]);
+
+                    }
+                    product.setSurvey(survey);
+                    boolean correcto=SurveyDAO.uploadSurvey(product);
+                    if(correcto)
+                        request.getRequestDispatcher("./LoadAllProducto.jsp").forward(request, response);
+                    else{
+                        request.setAttribute("error", "Error en la carga de la review.");
+                        request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
+                    }
+
                 }
-            } else if (user.getEmail() != email) {
-                if (UserDAO.checkEmail(temp) != -1) {
-                    request.setAttribute("error", "Ese email ya existe.");
-                    request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request, response);
-                }
-            }
-            boolean status = UserDAO.editUser1(user.getName(), temp);
-//            System.out.println("Estado upload: "+status);
-            if (!status) {
-                request.setAttribute("error1", "Error al actualizar, inténtelo de nuevo.");
-                request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request, response);
+
+
             } else {
-                temp = UserDAO.getUser(UserDAO.getUserID(temp));
-                session.setAttribute("user", temp);
-                response.sendRedirect("./LoadAllUser");
+                request.setAttribute("error", "Ese necesario loguearse para crear una review.");
+                request.getRequestDispatcher("./inicio_sesion_usuario.jsp").forward(request, response);
             }
-
-
-        } else if (request.getParameter("btn").equals("second")) {
-            /*String skinColor = this.num2SkinColor(Integer.parseInt(request.getParameter("skinColor")));
-            String skinCondition = this.num2SkinCondition(Integer.parseInt(request.getParameter("skinCondition")));
-            String bday = request.getParameter("fecha_nacimiento");
-            String genero = this.num2genero(Integer.parseInt(request.getParameter("genero")));
-            String direccion = request.getParameter("direccion");
-
-            boolean status = UserDAO.editUser2(user.getName(), bday, skinColor, skinCondition);
-            if (!status) {
-                request.setAttribute("error", "Error al actualizar, inténtelo de nuevo.");
-                request.getRequestDispatcher("./editar_perfil_usuario.jsp").forward(request, response);
-            } else {
-                User temp = UserDAO.getUser(UserDAO.getUserID(user));
-                session.setAttribute("user", temp);
-                response.sendRedirect("./LoadAllUser");
-            }
-            */
+        } else {
+            request.setAttribute("error", "Ese necesario que acceda desde un producto en concreto.");
+            request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
         }
     }
 }
