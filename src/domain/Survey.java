@@ -55,13 +55,9 @@ public class Survey implements Serializable{
         return survey.keySet();
     }
 
-    public String getAnswer(Question question) {
-        int[] puntuation=survey.get(question);
+    public int[] getQuestionRespuesta(Question question){
+        return survey.get(question);
 
-        if (puntuation[0]>=puntuation[1])
-            return "yes";
-        else
-            return "no";
     }
 
     public int getResult(Question question,int j) {

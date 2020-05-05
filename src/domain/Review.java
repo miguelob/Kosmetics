@@ -28,6 +28,18 @@ public class Review implements Serializable{
         this.setDate(date);
     }
 
+    public Review(User user, int scoreProduct,
+                  int scoreReview, String comentario,
+                  String comentarioTitle,Date date){
+
+        this.user=user;
+        this.scoreProduct=scoreProduct;
+        this.scoreReview=scoreReview;
+        this.comment=comentario;
+        this.commentTitle=comentarioTitle;
+        this.date=date;
+    }
+
     private void setDate(String date) throws ParseException {
         this.date = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(date));
     }

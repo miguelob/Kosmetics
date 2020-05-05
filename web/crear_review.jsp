@@ -22,7 +22,7 @@
         <!--Imagen del producto pantallas grandes-->
         <div class="img-fluid col-lg-6 p-7 pt-0 d-none d-lg-block">
             <div class="row">
-                <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
+                <!-- <img src = ".\media\prueba_cuadrada.jpg" class="img img-fluid p-4">-->
                 <img src="ReadImg?id=${product.id}" class="img-fluid px-4 pt-0">
 
             </div>
@@ -33,36 +33,49 @@
             <div class="col-12 px-0">
 
                 <!--Nombre del producto-->
-                <div class="row ">
-                    <div class="col-12 text-left">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-6 text-left">
                         <h2>${requestScope.product.name}</h2>
                     </div>
-                </div>
-
-                <!--Estrellas -->
-                <div class="row justify-content-center">
-                    <div class="col-11 py-3 ">
+                    <div class="col-11 col-lg-5 py-3 ">
                         <div class="row">
-                            <span class="fa fa-star fa-2x checked"></span>
-                            <span class="fa fa-star fa-2x checked"></span>
-                            <span class="fa fa-star fa-2x  checked"></span>
-                            <span class="fa fa-star fa-2x "></span>
-                            <span class="fa fa-star fa-2x "></span>
+                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.score}">
+                                <span class="fa fa-star fa-2x checked"></span>
+                            </c:forEach>
+                            <c:forEach var = "i" begin = "1" end = "${requestScope.product.resto}">
+                                <span class="fa fa-star fa-2x "></span>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
 
-                <form class="justify-content-center">
+
+                <form id="createReviewForm" class="justify-content-center" action="EditarPerfil" method="POST" onsubmit="return validarReview();">
+                    <!--Estrellas -->
+                    <div class="form-group justify-content-center row">
+                        <label for="selectEstrellas" class="col-sm-2 col-form-label">Estrellas</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="selectEstrellas" name="estrellas">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                     <!--Texto -->
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Ponle un título a tu review" rows="1" name="titulo"></textarea>
+                    <div class="form-group row">
+                        <textarea  id="tituloReview" form="createReviewForm" class="form-control" placeholder="Ponle un título a tu review" rows="1" name="titulo"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Cuentanos tu experiencia!" rows="4" name="comentario"></textarea>
+                    <div class="form-group row">
+                        <textarea id="textReview" form="createReviewForm" class="form-control" placeholder="Cuentanos tu experiencia!" rows="4" name="comentario"></textarea>
                     </div>
 
-                    <div class="form-group ">
+                    <div class="form-group row">
                     <!--Preguntas-->
                     <c:forEach var = "question" items="${requestScope.product.survey.questions}">
                         <div class="row">
@@ -75,15 +88,15 @@
                                     </div>
                                     <div class="col-5 col-lg-6 col-xl-5">
                                         <div class="form-check form-check-inline ">
-                                            <input class="form-check-input" type="radio" name="" id="inlineRadio1" value="Si"> // OJO AL NAME QUE TIENE QUE SER DISTINTO PARA CADA PREGUNTA
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions@${question.idQuestion}" id="inlineRadio1" value="Si">
                                             <label class="form-check-label text-muted" for="inlineRadio1">Si</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="No">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions@${question.idQuestion}" id="inlineRadio2" value="No">
                                             <label class="form-check-label text-muted" for="inlineRadio2">No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="NS/NC">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions@${question.idQuestion}" id="inlineRadio3" value="NS/NC">
                                             <label class="form-check-label text-muted" for="inlineRadio2">NS/NC</label>
                                         </div>
                                     </div>
@@ -107,7 +120,7 @@
                     </div>
 
                     <div class="row justify-content-center">
-                        <button type="submit" class="col-8 btn btn-outline-dark">Enviar opinión</button>
+                        <button type="submit" class="col-8 btn btn-outline-dark" name="btn">Enviar opinión</button>
                     </div>
 
                 </form>

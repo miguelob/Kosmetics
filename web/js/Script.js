@@ -97,3 +97,13 @@ function validarCompra() {
     return retorno;
 }
 
+function validarReview(){
+    var titel = document.getElementById("tituloReview").value;
+    var text = document.getElementById("textReview").value;
+
+    if(titel==="" || text===""){
+        error.innerHTML = "Debe rellenar todos los campos.";
+        retorno = false;
+    }
+}
+
