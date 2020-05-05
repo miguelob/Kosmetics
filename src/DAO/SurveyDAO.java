@@ -58,12 +58,14 @@ public class SurveyDAO {
     public static boolean uploadSurvey(Product product) {
         boolean status=true;
         try {
+            System.out.println("pez");
             Connection con = ConnectionDAO.getInstance().getConnection();
             Survey survey=product.getSurvey();
+            System.out.println(survey);
             for (Question q:survey.getQuestions()) {
 
-                PreparedStatement pst = con.prepareStatement("UPDATE questions SET numYes= ?, numNo= ?, noAnswer= ? WHERE idQuestion= ?");
-
+                PreparedStatement pst = con.prepareStatement("UPDATE products_questions SET numYes= ?, numNo= ?, numNoAnswer= ? WHERE Questions_idQuestion= ?");
+                System.out.println(survey.getQuestionRespuesta(q)[0]+survey.getQuestionRespuesta(q)[1]+survey.getQuestionRespuesta(q)[2]);
                 pst.setInt(1,survey.getQuestionRespuesta(q)[0]);
                 pst.setInt(2,survey.getQuestionRespuesta(q)[1]);
                 pst.setInt(3,survey.getQuestionRespuesta(q)[2]);
