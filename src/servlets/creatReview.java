@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 @WebServlet("/creatReview")
-public class creatReview {
+public class creatReview extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             processRequest(request, response);
@@ -37,22 +37,26 @@ public class creatReview {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ParseException, ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        Product product = (Product) session.getAttribute("product");
+        Product product = (Product) session.getAttribute("allProduct");
 
         if(product != null) {
             if (user != null) {
 
-                String comentarioTitle = request.getParameter("title");
+                String comentarioTitle = request.getParameter("titulo");
                 String comentario = request.getParameter("comentario");
                 String scoreProduct = request.getParameter("estrellas");
 
                 if (comentarioTitle == null || comentario == null || scoreProduct == null) {
+                    System.out.println(4);
+                    System.out.println(comentarioTitle+"/"+comentario+"/"+scoreProduct);
+
                     request.setAttribute("error", "Debe rellenar todos los campos.");
                     request.getRequestDispatcher("./crear_review.jsp").forward(request, response);
 
                 } else {
                     int scoreReview = 0;
                     Review review = new Review(user, Integer.parseInt(scoreProduct), scoreReview, comentario, comentarioTitle, new Date());
+                    System.out.println(review);
                     ReviewDAO.uploadReview(review, product);
 
                     //Cargar survey
@@ -75,13 +79,14 @@ public class creatReview {
                         }
 
                         survey.put(q, resultado[0],resultado[1],resultado[2]);
-
+                        System.out.println(survey);
                     }
                     product.setSurvey(survey);
                     boolean correcto=SurveyDAO.uploadSurvey(product);
                     if(correcto)
                         request.getRequestDispatcher("./LoadAllProducto.jsp").forward(request, response);
                     else{
+                        System.out.println(3);
                         request.setAttribute("error", "Error en la carga de la review.");
                         request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
                     }
@@ -90,10 +95,13 @@ public class creatReview {
 
 
             } else {
+                System.out.println(2);
                 request.setAttribute("error", "Ese necesario loguearse para crear una review.");
                 request.getRequestDispatcher("./inicio_sesion_usuario.jsp").forward(request, response);
+
             }
         } else {
+            System.out.println(1);
             request.setAttribute("error", "Ese necesario que acceda desde un producto en concreto.");
             request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);
         }

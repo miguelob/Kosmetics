@@ -50,7 +50,7 @@
                 </div>
 
 
-                <form id="createReviewForm" class="justify-content-center" action="EditarPerfil" method="POST" onsubmit="return validarReview();">
+                <form id="createReviewForm" class="justify-content-center" action="creatReview" method="POST" onsubmit="return validarReview();">
                     <!--Estrellas -->
                     <div class="form-group justify-content-center row">
                         <label for="selectEstrellas" class="col-sm-2 col-form-label">Estrellas</label>
