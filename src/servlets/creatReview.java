@@ -81,7 +81,7 @@ public class creatReview extends HttpServlet {
                         product.setSurvey(survey);
                         correcto=SurveyDAO.uploadSurvey(product);
                         if(correcto)
-                            request.getRequestDispatcher("LoadAllProduct").forward(request, response);
+                            request.getRequestDispatcher("LoadAllProduct?id="+product.getId()).forward(request, response);
                         else{
                             request.setAttribute("error", "Error en la carga de la review.");
                             request.getRequestDispatcher("./main_product_page.jsp").forward(request, response);

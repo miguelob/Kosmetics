@@ -33,7 +33,7 @@ public class LoadAllProduct extends HttpServlet {
             session.setAttribute("allProduct",ProductDAO.loadAllInfo(product.getId()));
             request.getRequestDispatcher("/crear_review.jsp").forward(request,response);
 
-        }else{
+        }else if(request.getParameter("id") != null){
             id = Integer.parseInt(request.getParameter("id"));
             product = ProductDAO.loadAllInfo(id);
             session.setAttribute("allProduct",product);

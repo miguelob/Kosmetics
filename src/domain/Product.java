@@ -200,15 +200,15 @@ public class Product implements Serializable{
     }
     public HashMap<Integer, Integer> getParcialScores(){
         int i,valor;
-        for(i=0;i<5;i++){
-            parcialScores.put(i+1,0);
+        for(i=1;i<=5;i++){
+            parcialScores.put(i,0);
         }
         totalScores = reviews.size();
         for(i=0; i<reviews.size();i++){
            valor = reviews.get(i).getProductScore();
            parcialScores.put(valor,parcialScores.get(valor)+1);
         }
-        for(i=1; i<5;i++){
+        for(i=1; i<=5;i++){
             parcialScores.put(i,Math.round(((float)parcialScores.get(i)/totalScores)*100));
         }
         return parcialScores;
