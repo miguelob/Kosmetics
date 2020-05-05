@@ -87,7 +87,7 @@
                 <div class="tab-pane fade show active" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
                     <!--Contenedor de un producto. Iterar para todos los productos-->
                     <c:forEach var = "product" items="${requestScope.compras}">
-
+                    <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-sm-4">
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    </a>
                     </c:forEach>
 
                 </div>
