@@ -65,64 +65,65 @@
         <!--Productos-->
         <div class="col-12 col-lg-9 pr-4 pl-2 py-1">
             <!--Contenedor de un producto. Iterar para todos los productos-->
-            <c:forEach var ="product" items="${sessionScope.products}">
-                <c:if test="${sessionScope.user.admin}">
-                    <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" onclick="getDatos('./EliminarProducto?id=${product.id}','paginaProductos');">Eliminar producto</button>
-                </c:if>
-                <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
-                    <div class="card mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-sm-4">
-                                <img src="ReadImg?id=${product.id}" class="card-img">
-                                <!--<span class=" productoImg  card-img m-auto">P</span>-->
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <div class="row">
-                                            <div class="col-12 col-xl-8 m-auto text-center">
-                                                <h3><c:out value="${product.name}"/></h3>
-                                            </div>
+            <c:if test="${not empty sessionScope.products}">
+                <c:forEach var ="product" items="${sessionScope.products}">
+                    <c:if test="${sessionScope.user.admin}">
+                        <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" onclick="getDatos('./EliminarProducto?id=${product.id}','paginaProductos');">Eliminar producto</button>
+                    </c:if>
+                    <a class = "text-decoration-none cajas" href="LoadAllProduct?id=${product.id}">
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                                <div class="col-sm-4">
+                                    <img src="ReadImg?id=${product.id}" class="card-img">
+                                    <!--<span class=" productoImg  card-img m-auto">P</span>-->
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <div class="col-12 col-xl-8 m-auto text-center">
+                                                    <h3><c:out value="${product.name}"/></h3>
+                                                </div>
 
-                                            <!--Contenedor estrellas-->
-                                            <div class="col-12 col-xl-4 m-auto offset-4">
-                                                <div class="row justify-content-center">
-                                                    <c:forEach var = "i" begin = "1" end = "${product.score}">
-                                                        <span class="fa fa-star fa-2x checked"></span>
-                                                    </c:forEach>
-                                                    <c:forEach var = "i" begin = "1" end = "${product.resto}">
-                                                        <span class="fa fa-star fa-2x "></span>
-                                                    </c:forEach>
+                                                <!--Contenedor estrellas-->
+                                                <div class="col-12 col-xl-4 m-auto offset-4">
+                                                    <div class="row justify-content-center">
+                                                        <c:forEach var = "i" begin = "1" end = "${product.score}">
+                                                            <span class="fa fa-star fa-2x checked"></span>
+                                                        </c:forEach>
+                                                        <c:forEach var = "i" begin = "1" end = "${product.resto}">
+                                                            <span class="fa fa-star fa-2x "></span>
+                                                        </c:forEach>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!--Segunda fila. Contiene categoria y marca-->
-                                    <div class="row">
-                                        <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted"><c:out value ="${product.category}"/></span>
+                                        <!--Segunda fila. Contiene categoria y marca-->
+                                        <div class="row">
+                                            <div class="col-3 m-auto py-2 text-nowrap">
+                                                <span class="h5 text-muted"><c:out value ="${product.category}"/></span>
+                                            </div>
+
+                                            <div class="col-3 m-auto py-2 text-nowrap">
+                                                <span class="h5 text-muted"><c:out value ="${product.brand}"/></span>
+                                            </div>
+
                                         </div>
 
-                                        <div class="col-3 m-auto py-2 text-nowrap">
-                                            <span class="h5 text-muted"><c:out value ="${product.brand}"/></span>
+                                        <!--Tercera fila. Contiene features-->
+                                        <div class="row ">
+                                            <ul class="list-inline">
+                                                <!--Hacer con un foreEach-->
+                                                <c:forEach var = "feature" items="${product.features}">
+                                                    <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center"><c:out value ="${feature}"/></li>
+                                                </c:forEach>
+                                            </ul>
                                         </div>
 
-                                    </div>
-
-                                    <!--Tercera fila. Contiene features-->
-                                    <div class="row ">
-                                        <ul class="list-inline">
-                                            <!--Hacer con un foreEach-->
-                                            <c:forEach var = "feature" items="${product.features}">
-                                                <li class="list-inline-item jumbotron mx-1 my-3 py-1 px-3 text-center"><c:out value ="${feature}"/></li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-
-                                    <!--Cuarta fila. Precio-->
-                                    <div class="row">
-                                        <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
-                                        <span class="h6 px-2" style="color:red">Oferta:
+                                        <!--Cuarta fila. Precio-->
+                                        <div class="row">
+                                            <span class="h6 px-2">Precio: <fmt:formatNumber pattern="#,##0.00 €" value="${product.ogPrice}"/></span>
+                                            <span class="h6 px-2" style="color:red">Oferta:
                                 <c:choose>
                                     <c:when test = "${product.freeDeliver}">
                                         Envío gratuíto
@@ -138,14 +139,18 @@
 
                             </span>
 
-                                    </div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </c:forEach>
+                    </a>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty sessionScope.products}">
+                <h5 style="color:red; text-align: center;">No hay ningún producto que cumpla esas características</h5>
+            </c:if>
         </div>
     </div>
     <script src="js/petAsinc.js"></script>

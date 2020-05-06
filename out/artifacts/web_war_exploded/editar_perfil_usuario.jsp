@@ -18,14 +18,14 @@
                    <div class="row">
                     <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
                        <c:if test="${sessionScope.user.imagen}">
-                           <img src="ReadImg?name=${sessionScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                           <img src="ReadImg?name=${sessionScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block rounded-circle">
                        </c:if>
                        <c:if test="${sessionScope.user.imagen == false}">
                            <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${sessionScope.user.iniciales}"/></span>
                        </c:if>
                    </div>
                     <div class="row justify-content-center">
-                        <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="">cambiar imagen de perfil</a></small>
+                        <small class="form-text text-muted mt-3"><a class="p-2 text-dark" href="./imgUser.jsp">cambiar imagen de perfil</a></small>
                     </div>
 
                 </div>

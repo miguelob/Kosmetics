@@ -223,7 +223,7 @@
                                         <div class="col-md-2 pb-2 ">
                                             <a href="LoadAllUser?name=${review.user.name.replace(' ','-')}">
                                                 <c:if test="${review.user.imagen}">
-                                                    <img src="ReadImg?name=${review.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                                                    <img src="ReadImg?name=${review.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block rounded-circle">
                                                 </c:if>
                                                 <c:if test="${review.user.imagen == false}">
                                                     <img src="./media/profile.jpg" class="img img-rounded img-fluid d-none d-md-block">
