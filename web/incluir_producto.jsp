@@ -52,10 +52,9 @@
                 <label for="productCategoria">Categoría</label>
                 <select id="productCategoria" class="custom-select" required name = "categoria">
                     <option value="1" >bases</option>
-                    <option value="2" >máscaras de pestañas</option>
+                    <option value="2" >mascaras de pestañas</option>
                     <option value="3" >pintalabios</option>
                     <option value="4" >sombras de ojos</option>
-                    <option value="5" >pestañas postizas</option>
                     <option value="6" >contouring</option>
                     <option value="7" >colorete</option>
                     <option value="8" >cejas</option>

@@ -38,6 +38,9 @@
                     </c:when>
                     <c:otherwise>
                         <c:if test="${sessionScope.user.admin}">
+                            <form method="POST" action="LoadInvoices">
+                                <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Ver ventas</button>
+                            </form>
                             <form method="POST" action="CargarDatosMarcas">
                                 <button class="btn btn-ttc my-2 mx-2 my-sm-0" type="submit" >Añadir producto</button>
                             </form>

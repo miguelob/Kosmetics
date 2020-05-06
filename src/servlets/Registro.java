@@ -48,17 +48,6 @@ public class Registro extends HttpServlet {
         //byte[] userImg = (byte[]) ((Object) request.getParameter("userImg"));
         HttpSession session = request.getSession();
 
-        //ERROR CODES
-        //0 --> TODO OK
-        //1 --> algun campo esta vacion
-        //2 --> el email ya esta registrado
-        //3 --> el username ya esta registrado
-        //4 --> error al gardar en base de datos
-
-        //if(userImg == null){
-           // userImg = defaultImage();
-        //}
-
         if(password1.equals(password2)){
             try{
                 user = new User(name,email,password1,brithDate,skinColor,skinCondition,false,false);
@@ -68,7 +57,7 @@ public class Registro extends HttpServlet {
                     request.setAttribute("error","Rellene todos los campos.");
                     request.getRequestDispatcher("/registro_usuario.jsp").forward(request,response);
                     System.out.println("nulos");
-                }else if(UserDAO.getUserID(user) != -1 || UserDAO.checkUsername(user) !=-1 || UserDAO.checkEmail(user) != 1){
+                }else if(UserDAO.getUserID(user) != -1 || UserDAO.checkUsername(user) !=-1 || UserDAO.checkEmail(user) != -1){
                     if (UserDAO.checkUsername(user) != -1)
                         request.setAttribute("error","Ese nombre de usuario ya está registrado.");
                     else

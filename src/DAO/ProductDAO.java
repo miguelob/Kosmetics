@@ -339,7 +339,7 @@ public class ProductDAO {
                         product.addFeature(rs4.getString(1));
                     }
                 }
-                PreparedStatement pst4 = con.prepareStatement("SELECT color FROM productcolor WHERE Products_idProducts = ?");
+                PreparedStatement pst4 = con.prepareStatement("SELECT color FROM productColor WHERE Products_idProducts = ?");
                 pst4.setInt(1, id);
                 ArrayList<String> colores = new ArrayList<String>();
                 ResultSet rs4 = pst4.executeQuery();
@@ -399,7 +399,7 @@ public class ProductDAO {
             pst1.setInt(1,id);
             pst1.executeUpdate();
 
-            PreparedStatement pst4 = con.prepareStatement("DELETE FROM productcolor WHERE idproductColor = ?");
+            PreparedStatement pst4 = con.prepareStatement("DELETE FROM productColor WHERE idproductColor = ?");
             pst4.setInt(1,id);
             pst4.executeUpdate();
 

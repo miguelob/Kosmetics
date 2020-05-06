@@ -16,7 +16,7 @@ public class Review implements Serializable{
     private String comment;
     private String commentTitle;
 
-    public Review(User user, int scoreProduct, int scoreReview, String comentario,String comentarioTitle,String date) throws ParseException {
+    public Review(User user, int scoreProduct, int scoreReview, String comentarioTitle, String comentario,String date) throws ParseException {
 
         this.user=user;
         this.scoreProduct=scoreProduct;
