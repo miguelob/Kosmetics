@@ -26,7 +26,7 @@
                     <div class="row">
                         <!--<img src = ".\media\inicio_sesion_fondo.jpg" class="rounded-circle img-fluid p-4">-->
                         <c:if test="${requestScope.user.imagen}">
-                            <img src="ReadImg?name=${requestScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block">
+                            <img src="ReadImg?name=${requestScope.user.name.replace(' ','-')}" class="img img-rounded img-fluid d-none d-md-block rounded-circle">
                         </c:if>
                         <c:if test="${requestScope.user.imagen == false}">
                             <span class="rounded-circle icono imgUserInfo m-auto"><c:out value ="${requestScope.user.iniciales}"/></span>

@@ -71,7 +71,7 @@ public class addProduct extends HttpServlet {
             ProductDAO.setFeatures(productId,idFeatures);
             Cookie id = new Cookie("id",Integer.toString(productId));
             response.addCookie(id);
-            request.getRequestDispatcher("img.html").forward(request,response);
+            request.getRequestDispatcher("/imgProduct.jsp").forward(request,response);
         }else{
             request.setAttribute("errorNewProduct","Ha ocurrido algun error al subir el producto. Inetentelo de nuevo.");
             request.getRequestDispatcher("/incluir_producto.jsp").forward(request,response);

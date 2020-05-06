@@ -129,6 +129,9 @@ public class User implements Serializable{
     public boolean isImagen() {
         return imagen;
     }
+    public void setImagen(boolean status){
+        this.imagen = status;
+    }
 
     @Override
     public boolean equals(Object o) {

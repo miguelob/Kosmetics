@@ -4,12 +4,7 @@
 <head>
     <jsp:include page="head.jsp"/>
     <title>Cargar Imagen · Kosmetics</title>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    -->
 
 </head>
 <body>
@@ -27,7 +22,7 @@
             </div>
         </div>
 
-        <form action="subirImg" method="post" enctype="multipart/form-data">
+        <form action="subirImgProducto" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="file" name="imagen[]" id="upload-files" accept="image/*" multiple="multiple">
                 <label for="upload-files" class=" form-control-file upload-drop-zone" id="drop-zone">

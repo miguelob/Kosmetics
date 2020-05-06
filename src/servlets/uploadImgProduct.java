@@ -12,35 +12,27 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "subirImg", urlPatterns = "/subirImg")
+@WebServlet(name = "subirImgProducto", urlPatterns = "/subirImgProducto")
 @MultipartConfig(
         fileSizeThreshold=1024 * 1024,
         maxFileSize=1024 * 1024 * 5,
         maxRequestSize=1024 * 1024 * 5 * 5
 )
-public class uploadImg extends HttpServlet {
+public class uploadImgProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Collection<Part> files = request.getParts();
         int id = this.getIdCookie(request);
 
-        System.out.println(files.size());
-
         for (Part f : files) {
-            System.out.println(f.getSubmittedFileName());
-
             InputStream imagen = f.getInputStream();
 
-            System.out.println(f.getSize() + " B");
-
             if (f.getSize() > 0) {
-                System.out.println("Se ha leído la imagen");
                 int i = ProductDAO.checkImg(id);
                 ProductDAO.uploadImg(id,imagen,i);
             }
         }
 
-        //response.setStatus(200);
-        //request.getRequestDispatcher("/imagen").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     private int getIdCookie(HttpServletRequest request) {
