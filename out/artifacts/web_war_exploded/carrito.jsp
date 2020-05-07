@@ -114,6 +114,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 No hay Oferta.
+                                                <span class="h6 px-2" style="color:red">Envío 4 €</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
