@@ -34,7 +34,7 @@
             <h3 class="text-left text-muted pt-5 pb-1 px-3">Información general</h3>
             <div class="form-row py-2">
                 <label for="productName">Nombre</label>
-                <input type="text" class="form-control" id="productName" placeholder="Hello Happy Foundation" value="nombre" required name="name">
+                <input type="text" class="form-control" id="productName" placeholder="Nombre del producto" required name="name">
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -52,10 +52,9 @@
                 <label for="productCategoria">Categoría</label>
                 <select id="productCategoria" class="custom-select" required name = "categoria">
                     <option value="1" >bases</option>
-                    <option value="2" >máscaras de pestañas</option>
+                    <option value="2" >mascaras de pestañas</option>
                     <option value="3" >pintalabios</option>
                     <option value="4" >sombras de ojos</option>
-                    <option value="5" >pestañas postizas</option>
                     <option value="6" >contouring</option>
                     <option value="7" >colorete</option>
                     <option value="8" >cejas</option>

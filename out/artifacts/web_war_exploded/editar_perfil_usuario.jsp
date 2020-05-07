@@ -123,7 +123,7 @@
 
                     </div>
                     <div style="color: red; align-content: center; text-align: center;" id="error1">
-                        ${requestScope.error1}
+                        <c:out value="${requestScope.error1}"/>
                     </div>
                     <div class="form-group col-md-10 mx-auto">
                         <button type="submit" class="btn btn-dark btn-block mt-5" name = "btn" value = "second">Actualizar</button>

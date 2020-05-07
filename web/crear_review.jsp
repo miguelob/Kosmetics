@@ -35,7 +35,7 @@
                 <!--Nombre del producto-->
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-6 text-left">
-                        <h2>${sessionScope.allProduct.name}</h2>
+                        <h2><c:out value="${sessionScope.allProduct.name}"/></h2>
                     </div>
                     <div class="col-11 col-lg-5 py-3 ">
                         <div class="row">
@@ -100,19 +100,6 @@
                                             <label class="form-check-label text-muted" for="inlineRadio2">NS/NC</label>
                                         </div>
                                     </div>
-                                        <%--<div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                            <label class="form-check-label text-muted" for="inlineRadio1">Si</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                            <label class="form-check-label text-muted" for="inlineRadio2">No</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option2">
-                                            <label class="form-check-label text-muted" for="inlineRadio2">Sin opinión</label>
-                                        </div>--%>
-
                                 </div>
                             </div>
                         </div>

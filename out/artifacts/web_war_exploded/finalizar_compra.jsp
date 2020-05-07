@@ -68,7 +68,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
-                    <label for="cc-expiration">Fecha de caducidad</label>
+                    <label for="caducidad">Fecha de caducidad</label>
                     <input type="date" name = "birthDate" class="form-control"id="caducidad"
                     value="2020-04-2"
                     min="2020-04-11" max="2030-12-31">

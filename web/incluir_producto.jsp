@@ -34,7 +34,7 @@
             <h3 class="text-left text-muted pt-5 pb-1 px-3">Información general</h3>
             <div class="form-row py-2">
                 <label for="productName">Nombre</label>
-                <input type="text" class="form-control" id="productName" placeholder="Hello Happy Foundation" value="nombre" required name="name">
+                <input type="text" class="form-control" id="productName" placeholder="Nombre del producto" required name="name">
                 <div class="valid-feedback">
                     Looks good!
                 </div>
