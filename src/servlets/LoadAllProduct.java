@@ -3,7 +3,6 @@ package servlets;
 import DAO.ProductDAO;
 import domain.Product;
 
-import javax.management.DynamicMBean;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

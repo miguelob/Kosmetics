@@ -1,8 +1,13 @@
 package DAO;
 
+import domain.Carrito;
+import domain.Product;
+import domain.User;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,14 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
-import com.sun.source.tree.CaseTree;
-import domain.Carrito;
-import domain.Product;
-import domain.User;
 
 public class UserDAO {
     public static User getUser(int i) {

@@ -61,8 +61,10 @@ public class creatReview extends HttpServlet {
                         Survey survey = product.getSurvey();
 
                         for (Question q:survey.getQuestions()) {
+                            System.out.println(((Integer) q.getIdQuestion()).toString());
+                            String  value= request.getParameter("inlineRadioOptions@" + ((Integer) q.getIdQuestion()).toString());
 
-                            String  value= request.getParameter("inlineRadioOptions" + "@" + ((Integer) q.getIdQuestion()).toString());
+                            System.out.println(value);
                             int resultado[]=survey.getQuestionRespuesta(q);
                             if(value.equals("Si")){
                                 resultado[0]++;
