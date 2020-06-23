@@ -8,8 +8,8 @@ public class ConnectionDAO {
     private static ConnectionDAO instance;
     private static Connection con;
     private ConnectionDAO() throws ClassNotFoundException, SQLException {
-        Class.forName("org.mariadb.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mariadb://kosmeticsserver.ddns.net:5432/pat_7?user=pat&password=pat");
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://kosmeticsserver.ddns.net:5432/pat_7?user=pat&password=pat");
     }
     public static ConnectionDAO getInstance() throws SQLException, ClassNotFoundException {
         if(instance == null){
